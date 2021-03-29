@@ -8,7 +8,7 @@ Plataforma web de preguntas y respuestas para la materia Orientación a Objetos 
 
 ## Instalar dependencias
 
-- Seaside
+- Seaside3
 
 Ejecutar en el Playground de Pharo
 ```Smalltalk
