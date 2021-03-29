@@ -20,5 +20,10 @@ Metacello new
 
 ## Ejecutar app
 
+- Cargar Seaside en la imagen de Pharo.
 - Clonar el repositorio utilizando [Iceberg](https://books.pharo.org/booklet-ManageCode/pdf/2019-03-24-ManageCode.pdf) en Pharo.
-- TODO
+- Si todo funcionó correctamente, ejecutando en el Playground:
+```Smalltalk
+WAAdmin register: HelloWorldComponent asApplicationAt: 'ejemplo'.
+```
+y navegando a https://localhost:8080/ejemplo debería mostrar el mensaje 'Hello World!'.
