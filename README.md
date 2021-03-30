@@ -1,5 +1,5 @@
 # cuoora
-Plataforma web de preguntas y respuestas para la materia Orientación a Objetos 2 2021 de la UNLP.
+Plataforma web de preguntas y respuestas desarrollada en Smalltalk con el framework Seaside, para la materia Orientación a Objetos 2 2021 de la UNLP.
 
 ## Stack
 - [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) (lenguaje de programación)
