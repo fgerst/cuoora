@@ -2,9 +2,9 @@
 Plataforma web de preguntas y respuestas para la materia Orientación a Objetos 2 2021 de la UNLP.
 
 ## Stack
-
-- [Pharo](https://pharo.org)
-- [Seaside](https://github.com/SeasideSt/Seaside)
+- [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) (lenguaje de programación)
+- [Pharo](https://pharo.org) (entorno de desarrollo)
+- [Seaside](https://github.com/SeasideSt/Seaside) (framework web)
 
 ## Instalar dependencias
 
