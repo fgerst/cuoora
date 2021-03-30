@@ -22,6 +22,7 @@ Metacello new
 
 - Cargar Seaside en la imagen de Pharo.
 - Clonar el repositorio utilizando [Iceberg](https://books.pharo.org/booklet-ManageCode/pdf/2019-03-24-ManageCode.pdf) en Pharo.
+- Cargar los paquetes del repositorio cuoora en la imagen de Pharo.
 - Si todo funcionó correctamente, ejecutando en el Playground:
 ```Smalltalk
 WAAdmin register: HelloWorldComponent asApplicationAt: 'ejemplo'.
