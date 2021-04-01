@@ -6,8 +6,44 @@ Class {
 	#superclass : #Post,
 	#instVars : [
 		'title',
-		'description',
 		'answers'
 	],
 	#category : #'Cuoora-Model'
 }
+
+{ #category : #creation }
+Question class >> withAuthor: anUser title: aTitle content: aContent [
+	^ self new
+		author: anUser;
+		title: aTitle;
+		content: aContent;
+		yourself
+]
+
+{ #category : #accesing }
+Question >> answers [
+	^ answers
+]
+
+{ #category : #removing }
+Question >> delete [
+	"#TODO"
+
+	^ nil
+]
+
+{ #category : #initialization }
+Question >> initialize [
+	answers := OrderedCollection new.
+	super initialize
+]
+
+{ #category : #accesing }
+Question >> title [
+	^ title
+]
+
+{ #category : #accesing }
+Question >> title: aString [
+	title := aString
+]
