@@ -2,7 +2,11 @@
 Clase principal de la aplicacion
 "
 Class {
-	#name : #PlataformaCuoora,
+	#name : #CuooraPlatform,
 	#superclass : #Object,
+	#instVars : [
+		'users',
+		'topics'
+	],
 	#category : #'Cuoora-Model'
 }
