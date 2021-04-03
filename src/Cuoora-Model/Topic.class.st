@@ -13,26 +13,16 @@ Class {
 }
 
 { #category : #removing }
-Topic >> deleteQuestion [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^nil
+Topic >> deleteQuestion: aQuestion [
+	^ nil
 ]
 
-{ #category : #acccessing }
+{ #category : #accesing }
 Topic >> getQuestions [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^topicQuestions 
+	^ topicQuestions
 ]
 
 { #category : #initialization }
 Topic >> initialize [
-	"comment stating purpose of instance-side message"
-	"'name description topicQuestions'"	
-			
-topicQuestions:= OrderedCollection new.
-
+	topicQuestions := OrderedCollection new
 ]

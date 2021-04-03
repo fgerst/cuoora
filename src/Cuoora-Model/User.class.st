@@ -16,93 +16,89 @@ Class {
 	#category : #'Cuoora-Model'
 }
 
-{ #category : #accesing }
-User >> addFollowing: newUser [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	following add: newUser
+{ #category : #creation }
+User class >> withUsername: anUsername password: aPassword [
+	^ self new
+		username: anUsername;
+		password: aPassword;
+		yourself
+]
+
+{ #category : #'adding/removing' }
+User >> addFollowing: anUser [ 
+	following add: anUser
 ]
 
 { #category : #accesing }
-User >> checkPassword: word [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-  ^( word = password )
+User >> answers [
+	^ answers
 ]
 
-{ #category : #removing }
-User >> deleteAnswerFromList: anAnswer [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^nil
+{ #category : #access }
+User >> checkPassword: aString [
+	^ aString = password
 ]
 
-{ #category : #removing }
-User >> deleteQuestionFromList: aQuestion [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^nil
+{ #category : #'adding/removing' }
+User >> deleteAnswer: anAnswer [
+	^ nil
+]
+
+{ #category : #'adding/removing' }
+User >> deleteQuestion: aQuestion [
+	^ nil
 ]
 
 { #category : #accesing }
 User >> following [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^following 
+	^ following
 ]
 
 { #category : #initialization }
 User >> initialize [
-	"username password timestamp following questions answers interests"
-	"scope: class-variables  &  instance-variables"	
-			
-	timestamp:= DateAndTime now.
-	following:= OrderedCollection new.
-	questions:= OrderedCollection new.
-	answers:= OrderedCollection new.
-	interests:= OrderedCollection new.
+	timestamp := DateAndTime now.
+	questions := OrderedCollection new.
+	answers := OrderedCollection new.
+	following := OrderedCollection new.
+	interests := OrderedCollection new
 ]
 
-{ #category : #initialization }
-User >> initialize: anUsername password: aPassword [
-	"username password timestamp following questions answers interests"
-	"scope: class-variables  &  instance-variables"	
-			
-	timestamp:= DateAndTime now.
-	following:= OrderedCollection new.
-	questions:= OrderedCollection new.
-	answers:= OrderedCollection new.
-	interests:= OrderedCollection new.
-	
-	username := anUsername.
-	password := aPassword 
+{ #category : #accesing }
+User >> interests [
+	^ interests
+]
+
+{ #category : #'adding/removing' }
+User >> newAnswer: anAnswer [
+	^ nil
+]
+
+{ #category : #'adding/removing' }
+User >> newQuestion: aQuestion [
+	^ nil
+]
+
+{ #category : #accesing }
+User >> password: aString [
+	password := aString
+]
+
+{ #category : #accesing }
+User >> questions [
+	^ questions
 ]
 
 { #category : #accesing }
 User >> timestamp [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^timestamp 
+	^ timestamp
 ]
 
 { #category : #accesing }
 User >> username [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^username 
+	^ username
 ]
 
 { #category : #accesing }
-User >> username: newName [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	username:= newName
+User >> username: aString [
+	username := aString
 ]

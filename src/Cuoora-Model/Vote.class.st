@@ -6,73 +6,34 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'timestamp',
-		'author',
-		'isLike'
+		'author'
 	],
 	#category : #'Cuoora-Model'
 }
 
-{ #category : #accessing }
+{ #category : #creation }
+Vote class >> withAuthor: anUser [
+	^ self new
+		author: anUser;
+		yourself
+]
+
+{ #category : #accesing }
 Vote >> author [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^author
+	^ author
 ]
 
-{ #category : #accessing }
+{ #category : #accesing }
 Vote >> author: anUser [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	author:= anUser
+	author := anUser
 ]
 
 { #category : #initialization }
-Vote >> initialize [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
+Vote >> initialize [		
 	timestamp := DateAndTime now.
 ]
 
-{ #category : #initialization }
-Vote >> initialize: anAuthor [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	timestamp := DateAndTime now.
-	author := anAuthor 
-]
-
-{ #category : #accessing }
-Vote >> isLike [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^isLike 
-]
-
-{ #category : #initialization }
-Vote >> setToDislike [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	isLike:= false
-]
-
-{ #category : #initialization }
-Vote >> setToLike [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	isLike := true
-]
-
-{ #category : #accessing }
+{ #category : #accesing }
 Vote >> timestamp [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	^timestamp 
+	^ timestamp
 ]

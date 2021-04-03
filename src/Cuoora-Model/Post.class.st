@@ -39,6 +39,27 @@ Post >> delete [
 	^ self subclassResponsibility
 ]
 
+{ #category : #actions }
+Post >> deleteOrAddVoteFrom: anUser in: votes [
+	votes
+		detect: [ :each | each author = anUser ]
+		ifFound: [ :element | votes remove: element ]
+		ifNone: [ votes add: (Vote withAuthor: anUser) ]
+]
+
+{ #category : #actions }
+Post >> deleteVoteFrom: anUser in: votes [
+	votes
+		detect: [ :each | each author = anUser ]
+		ifFound: [ :element | votes remove: element ]
+]
+
+{ #category : #actions }
+Post >> dislikeFrom: anUser [
+	self deleteVoteFrom: anUser in: likes.
+	self deleteOrAddVoteFrom: anUser in: dislikes
+]
+
 { #category : #accesing }
 Post >> dislikes [
 	^ dislikes
@@ -51,9 +72,20 @@ Post >> initialize [
 	dislikes := OrderedCollection new
 ]
 
+{ #category : #actions }
+Post >> likeFrom: anUser [
+	self deleteVoteFrom: anUser in: dislikes.
+	self deleteOrAddVoteFrom: anUser in: likes
+]
+
 { #category : #accesing }
 Post >> likes [
 	^ likes
+]
+
+{ #category : #calculating }
+Post >> score [
+	^ likes size - dislikes size
 ]
 
 { #category : #accesing }
