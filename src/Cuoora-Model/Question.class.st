@@ -25,7 +25,7 @@ Question >> answers [
 	^ answers
 ]
 
-{ #category : #removing }
+{ #category : #'adding/removing' }
 Question >> delete [
 	"#TODO"
 
@@ -36,6 +36,13 @@ Question >> delete [
 Question >> initialize [
 	answers := OrderedCollection new.
 	super initialize
+]
+
+{ #category : #'adding/removing' }
+Question >> newAnswer: anAnswer [
+	answers add: anAnswer.
+	anAnswer author addAnswer: anAnswer.
+	^ anAnswer
 ]
 
 { #category : #accesing }

@@ -24,14 +24,24 @@ User class >> withUsername: anUsername password: aPassword [
 		yourself
 ]
 
-{ #category : #actions }
+{ #category : #'adding/removing' }
+User >> addAnswer: anAnswer [
+	answers add: anAnswer
+]
+
+{ #category : #'adding/removing' }
 User >> addFollowing: anUser [ 
 	following add: anUser
 ]
 
-{ #category : #actions }
+{ #category : #'adding/removing' }
 User >> addInterest: aTopic [
 	interests add: aTopic
+]
+
+{ #category : #'adding/removing' }
+User >> addQuestion: aQuestion [
+	questions add: aQuestion
 ]
 
 { #category : #accesing }
@@ -72,16 +82,6 @@ User >> initialize [
 { #category : #accesing }
 User >> interests [
 	^ interests
-]
-
-{ #category : #'adding/removing' }
-User >> newAnswer: anAnswer [
-	^ nil
-]
-
-{ #category : #'adding/removing' }
-User >> newQuestion: aQuestion [
-	^ nil
 ]
 
 { #category : #accesing }

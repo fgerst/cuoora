@@ -12,14 +12,47 @@ Class {
 	#category : #'Cuoora-Model'
 }
 
-{ #category : #removing }
+{ #category : #creation }
+Topic class >> withName: aName description: aDesc [
+	^ self new
+		name: aName;
+		description: aDesc;
+		yourself
+]
+
+{ #category : #'adding/removing' }
+Topic >> addTopicQuestion: aQuestion [
+	topicQuestions add: aQuestion
+]
+
+{ #category : #'adding/removing' }
 Topic >> deleteTopicQuestion: aQuestion [
 	topicQuestions remove: aQuestion.
+]
+
+{ #category : #accesing }
+Topic >> description [
+	^ description
+]
+
+{ #category : #accesing }
+Topic >> description: aString [
+	description := aString
 ]
 
 { #category : #initialization }
 Topic >> initialize [
 	topicQuestions := OrderedCollection new
+]
+
+{ #category : #accesing }
+Topic >> name [
+	^ name
+]
+
+{ #category : #accesing }
+Topic >> name: aString [
+	name := aString
 ]
 
 { #category : #accesing }
