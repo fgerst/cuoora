@@ -95,6 +95,16 @@ User >> questions [
 ]
 
 { #category : #accesing }
+User >> sortedAnswers [
+	^ ( answers sort: [ :a :b | ( a score ) < ( b score ) ] )
+]
+
+{ #category : #accesing }
+User >> sortedQuestions [
+	^ ( questions sort: [ :a :b | ( a score ) < ( b score ) ] )
+]
+
+{ #category : #accesing }
 User >> timestamp [
 	^ timestamp
 ]

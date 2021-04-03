@@ -22,6 +22,7 @@ Question class >> withAuthor: anUser title: aTitle content: aContent [
 
 { #category : #accesing }
 Question >> answers [
+	"Obtener las respuestas a una pregunta: se indica la pregunta y se retornan todas las respuestas 	ordenadas de mayor a menor por cantidad mayor puntaje, el que está dado por la diferencia de likes y 	dislikes. "
 	^ answers
 ]
 
