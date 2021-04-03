@@ -23,3 +23,9 @@ a1 dislikeFrom: u1.
 
 cuoora.
 ```
+Testing App
+```Smalltalk
+| app |
+
+app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+```
