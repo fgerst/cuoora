@@ -13,16 +13,16 @@ Class {
 }
 
 { #category : #removing }
-Topic >> deleteQuestion: aQuestion [
-	^ nil
-]
-
-{ #category : #accesing }
-Topic >> getQuestions [
-	^ topicQuestions
+Topic >> deleteTopicQuestion: aQuestion [
+	topicQuestions remove: aQuestion.
 ]
 
 { #category : #initialization }
 Topic >> initialize [
 	topicQuestions := OrderedCollection new
+]
+
+{ #category : #accesing }
+Topic >> topicQuestions [
+	^ topicQuestions
 ]

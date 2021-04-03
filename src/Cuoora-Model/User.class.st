@@ -24,9 +24,14 @@ User class >> withUsername: anUsername password: aPassword [
 		yourself
 ]
 
-{ #category : #'adding/removing' }
+{ #category : #actions }
 User >> addFollowing: anUser [ 
 	following add: anUser
+]
+
+{ #category : #actions }
+User >> addInterest: aTopic [
+	interests add: aTopic
 ]
 
 { #category : #accesing }
@@ -40,13 +45,14 @@ User >> checkPassword: aString [
 ]
 
 { #category : #'adding/removing' }
-User >> deleteAnswer: anAnswer [
-	^ nil
+User >> deleteMyAnswer: anAnswer [
+	answers remove: anAnswer
 ]
 
 { #category : #'adding/removing' }
-User >> deleteQuestion: aQuestion [
-	^ nil
+User >> deleteMyQuestion: aQuestion [
+	aQuestion delete.
+	questions remove: aQuestion
 ]
 
 { #category : #accesing }
