@@ -25,6 +25,9 @@ Metacello new
 - Cargar los paquetes del repositorio cuoora en la imagen de Pharo.
 - Si todo funcionó correctamente, ejecutando en el Playground:
 ```Smalltalk
-WAAdmin register: HelloWorldComponent asApplicationAt: 'ejemplo'.
+| app |
+
+app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+app sessionClass: SessionWithUser.
 ```
-y navegando a https://localhost:8080/ejemplo debería mostrar el mensaje 'Hello World!'.
+y navegando a https://localhost:8080/cuoora debería mostrarse la aplicación.
