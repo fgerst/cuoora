@@ -90,21 +90,21 @@ User >> questions [
 	^ questions
 ]
 
-{ #category : #accesing }
+{ #category : #listing }
 User >> relevantQuestions [
-	| rQuestions |
-	rQuestions := OrderedCollection new.
-	rQuestions addAll: interests topicQuestions.
-	rQuestions addAll: following questions.
-	^ rQuestions
+	| relevantQuestions |
+	relevantQuestions := Set new.
+	following do: [ :user | relevantQuestions addAll: user questions ].
+	interests do: [ :topic | relevantQuestions addAll: topic questions ].
+	^ relevantQuestions
 ]
 
-{ #category : #accesing }
+{ #category : #listing }
 User >> sortedAnswers [
 	^ ( answers sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
 
-{ #category : #accesing }
+{ #category : #listing }
 User >> sortedQuestions [
 	^ ( questions sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
@@ -123,9 +123,9 @@ User >> userScore [
 	aScore := (answers
 		difference: (questions flatCollect: [ :each | each answers ])) size
 		* 50.
-	"balance de likes/dislikes en preguntas/respuestas propias"
-	vScore := (answers sum: [ :each | each postScore ])
-		+ (questions sum: [ :each | each postScore ]).
+	"balance de likes/dislikes en todas las participaciones del usuario"
+	vScore := (answers sumNumbers: [ :each | each postScore ])
+		+ (questions sumNumbers: [ :each | each postScore ]).
 	^ qScore + aScore + vScore
 ]
 

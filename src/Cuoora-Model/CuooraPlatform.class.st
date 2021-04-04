@@ -68,8 +68,8 @@ CuooraPlatform >> initialize [
 
 { #category : #'adding/removing' }
 CuooraPlatform >> newQuestion: aQuestion withTopics: topicList [
-	topicList do: [ :each | each addTopicQuestion: aQuestion ].
 	aQuestion author addQuestion: aQuestion.
+	topicList do: [ :each | each addTopicQuestion: aQuestion ].
 	^ aQuestion
 ]
 
