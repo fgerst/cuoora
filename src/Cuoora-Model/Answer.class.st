@@ -18,7 +18,8 @@ Answer class >> withAuthor: anUser content: aContent [
 { #category : #removing }
 Answer >> delete [
 	"#TODO"
-
+	
+	author deleteMyAnswer: self.
 	^ nil
 ]
 

@@ -61,8 +61,8 @@ User >> deleteMyAnswer: anAnswer [
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
+	questions remove: aQuestion.
 	aQuestion delete.
-	questions remove: aQuestion
 ]
 
 { #category : #accesing }
