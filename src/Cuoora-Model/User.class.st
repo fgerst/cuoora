@@ -95,6 +95,18 @@ User >> questions [
 ]
 
 { #category : #accesing }
+User >> relevantQuestions [
+
+	| rQuestions |
+	
+	rQuestions := OrderedCollection new.
+	rQuestions add: ( interests topicQuestions ).
+	rQuestions add: ( following questions ).
+	
+	^rQuestions 
+]
+
+{ #category : #accesing }
 User >> sortedAnswers [
 	^ ( answers sort: [ :a :b | ( a score ) < ( b score ) ] )
 ]
