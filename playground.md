@@ -28,4 +28,5 @@ Testing App
 | app |
 
 app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+app sessionClass: SessionWithUser.
 ```
