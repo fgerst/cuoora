@@ -42,7 +42,7 @@ Topic >> description: aString [
 
 { #category : #initialization }
 Topic >> initialize [
-	topicQuestions := OrderedCollection new
+	topicQuestions := Set new
 ]
 
 { #category : #accesing }

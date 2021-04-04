@@ -70,10 +70,10 @@ User >> following [
 { #category : #initialization }
 User >> initialize [
 	timestamp := DateAndTime now.
-	questions := OrderedCollection new.
-	answers := OrderedCollection new.
-	following := OrderedCollection new.
-	interests := OrderedCollection new
+	questions := Set new.
+	answers := Set new.
+	following := Set new.
+	interests := Set new
 ]
 
 { #category : #accesing }

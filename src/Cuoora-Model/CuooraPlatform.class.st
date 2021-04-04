@@ -62,8 +62,8 @@ CuooraPlatform >> deleteQuestion: aQuestion [
 
 { #category : #initialization }
 CuooraPlatform >> initialize [
-	users := OrderedCollection new.
-	topics := OrderedCollection new
+	users := Set new.
+	topics := Set new
 ]
 
 { #category : #'adding/removing' }

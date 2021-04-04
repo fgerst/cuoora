@@ -34,8 +34,8 @@ Question >> delete [
 
 { #category : #initialization }
 Question >> initialize [
-	answers := OrderedCollection new.
-	super initialize
+	super initialize.
+	answers := Set new.
 ]
 
 { #category : #'adding/removing' }
@@ -47,7 +47,7 @@ Question >> newAnswer: anAnswer [
 
 { #category : #accesing }
 Question >> sortedAnswers [
-	^ answers asSortedCollection: [ :a :b | a postScore < b postScore ]
+	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
 ]
 
 { #category : #accesing }
