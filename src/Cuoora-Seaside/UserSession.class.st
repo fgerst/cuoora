@@ -21,6 +21,11 @@ UserSession >> loginUser: anUser [
 ]
 
 { #category : #accesing }
+UserSession >> logout [
+	user := nil
+]
+
+{ #category : #accesing }
 UserSession >> user [
 	^ user
 ]

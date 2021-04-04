@@ -9,9 +9,8 @@ Class {
 
 { #category : #callbacks }
 HomeComponent >> logout [
-	"#TODO"
-
-	self answer
+	self session logout.
+	self call: LoginComponent new.
 ]
 
 { #category : #rendering }
