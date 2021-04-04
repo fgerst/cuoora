@@ -94,8 +94,8 @@ User >> questions [
 User >> relevantQuestions [
 	| rQuestions |
 	rQuestions := OrderedCollection new.
-	rQuestions add: interests topicQuestions.
-	rQuestions add: following questions.
+	rQuestions addAll: interests topicQuestions.
+	rQuestions addAll: following questions.
 	^ rQuestions
 ]
 
@@ -117,9 +117,13 @@ User >> timestamp [
 { #category : #calculating }
 User >> userScore [
 	| qScore aScore vScore |
+	"puntaje por cantidad de preguntas"
 	qScore := questions size * 20.
-	"cantidad de respuestas a preguntas de otros usuarios"
-	aScore := 0.
+	"puntaje por cantidad de respuestas a preguntas de otros usuarios"
+	aScore := (answers
+		difference: (questions flatCollect: [ :each | each answers ])) size
+		* 50.
+	"balance de likes/dislikes en preguntas/respuestas propias"
 	vScore := (answers sum: [ :each | each postScore ])
 		+ (questions sum: [ :each | each postScore ]).
 	^ qScore + aScore + vScore
