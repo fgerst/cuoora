@@ -28,8 +28,9 @@ Question >> answers [
 
 { #category : #'adding/removing' }
 Question >> delete [
-	"#TODO"
-
+	"#TODO le va a pedir amablemente a sus respuestas que se eliminen"
+	
+	answers do: [ :each | each delete ].
 	^ nil
 ]
 

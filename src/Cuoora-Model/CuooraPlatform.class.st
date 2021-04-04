@@ -8,9 +8,6 @@ Class {
 		'users',
 		'topics'
 	],
-	#classInstVars : [
-		'soleInstance'
-	],
 	#category : #'Cuoora-Model'
 }
 
@@ -58,6 +55,9 @@ CuooraPlatform class >> soleInstance [
 CuooraPlatform >> deleteQuestion: aQuestion [
 	"#TODO *eliminar de topicos
 			 *eliminar de usuarios"
+	"Si es necesario podes hacer que pare de buscar en los topicos cuando lo encuentre"
+	topics do: [ :each | each deleteTopicQuestion: aQuestion ].
+	aQuestion author deleteMyQuestion: aQuestion.
 
 	^ nil
 ]

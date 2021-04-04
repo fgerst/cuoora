@@ -61,8 +61,8 @@ User >> deleteMyAnswer: anAnswer [
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
+	questions remove: aQuestion.
 	aQuestion delete.
-	questions remove: aQuestion
 ]
 
 { #category : #accesing }
@@ -124,8 +124,13 @@ User >> timestamp [
 { #category : #calculating }
 User >> userScore [
 	"#TODO"
-
-	^ nil
+	"se indica un usuario, y se retorna un puntaje que se calcula en función de su actividad en la red social. Por cada pregunta realizada, suma 20 puntos, y por cada respuesta a una pregunta que realizó otro usuario, suma 50 puntos. Además, se suma puntaje determinado por la diferencia entre likes y dislikes de todas sus participaciones, que de tener mas dislikes que likes, puede ser negativo. "
+	| uScore |
+	
+	uScore := ( questions size )* 20.
+	"answers do: [ :each |  ]"
+	
+	^ uScore
 ]
 
 { #category : #accesing }
