@@ -28,7 +28,7 @@ AccessGrantingComponent >> password: aString [
 
 { #category : #control }
 AccessGrantingComponent >> proceedWith: anUser [
-	self session user: anUser.
+	self session loginUser: anUser.
 	self call: HomeComponent new 
 ]
 
@@ -50,6 +50,20 @@ AccessGrantingComponent >> renderInputElementsOn: aCanvas [
 	aCanvas paragraph: [ aCanvas textInput on: #username of: self ].
 	aCanvas label: 'Password'.
 	aCanvas paragraph: [ aCanvas passwordInput on: #password of: self ]
+]
+
+{ #category : #styles }
+AccessGrantingComponent >> style [
+	^ '
+body { 
+	font-family: sans-serif;
+	margin: 12px;
+   padding: 8px;
+}
+
+#title { display: inline; }
+
+'
 ]
 
 { #category : #accesing }

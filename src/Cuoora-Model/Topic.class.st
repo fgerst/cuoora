@@ -27,8 +27,7 @@ Topic >> addTopicQuestion: aQuestion [
 
 { #category : #'adding/removing' }
 Topic >> deleteTopicQuestion: aQuestion [
-	"podes agregar ifAbsent si es necesario"
-	topicQuestions remove: aQuestion ifAbsent: [ ^nil ].
+	topicQuestions remove: aQuestion ifAbsent: [ ^ nil ]
 ]
 
 { #category : #accesing }

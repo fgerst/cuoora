@@ -81,6 +81,11 @@ User >> interests [
 ]
 
 { #category : #accesing }
+User >> password [
+	^ password
+]
+
+{ #category : #accesing }
 User >> password: aString [
 	password := aString
 ]

@@ -2,7 +2,7 @@
 Este componente agrega a la session de seaside variables que mantienen informacion importante en la sesion, en este caso el usuario.
 "
 Class {
-	#name : #SessionWithUser,
+	#name : #UserSession,
 	#superclass : #WASession,
 	#instVars : [
 		'user'
@@ -11,11 +11,16 @@ Class {
 }
 
 { #category : #accesing }
-SessionWithUser >> user [
-	^ user
+UserSession >> loggedUsername [
+	^ user username
 ]
 
 { #category : #accesing }
-SessionWithUser >> user: anUser [
+UserSession >> loginUser: anUser [
 	user := anUser
+]
+
+{ #category : #accesing }
+UserSession >> user [
+	^ user
 ]
