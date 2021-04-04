@@ -84,7 +84,7 @@ Post >> likes [
 ]
 
 { #category : #calculating }
-Post >> score [
+Post >> postScore [
 	^ likes size - dislikes size
 ]
 
