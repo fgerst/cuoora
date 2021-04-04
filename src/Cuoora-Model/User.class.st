@@ -96,17 +96,24 @@ User >> questions [
 
 { #category : #accesing }
 User >> sortedAnswers [
-	^ ( answers sort: [ :a :b | ( a score ) < ( b score ) ] )
+	^ ( answers sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
 
 { #category : #accesing }
 User >> sortedQuestions [
-	^ ( questions sort: [ :a :b | ( a score ) < ( b score ) ] )
+	^ ( questions sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
 
 { #category : #accesing }
 User >> timestamp [
 	^ timestamp
+]
+
+{ #category : #calculating }
+User >> userScore [
+	"#TODO"
+
+	^ nil
 ]
 
 { #category : #accesing }

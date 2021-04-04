@@ -57,7 +57,7 @@ Topic >> name: aString [
 
 { #category : #accesing }
 Topic >> sortedTopicQuestions [
-	^ ( topicQuestions sort: [ :a :b | ( a score ) < ( b score ) ] )
+	^ ( topicQuestions sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
 
 { #category : #accesing }
