@@ -49,11 +49,6 @@ User >> answers [
 	^ answers
 ]
 
-{ #category : #access }
-User >> checkPassword: aString [
-	^ aString = password
-]
-
 { #category : #'adding/removing' }
 User >> deleteMyAnswer: anAnswer [
 	answers remove: anAnswer
@@ -61,8 +56,9 @@ User >> deleteMyAnswer: anAnswer [
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
-	questions remove: aQuestion.
 	aQuestion delete.
+	questions remove: aQuestion
+
 ]
 
 { #category : #accesing }
@@ -96,14 +92,11 @@ User >> questions [
 
 { #category : #accesing }
 User >> relevantQuestions [
-
 	| rQuestions |
-	
 	rQuestions := OrderedCollection new.
-	rQuestions add: ( interests topicQuestions ).
-	rQuestions add: ( following questions ).
-	
-	^rQuestions 
+	rQuestions add: interests topicQuestions.
+	rQuestions add: following questions.
+	^ rQuestions
 ]
 
 { #category : #accesing }
@@ -123,14 +116,13 @@ User >> timestamp [
 
 { #category : #calculating }
 User >> userScore [
-	"#TODO"
-	"se indica un usuario, y se retorna un puntaje que se calcula en función de su actividad en la red social. Por cada pregunta realizada, suma 20 puntos, y por cada respuesta a una pregunta que realizó otro usuario, suma 50 puntos. Además, se suma puntaje determinado por la diferencia entre likes y dislikes de todas sus participaciones, que de tener mas dislikes que likes, puede ser negativo. "
-	| uScore |
-	
-	uScore := ( questions size )* 20.
-	"answers do: [ :each |  ]"
-	
-	^ uScore
+	| qScore aScore vScore |
+	qScore := questions size * 20.
+	"cantidad de respuestas a preguntas de otros usuarios"
+	aScore := 0.
+	vScore := (answers sum: [ :each | each postScore ])
+		+ (questions sum: [ :each | each postScore ]).
+	^ qScore + aScore + vScore
 ]
 
 { #category : #accesing }

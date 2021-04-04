@@ -22,16 +22,14 @@ Question class >> withAuthor: anUser title: aTitle content: aContent [
 
 { #category : #accesing }
 Question >> answers [
-	"Obtener las respuestas a una pregunta: se indica la pregunta y se retornan todas las respuestas 	ordenadas de mayor a menor por cantidad mayor puntaje, el que está dado por la diferencia de likes y 	dislikes. "
 	^ answers
 ]
 
 { #category : #'adding/removing' }
 Question >> delete [
-	"#TODO le va a pedir amablemente a sus respuestas que se eliminen"
+	"TODO le va a pedir amablemente a sus respuestas que se eliminen"
 	
 	answers do: [ :each | each delete ].
-	^ nil
 ]
 
 { #category : #initialization }
@@ -45,6 +43,11 @@ Question >> newAnswer: anAnswer [
 	answers add: anAnswer.
 	anAnswer author addAnswer: anAnswer.
 	^ anAnswer
+]
+
+{ #category : #accesing }
+Question >> sortedAnswers [
+	^ answers asSortedCollection: [ :a :b | a postScore < b postScore ]
 ]
 
 { #category : #accesing }

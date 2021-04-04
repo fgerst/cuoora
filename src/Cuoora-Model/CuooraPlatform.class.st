@@ -8,6 +8,9 @@ Class {
 		'users',
 		'topics'
 	],
+	#classInstVars : [
+		'soleInstance'
+	],
 	#category : #'Cuoora-Model'
 }
 
@@ -19,7 +22,7 @@ CuooraPlatform class >> clearSoleInstance [
 { #category : #'instance creation' }
 CuooraPlatform class >> instanceWithData [
 	| cuoora t1 t2 t3 u1 u2 u3 q1 q2 a1 a2 |
-	cuoora := self class new.
+	cuoora := CuooraPlatform new.
 	t1 := cuoora
 		newTopic: (Topic withName: 'Python' description: 'Python').
 	t2 := cuoora newTopic: (Topic withName: 'Java' description: 'Java').
@@ -53,13 +56,8 @@ CuooraPlatform class >> soleInstance [
 
 { #category : #'adding/removing' }
 CuooraPlatform >> deleteQuestion: aQuestion [
-	"#TODO *eliminar de topicos
-			 *eliminar de usuarios"
-	"Si es necesario podes hacer que pare de buscar en los topicos cuando lo encuentre"
 	topics do: [ :each | each deleteTopicQuestion: aQuestion ].
 	aQuestion author deleteMyQuestion: aQuestion.
-
-	^ nil
 ]
 
 { #category : #initialization }
@@ -95,7 +93,7 @@ CuooraPlatform >> topics [
 { #category : #access }
 CuooraPlatform >> username: anUsername protectedBy: aPassword [
 	^ users
-		detect: [ :each | each username = anUsername & (each checkPassword: aPassword) ]
+		detect: [ :each | each username = anUsername & (each password = aPassword) ]
 		ifNone: [ nil ]
 ]
 
