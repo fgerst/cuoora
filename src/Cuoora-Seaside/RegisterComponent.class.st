@@ -9,9 +9,10 @@ Class {
 
 { #category : #callbacks }
 RegisterComponent >> registerAndLogin [
-	"#TODO"
-
-	^ nil
+	| anUser |
+	anUser := User withUsername: username password: password.
+	self model newUser: anUser.
+	self proceedWith: anUser
 ]
 
 { #category : #rendering }

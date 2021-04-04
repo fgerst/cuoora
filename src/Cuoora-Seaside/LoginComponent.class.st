@@ -9,9 +9,10 @@ Class {
 
 { #category : #callbacks }
 LoginComponent >> login [
-	"#TODO"
-
-	^ nil
+	(self model username: username protectedBy: password)
+		ifNotNil: [ :it| self proceedWith: it ].
+	username := nil.
+	password := nil
 ]
 
 { #category : #callbacks }

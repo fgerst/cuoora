@@ -11,6 +11,11 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
+{ #category : #'accessing model' }
+AccessGrantingComponent >> model [
+ ^ CuooraPlatform soleInstance.
+]
+
 { #category : #accesing }
 AccessGrantingComponent >> password [
 	^ password
@@ -19,6 +24,12 @@ AccessGrantingComponent >> password [
 { #category : #accesing }
 AccessGrantingComponent >> password: aString [
 	password := aString
+]
+
+{ #category : #control }
+AccessGrantingComponent >> proceedWith: anUser [
+	self session user: anUser.
+	self call: HomeComponent new 
 ]
 
 { #category : #rendering }
