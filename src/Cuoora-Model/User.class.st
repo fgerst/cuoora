@@ -51,6 +51,7 @@ User >> answers [
 
 { #category : #'adding/removing' }
 User >> deleteMyAnswer: anAnswer [
+	"Si no la encuentra devuelve un error"
 	answers remove: anAnswer
 ]
 
