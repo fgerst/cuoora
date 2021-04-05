@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #utilities }
-LoginComponent >> clearCache [
+LoginComponent >> clearInstance [
 	"metodo para borrar datos nuevos creados desde seaside"
 
 	CuooraPlatform clearSoleInstance
@@ -36,7 +36,7 @@ LoginComponent >> renderButtonsOn: aCanvas [
 	aCanvas paragraph: 'Don''t have an account?'.
 	self renderSignUpButtonOn: aCanvas.
 	aCanvas horizontalRule.
-	aCanvas anchor callback: [self clearCache]; with: 'Clear cache'. 
+	aCanvas anchor callback: [self clearInstance]; with: 'Clear instance'. 
 ]
 
 { #category : #rendering }

@@ -54,15 +54,15 @@ Post >> deleteVoteFrom: anUser in: votes [
 		ifFound: [ :element | votes remove: element ]
 ]
 
+{ #category : #accesing }
+Post >> dislikeCount [
+	^ dislikes size
+]
+
 { #category : #actions }
 Post >> dislikeFrom: anUser [
 	self deleteVoteFrom: anUser in: likes.
 	self deleteOrAddVoteFrom: anUser in: dislikes
-]
-
-{ #category : #accesing }
-Post >> dislikeScore [
-	^ dislikes size
 ]
 
 { #category : #accesing }
@@ -77,15 +77,15 @@ Post >> initialize [
 	dislikes := OrderedCollection new
 ]
 
+{ #category : #accesing }
+Post >> likeCount [
+	^ likes size
+]
+
 { #category : #actions }
 Post >> likeFrom: anUser [
 	self deleteVoteFrom: anUser in: dislikes.
 	self deleteOrAddVoteFrom: anUser in: likes
-]
-
-{ #category : #accesing }
-Post >> likeScore [
-	^ likes size
 ]
 
 { #category : #accesing }

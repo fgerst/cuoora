@@ -16,7 +16,7 @@ HomeComponent >> logout [
 { #category : #rendering }
 HomeComponent >> renderContentOn: anHtmlCanvas [
 	self renderHeaderOn: anHtmlCanvas.
-	self renderPostsOn: anHtmlCanvas.
+	self renderRelevantQuestionsOn: anHtmlCanvas
 ]
 
 { #category : #'rendering-elements' }
@@ -24,7 +24,8 @@ HomeComponent >> renderHeaderNavBar: html [
 	html
 		unorderedList: [ html listItem with: [ self renderSeparator: html ].
 			html listItem
-				with: [ html anchor class: 'link-alt';
+				with: [ html anchor
+						class: 'link-alt bold';
 						callback: [ self call: HomeComponent new ];
 						with: self session loggedUsername ].
 			html listItem
@@ -34,22 +35,18 @@ HomeComponent >> renderHeaderNavBar: html [
 			html listItem
 				with: [ html anchor
 						callback: [ self call: HomeComponent new ];
-						with: 'Questions' ].
-			html listItem
-				with: [ html anchor
-						callback: [ self call: HomeComponent new ];
-						with: 'Users' ].
+						with: 'Topics' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]
 
 { #category : #rendering }
-HomeComponent >> renderHeaderOn: html [
-	html div
+HomeComponent >> renderHeaderOn: aCanvas [
+	aCanvas div
 		id: 'header';
-		with: [ self renderHeaderTitle: html.
-			self renderHeaderNavBar: html.
-			self renderLogoutAnchor: html ].
-	html horizontalRule
+		with: [ self renderHeaderTitle: aCanvas.
+			self renderHeaderNavBar: aCanvas.
+			self renderLogoutAnchor: aCanvas ].
+	aCanvas horizontalRule
 ]
 
 { #category : #'rendering-elements' }
@@ -69,11 +66,66 @@ HomeComponent >> renderLogoutAnchor: html [
 		with: 'Log out'
 ]
 
-{ #category : #rendering }
-HomeComponent >> renderPostsOn: html [
-	"TODO relevant questions"
+{ #category : #'rendering-elements' }
+HomeComponent >> renderQuestion: aQuestion on: html [
+	html div
+		class: 'question-div';
+		with: [ html paragraph
+				class: 'italic bold';
+				with: aQuestion title.
+			self renderQuestionInfo: aQuestion on: html.
+			self renderQuestionVotes: aQuestion on: html.
+			html horizontalRule ]
+]
 
-	^ nil
+{ #category : #'rendering-elements' }
+HomeComponent >> renderQuestionInfo: aQuestion on: html [
+	html paragraph
+		with: [ html span: 'Realizada por '.
+			html anchor
+				class: 'bold link-alt';
+				callback: [ self call: HomeComponent new ];
+				with: aQuestion author username.
+			html span: ' | '.
+			html span: aQuestion answersCount.
+			html span: ' respuestas' ]
+]
+
+{ #category : #'rendering-elements' }
+HomeComponent >> renderQuestionVotes: aQuestion on: html [
+	html paragraph
+		with: [ html span
+				class: 'green-text';
+				with: aQuestion likeCount.
+			html span with: ' likes'.
+			html span with: ' | '.
+			html span
+				class: 'red-text';
+				with: aQuestion dislikeCount.
+			html span with: ' dislikes' ]
+]
+
+{ #category : #'rendering-elements' }
+HomeComponent >> renderQuestions: questions on: html [
+	html
+		orderedList: [ questions
+				do: [ :question | self renderQuestion: question on: html ] ]
+]
+
+{ #category : #rendering }
+HomeComponent >> renderRelevantQuestionsOn: aCanvas [
+	| rQuestions |
+	(rQuestions := self session user relevantQuestions
+		asSortedCollection: [ :a :b | a timestamp < b timestamp ])
+		ifEmpty: [ aCanvas paragraph
+				class: 'italic';
+				with:
+					'...no hay preguntas relevantes. Añada tópicos de interés, o siga a otros usuarios.' ]
+		ifNotEmpty: [ aCanvas heading
+				level: 2;
+				class: 'h2-alt';
+				with: 'Preguntas relevantes'.
+			self renderQuestions: rQuestions on: aCanvas ]
 ]
 
 { #category : #'rendering-utilities' }
@@ -89,7 +141,7 @@ HomeComponent >> style [
 body { 
 	font-family: sans-serif;
    padding: 8px;
-	max-width: 920px;
+	max-width: 900px;
    margin: auto; 
 }
 
@@ -114,18 +166,41 @@ ul {
 li { 
 	display: inline;
 	padding: 6px;
- }
+}
 
-.link-alt { 
-	font-weight: 600;
-	color: black;
- }
+ol { 
+	padding: 0;
+	margin: 0;
+}
+
+p { 
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.link-alt { color: black; }
+
+.h2-alt { margin: 12px; }
+
+.bold { font-weight: 600; }
+
+.italic { font-style: italic; }
+
+.question-div { 
+	padding: 6px;
+	max-width: 800px;
+	margin: auto;
+}
+
+.green-text { color: green;}
+
+.red-text { color: #9e0000; }
 
 a {  text-decoration: none; } 
 
 a:hover { text-decoration: underline; }
 
-hr { opacity: 0.4; }
+hr { opacity: 0.6; }
 
 '
 ]

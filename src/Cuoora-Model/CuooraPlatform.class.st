@@ -21,31 +21,59 @@ CuooraPlatform class >> clearSoleInstance [
 
 { #category : #'instance creation' }
 CuooraPlatform class >> instanceWithData [
-	| cuoora t1 t2 t3 u1 u2 u3 q1 q2 a1 a2 |
+	| cuoora t1 t2 t3 u1 u2 u3 q1 q2 q3 a1 a2 |
 	cuoora := CuooraPlatform new.
+	"creacion de topicos"
 	t1 := cuoora
 		newTopic: (Topic withName: 'Python' description: 'Python').
 	t2 := cuoora newTopic: (Topic withName: 'Java' description: 'Java').
 	t3 := cuoora
 		newTopic: (Topic withName: 'Smalltalk' description: 'Smalltalk').
+	"creacion de users"
 	u1 := cuoora newUser: (User withUsername: 'Franco' password: '123').
 	u2 := cuoora newUser: (User withUsername: 'Tomas' password: '123').
 	u3 := cuoora newUser: (User withUsername: 'Juan' password: '123').
+	"creacion de preguntas"
 	q1 := cuoora
-		newQuestion: (Question withAuthor: u1 title: 'Test1?' content: 'Test a')
+		newQuestion:
+			(Question
+				withAuthor: u1
+				title: '¿Para que sirve el método setUp en un Test Case?'
+				content: 'Lorem ipsum lorem ipsum')
 		withTopics:
 			{t1.
 			t2}.
 	q2 := cuoora
-		newQuestion: (Question withAuthor: u2 title: 'Test2?' content: 'Test b')
+		newQuestion:
+			(Question
+				withAuthor: u2
+				title: '¿Qué significa #MessageNotUnderstood?'
+				content: 'Lorem ipsum lorem ipsum')
 		withTopics: {t3}.
+	q3 := cuoora
+		newQuestion:
+			(Question
+				withAuthor: u3
+				title: '¿Como imprimo en consola en Java?'
+				content: 'Lorem ipsum lorem ipsum')
+		withTopics: {t2}.
+	"creacion de respuestas"
 	a1 := q1 newAnswer: (Answer withAuthor: u2 content: 'Sos un boludo').
 	a2 := q1
 		newAnswer: (Answer withAuthor: u3 content: 'Tomatela te dije').
-	q1 likeFrom: u2.
+	"intereses"
+	u2
+		addInterest: t1;
+		addInterest: t2;
+		addInterest: t3.
+	u1 addInterest: t2.
+	"likes y dislikes"
 	q1 likeFrom: u2.
 	q1 dislikeFrom: u3.
 	a1 dislikeFrom: u1.
+	q2 likeFrom: u1.
+	q3 dislikeFrom: u1.
+	q3 dislikeFrom: u3.
 	^ cuoora
 ]
 

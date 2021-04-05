@@ -25,6 +25,11 @@ Question >> answers [
 	^ answers
 ]
 
+{ #category : #accesing }
+Question >> answersCount [
+	^ answers size
+]
+
 { #category : #'adding/removing' }
 Question >> delete [
 	answers do: [ :each | each delete ].

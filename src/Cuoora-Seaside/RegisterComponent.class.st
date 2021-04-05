@@ -27,9 +27,9 @@ RegisterComponent >> renderBackButtonOn: aCanvas [
 
 { #category : #rendering }
 RegisterComponent >> renderButtonsOn: aCanvas [
-	self renderBackButtonOn: aCanvas.
+	self renderSignUpButtonOn: aCanvas.
 	aCanvas space.
-	self renderSignUpButtonOn: aCanvas
+	self renderBackButtonOn: aCanvas
 ]
 
 { #category : #rendering }
