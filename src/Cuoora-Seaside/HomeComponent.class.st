@@ -67,6 +67,32 @@ HomeComponent >> renderLogoutAnchor: html [
 ]
 
 { #category : #'rendering-elements' }
+HomeComponent >> renderPostReactionAnchors: aPost on: html [
+	html paragraph
+		with: [ html anchor
+				callback: [ aPost dislikeFrom: self session user ];
+				with: 'like'.
+			html span with: ' | '.
+			html anchor
+				callback: [ aPost dislikeFrom: self session user ];
+				with: 'dislike' ]
+]
+
+{ #category : #'rendering-elements' }
+HomeComponent >> renderPostVotes: aPost on: html [
+	html paragraph
+		with: [ html span
+				class: 'green-text';
+				with: aPost likeCount.
+			html span with: ' likes'.
+			html span with: ' | '.
+			html span
+				class: 'red-text';
+				with: aPost dislikeCount.
+			html span with: ' dislikes' ]
+]
+
+{ #category : #'rendering-elements' }
 HomeComponent >> renderQuestion: aQuestion on: html [
 	html div
 		class: 'question-div';
@@ -74,7 +100,8 @@ HomeComponent >> renderQuestion: aQuestion on: html [
 				class: 'italic bold';
 				with: aQuestion title.
 			self renderQuestionInfo: aQuestion on: html.
-			self renderQuestionVotes: aQuestion on: html.
+			self renderPostVotes: aQuestion on: html.
+			self renderPostReactionAnchors: aQuestion on: html.
 			html horizontalRule ]
 ]
 
@@ -89,20 +116,6 @@ HomeComponent >> renderQuestionInfo: aQuestion on: html [
 			html span: ' | '.
 			html span: aQuestion answersCount.
 			html span: ' respuestas' ]
-]
-
-{ #category : #'rendering-elements' }
-HomeComponent >> renderQuestionVotes: aQuestion on: html [
-	html paragraph
-		with: [ html span
-				class: 'green-text';
-				with: aQuestion likeCount.
-			html span with: ' likes'.
-			html span with: ' | '.
-			html span
-				class: 'red-text';
-				with: aQuestion dislikeCount.
-			html span with: ' dislikes' ]
 ]
 
 { #category : #'rendering-elements' }
@@ -147,7 +160,7 @@ body {
 
 #title { 
 	display: inline;
-	color: #1fa3ff;
+	color: #2ea1ff;
 	font-weight: 400;
 }
 
@@ -196,7 +209,10 @@ p {
 
 .red-text { color: #9e0000; }
 
-a {  text-decoration: none; } 
+a {  
+	text-decoration: none;
+	color: #0f61bf;
+} 
 
 a:hover { text-decoration: underline; }
 
