@@ -28,6 +28,6 @@ Metacello new
 | app |
 
 app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
-app sessionClass: SessionWithUser.
+app sessionClass: UserSession.
 ```
 y navegando a https://localhost:8080/cuoora debería mostrarse la aplicación.
