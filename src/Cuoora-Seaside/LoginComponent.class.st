@@ -9,8 +9,10 @@ Class {
 
 { #category : #callbacks }
 LoginComponent >> login [
+	username isNotEmpty & password isNotEmpty
+		ifFalse: [ ^ nil ].
 	(self model username: username protectedBy: password)
-		ifNotNil: [ :it| self proceedWith: it ].
+		ifNotNil: [ :it | self proceedWith: it ].
 	username := nil.
 	password := nil
 ]

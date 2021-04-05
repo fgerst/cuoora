@@ -27,15 +27,13 @@ Question >> answers [
 
 { #category : #'adding/removing' }
 Question >> delete [
-	"TODO le va a pedir amablemente a sus respuestas que se eliminen"
-	
 	answers do: [ :each | each delete ].
 ]
 
 { #category : #initialization }
 Question >> initialize [
 	super initialize.
-	answers := Set new.
+	answers := Set new
 ]
 
 { #category : #'adding/removing' }

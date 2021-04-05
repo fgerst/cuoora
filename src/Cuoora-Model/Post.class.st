@@ -61,6 +61,11 @@ Post >> dislikeFrom: anUser [
 ]
 
 { #category : #accesing }
+Post >> dislikeScore [
+	^ dislikes size
+]
+
+{ #category : #accesing }
 Post >> dislikes [
 	^ dislikes
 ]
@@ -76,6 +81,11 @@ Post >> initialize [
 Post >> likeFrom: anUser [
 	self deleteVoteFrom: anUser in: dislikes.
 	self deleteOrAddVoteFrom: anUser in: likes
+]
+
+{ #category : #accesing }
+Post >> likeScore [
+	^ likes size
 ]
 
 { #category : #accesing }

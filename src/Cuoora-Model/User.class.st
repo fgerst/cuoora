@@ -51,15 +51,13 @@ User >> answers [
 
 { #category : #'adding/removing' }
 User >> deleteMyAnswer: anAnswer [
-	"Si no la encuentra devuelve un error"
-	answers remove: anAnswer
+	answers remove: anAnswer ifAbsent: [ ^ nil ]
 ]
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
 	aQuestion delete.
-	questions remove: aQuestion
-
+	questions remove: aQuestion ifAbsent: [ ^ nil ]
 ]
 
 { #category : #accesing }
@@ -103,16 +101,6 @@ User >> relevantQuestions [
 	following do: [ :user | relevantQuestions addAll: user questions ].
 	interests do: [ :topic | relevantQuestions addAll: topic questions ].
 	^ relevantQuestions
-]
-
-{ #category : #listing }
-User >> sortedAnswers [
-	^ ( answers sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
-]
-
-{ #category : #listing }
-User >> sortedQuestions [
-	^ ( questions sort: [ :a :b | ( a postScore ) < ( b postScore ) ] )
 ]
 
 { #category : #accesing }

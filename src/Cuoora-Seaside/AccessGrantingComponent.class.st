@@ -39,6 +39,11 @@ AccessGrantingComponent >> renderButtonsOn: aCanvas [
 
 { #category : #rendering }
 AccessGrantingComponent >> renderContentOn: aCanvas [
+aCanvas heading
+		id: 'title';
+		level1;
+		with: [ aCanvas span with: 'CuOOra' ].
+	aCanvas horizontalRule.
 	aCanvas
 		form: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ]
@@ -55,13 +60,21 @@ AccessGrantingComponent >> renderInputElementsOn: aCanvas [
 { #category : #styles }
 AccessGrantingComponent >> style [
 	^ '
+	
 body { 
 	font-family: sans-serif;
-	margin: 12px;
    padding: 8px;
+	max-width: 920px;
+   margin: auto; 
 }
 
-#title { display: inline; }
+#title { 
+	display: inline;
+	color: #1fa3ff;
+	font-weight: 400;
+}
+
+hr { opacity: 0.4; }
 
 '
 ]

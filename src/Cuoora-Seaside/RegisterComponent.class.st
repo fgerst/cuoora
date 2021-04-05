@@ -10,6 +10,12 @@ Class {
 { #category : #callbacks }
 RegisterComponent >> registerAndLogin [
 	| anUser |
+	"Chequea que se hayan llenado los campos"
+	username isNotEmpty & password isNotEmpty
+		ifFalse: [ ^ nil ].
+	"Chequea con el model que el username no este ya registrado"
+	(self model usernameExists: username)
+		ifTrue: [ ^ nil ].
 	anUser := User withUsername: username password: password.
 	self model newUser: anUser.
 	self proceedWith: anUser

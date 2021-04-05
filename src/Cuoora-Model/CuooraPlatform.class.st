@@ -62,8 +62,8 @@ CuooraPlatform >> deleteQuestion: aQuestion [
 
 { #category : #initialization }
 CuooraPlatform >> initialize [
-	users := Set new.
-	topics := Set new
+	users := OrderedCollection new.
+	topics := OrderedCollection new
 ]
 
 { #category : #'adding/removing' }
@@ -90,11 +90,19 @@ CuooraPlatform >> topics [
 	^ topics
 ]
 
-{ #category : #access }
+{ #category : #users }
 CuooraPlatform >> username: anUsername protectedBy: aPassword [
-	^ users
+	| user |
+	user := users
 		detect: [ :each | each username = anUsername & (each password = aPassword) ]
-		ifNone: [ nil ]
+		ifNone: [ nil ].
+	user.
+	^ user
+]
+
+{ #category : #users }
+CuooraPlatform >> usernameExists: anUsername [
+	^ users anySatisfy: [ :each | each username = anUsername ]
 ]
 
 { #category : #accesing }
