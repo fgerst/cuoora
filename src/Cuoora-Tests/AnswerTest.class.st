@@ -30,6 +30,8 @@ AnswerTest >> testDelete [
 	"comment stating purpose of instance-side message"
 	"scope: class-variables  &  instance-variables"	
 			
+	self assert: ( u1 answers includes: anAnswer1 ).
+	
 	anAnswer1 delete.
 	
 	self assert: ( u1 answers size ) equals: 0.
