@@ -99,7 +99,7 @@ User >> relevantQuestions [
 	| relevantQuestions |
 	relevantQuestions := Set new.
 	following do: [ :user | relevantQuestions addAll: user questions ].
-	interests do: [ :topic | relevantQuestions addAll: topic questions ].
+	interests do: [ :topic | relevantQuestions addAll: topic topicQuestions ].
 	^ relevantQuestions
 ]
 
@@ -124,13 +124,11 @@ User >> userScore [
 	"puntaje por cantidad de preguntas"
 	qScore := questions size * 20.
 	"puntaje por cantidad de respuestas a preguntas de otros usuarios"
-	aScore := (answers
-		difference: (questions flatCollect: [ :each | each answers ])) size
-		* 50.
+	aScore := (answers difference: (questions flatCollect: [ :each | each answers ])) size * 50.
 	"balance de likes/dislikes en todas las participaciones del usuario"
 	vScore := (answers sumNumbers: [ :each | each postScore ])
 		+ (questions sumNumbers: [ :each | each postScore ]).
-	^ qScore + aScore + vScore
+	^ ( qScore + aScore + vScore )
 ]
 
 { #category : #accesing }
