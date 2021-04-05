@@ -65,7 +65,7 @@ HomeComponent >> renderLogoutAnchor: html [
 HomeComponent >> renderPostReactionAnchors: aPost on: html [
 	html paragraph
 		with: [ html anchor
-				callback: [ aPost dislikeFrom: self session user ];
+				callback: [ aPost likeFrom: self session user ];
 				with: 'like'.
 			html span with: ' | '.
 			html anchor
