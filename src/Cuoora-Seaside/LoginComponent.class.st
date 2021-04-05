@@ -7,10 +7,17 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
+{ #category : #utilities }
+LoginComponent >> clearCache [
+	"metodo para borrar datos nuevos creados desde seaside"
+
+	CuooraPlatform clearSoleInstance
+]
+
 { #category : #callbacks }
 LoginComponent >> login [
-	username isNotEmpty & password isNotEmpty
-		ifFalse: [ ^ nil ].
+	self fieldsEmpty
+		ifTrue: [ ^ nil ].
 	(self model username: username protectedBy: password)
 		ifNotNil: [ :it | self proceedWith: it ].
 	username := nil.
@@ -27,7 +34,9 @@ LoginComponent >> renderButtonsOn: aCanvas [
 	self renderSignInButtonOn: aCanvas.
 	aCanvas horizontalRule.
 	aCanvas paragraph: 'Don''t have an account?'.
-	self renderSignUpButtonOn: aCanvas
+	self renderSignUpButtonOn: aCanvas.
+	aCanvas horizontalRule.
+	aCanvas anchor callback: [self clearCache]; with: 'Clear cache'. 
 ]
 
 { #category : #rendering }

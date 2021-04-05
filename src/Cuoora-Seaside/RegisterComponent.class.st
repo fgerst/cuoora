@@ -10,11 +10,8 @@ Class {
 { #category : #callbacks }
 RegisterComponent >> registerAndLogin [
 	| anUser |
-	"Chequea que se hayan llenado los campos"
-	username isNotEmpty & password isNotEmpty
-		ifFalse: [ ^ nil ].
-	"Chequea con el model que el username no este ya registrado"
-	(self model usernameExists: username)
+	"chequea campos vacios o usuario ya existente"
+	self fieldsEmpty | (self model usernameExists: username)
 		ifTrue: [ ^ nil ].
 	anUser := User withUsername: username password: password.
 	self model newUser: anUser.
@@ -22,7 +19,16 @@ RegisterComponent >> registerAndLogin [
 ]
 
 { #category : #rendering }
+RegisterComponent >> renderBackButtonOn: aCanvas [
+	aCanvas button
+		callback: [ self answer ];
+		with: 'Back'
+]
+
+{ #category : #rendering }
 RegisterComponent >> renderButtonsOn: aCanvas [
+	self renderBackButtonOn: aCanvas.
+	aCanvas space.
 	self renderSignUpButtonOn: aCanvas
 ]
 

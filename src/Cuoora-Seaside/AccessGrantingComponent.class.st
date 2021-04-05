@@ -11,9 +11,14 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
-{ #category : #'accessing model' }
+{ #category : #accesing }
+AccessGrantingComponent >> fieldsEmpty [
+	^ username isEmpty | password isEmpty
+]
+
+{ #category : #accesing }
 AccessGrantingComponent >> model [
- ^ CuooraPlatform soleInstance.
+	^ CuooraPlatform soleInstance
 ]
 
 { #category : #accesing }
@@ -39,7 +44,7 @@ AccessGrantingComponent >> renderButtonsOn: aCanvas [
 
 { #category : #rendering }
 AccessGrantingComponent >> renderContentOn: aCanvas [
-aCanvas heading
+	aCanvas heading
 		id: 'title';
 		level1;
 		with: [ aCanvas span with: 'CuOOra' ].

@@ -9,15 +9,14 @@ Class {
 
 { #category : #callbacks }
 HomeComponent >> logout [
-	self session logout.
+	self session logoutUser.
 	self call: LoginComponent new.
 ]
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: anHtmlCanvas [
-	"#TODO *content(relevant questions)"
-
-	self renderHeaderOn: anHtmlCanvas
+	self renderHeaderOn: anHtmlCanvas.
+	self renderPostsOn: anHtmlCanvas.
 ]
 
 { #category : #'rendering-elements' }
@@ -62,8 +61,8 @@ HomeComponent >> renderHeaderTitle: html [
 ]
 
 { #category : #'rendering-elements' }
-HomeComponent >> renderLogoutAnchor: anHtmlCanvas [
-	anHtmlCanvas anchor
+HomeComponent >> renderLogoutAnchor: html [
+	html anchor
 		class: 'link-alt';
 		callback: [ self logout.
 			self answer ];
@@ -72,14 +71,14 @@ HomeComponent >> renderLogoutAnchor: anHtmlCanvas [
 
 { #category : #rendering }
 HomeComponent >> renderPostsOn: html [
-	"TODO"
+	"TODO relevant questions"
 
 	^ nil
 ]
 
 { #category : #'rendering-utilities' }
-HomeComponent >> renderSeparator: anHtmlCanvas [
-	anHtmlCanvas span
+HomeComponent >> renderSeparator: html [
+	html span
 		id: 'title-separator';
 		with: '|'
 ]
