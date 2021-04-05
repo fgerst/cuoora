@@ -24,19 +24,13 @@ LoginComponent >> login [
 	password := nil
 ]
 
-{ #category : #callbacks }
-LoginComponent >> registerNewUser [
-	self call: RegisterComponent new
-]
-
 { #category : #rendering }
 LoginComponent >> renderButtonsOn: aCanvas [
 	self renderSignInButtonOn: aCanvas.
 	aCanvas horizontalRule.
-	aCanvas paragraph: 'Don''t have an account?'.
-	self renderSignUpButtonOn: aCanvas.
-	aCanvas horizontalRule.
-	aCanvas anchor callback: [self clearInstance]; with: 'Clear instance'. 
+	aCanvas anchor
+		callback: [ self clearInstance ];
+		with: 'Clear instance'
 ]
 
 { #category : #rendering }
@@ -44,11 +38,4 @@ LoginComponent >> renderSignInButtonOn: aCanvas [
 	aCanvas submitButton
 		callback: [ self login ];
 		with: 'Sign In'
-]
-
-{ #category : #rendering }
-LoginComponent >> renderSignUpButtonOn: aCanvas [
-	aCanvas submitButton
-		callback: [ self registerNewUser ];
-		with: 'Sign Up'
 ]

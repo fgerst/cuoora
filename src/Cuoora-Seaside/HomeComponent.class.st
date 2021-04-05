@@ -26,16 +26,12 @@ HomeComponent >> renderHeaderNavBar: html [
 			html listItem
 				with: [ html anchor
 						class: 'link-alt bold';
-						callback: [ self call: HomeComponent new ];
+						callback: [ nil ];
 						with: self session loggedUsername ].
 			html listItem
 				with: [ html anchor
 						callback: [ self call: HomeComponent new ];
 						with: 'Home' ].
-			html listItem
-				with: [ html anchor
-						callback: [ self call: HomeComponent new ];
-						with: 'Topics' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]
 
@@ -61,8 +57,7 @@ HomeComponent >> renderHeaderTitle: html [
 HomeComponent >> renderLogoutAnchor: html [
 	html anchor
 		class: 'link-alt';
-		callback: [ self logout.
-			self answer ];
+		callback: [ self logout ];
 		with: 'Log out'
 ]
 
@@ -111,7 +106,7 @@ HomeComponent >> renderQuestionInfo: aQuestion on: html [
 		with: [ html span: 'Realizada por '.
 			html anchor
 				class: 'bold link-alt';
-				callback: [ self call: HomeComponent new ];
+				callback: [ nil ];
 				with: aQuestion author username.
 			html span: ' | '.
 			html span: aQuestion answersCount.

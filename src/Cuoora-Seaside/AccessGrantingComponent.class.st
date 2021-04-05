@@ -1,5 +1,5 @@
 "
-Clase abstracta que implementa comportamiento para Login y Register.
+Clase abstracta que implementa comportamiento para el login de usuarios y eventualmente implementar registro de nuevos usuarios.
 "
 Class {
 	#name : #AccessGrantingComponent,
@@ -79,7 +79,7 @@ body {
 	font-weight: 400;
 }
 
-hr { opacity: 0.4; }
+hr { opacity: 0.6; }
 
 '
 ]
