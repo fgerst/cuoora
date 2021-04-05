@@ -103,6 +103,16 @@ User >> relevantQuestions [
 	^ relevantQuestions
 ]
 
+{ #category : #listing }
+User >> sortedAnswers [
+	^ ( answers asOrderedCollection sort: [ :a :b | ( a postScore ) > ( b postScore ) ] )
+]
+
+{ #category : #listing }
+User >> sortedQuestions [
+	^ ( questions sort: [ :a :b | ( a postScore ) > ( b postScore ) ] )
+]
+
 { #category : #accesing }
 User >> timestamp [
 	^ timestamp
