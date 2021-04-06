@@ -1,24 +1,11 @@
 "
-Componente que implementa el Home de la aplicacion
+Componente que implementa el Home de la aplicacion, donde se pueden ver las Preguntas Relevantes para el Usuario, y crear nuevas preguntas.
 "
 Class {
 	#name : #HomeComponent,
-	#superclass : #HeaderComponent,
+	#superclass : #CommonPageComponent,
 	#category : #'Cuoora-Seaside'
 }
-
-{ #category : #callbacks }
-HomeComponent >> logout [
-	self session logoutUser.
-	self answer
-]
-
-{ #category : #rendering }
-HomeComponent >> renderContentOn: anHtmlCanvas [
-	super renderContentOn: anHtmlCanvas.
-	self renderNewQuestionButtonOn: anHtmlCanvas.
-	self renderRelevantQuestionsOn: anHtmlCanvas
-]
 
 { #category : #'rendering-questions' }
 HomeComponent >> renderNewQuestionButtonOn: html [
@@ -32,17 +19,23 @@ HomeComponent >> renderNewQuestionButtonOn: html [
 ]
 
 { #category : #rendering }
-HomeComponent >> renderRelevantQuestionsOn: aCanvas [
+HomeComponent >> renderPageContentOn: anHtmlCanvas [
+	self renderNewQuestionButtonOn: anHtmlCanvas.
+	self renderRelevantQuestionsOn: anHtmlCanvas
+]
+
+{ #category : #rendering }
+HomeComponent >> renderRelevantQuestionsOn: html [
 	| rQuestions |
 	(rQuestions := self session user relevantQuestions
 		asSortedCollection: [ :a :b | a timestamp < b timestamp ])
-		ifEmpty: [ aCanvas paragraph
+		ifEmpty: [ html paragraph
 				class: 'italic';
 				with:
 					'...no hay preguntas relevantes. Añada tópicos de interés, o siga a otros usuarios.' ]
-		ifNotEmpty: [ aCanvas heading
+		ifNotEmpty: [ html heading
 				level: 2;
 				class: 'h2-alt';
 				with: 'Preguntas relevantes'.
-			self renderQuestions: rQuestions on: aCanvas ]
+			self renderQuestions: rQuestions on: html ]
 ]

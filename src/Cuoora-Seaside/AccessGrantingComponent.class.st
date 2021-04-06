@@ -20,7 +20,7 @@ AccessGrantingComponent >> clearInstance [
 
 { #category : #accesing }
 AccessGrantingComponent >> fieldsEmpty [
-	^ username isEmpty | password isEmpty
+	^ username isEmptyOrNil | password isEmptyOrNil
 ]
 
 { #category : #accesing }
