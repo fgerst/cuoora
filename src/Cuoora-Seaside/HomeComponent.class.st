@@ -10,12 +10,13 @@ Class {
 { #category : #callbacks }
 HomeComponent >> logout [
 	self session logoutUser.
-	self call: LoginComponent new.
+	self answer
 ]
 
 { #category : #rendering }
 HomeComponent >> renderContentOn: anHtmlCanvas [
 	self renderHeaderOn: anHtmlCanvas.
+	self renderNewQuestionButtonOn: anHtmlCanvas.
 	self renderRelevantQuestionsOn: anHtmlCanvas
 ]
 
@@ -30,7 +31,7 @@ HomeComponent >> renderHeaderNavBar: html [
 						with: self session loggedUsername ].
 			html listItem
 				with: [ html anchor
-						callback: [ self call: HomeComponent new ];
+						callback: [ nil ];
 						with: 'Home' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]
@@ -56,9 +57,20 @@ HomeComponent >> renderHeaderTitle: html [
 { #category : #'rendering-elements' }
 HomeComponent >> renderLogoutAnchor: html [
 	html anchor
-		class: 'link-alt';
 		callback: [ self logout ];
 		with: 'Log out'
+]
+
+{ #category : #rendering }
+HomeComponent >> renderNewQuestionButtonOn: html [
+	html paragraph
+		class: 'newpost-p';
+		with: [ html button
+				class: 'newpost-button';
+				callback: [ nil ];
+				with: '+'.
+			html space.
+			html span: 'Hacer una nueva pregunta' ]
 ]
 
 { #category : #'rendering-elements' }
@@ -184,6 +196,24 @@ ol {
 p { 
 	margin-top: 6px;
 	margin-bottom: 6px;
+}
+
+.newpost-button { 
+	background-color: #2bad5d;
+	color: white;
+   text-align: center;
+	font-size: 18px;
+	border-radius: 10px;
+	border: none;
+	margin-right: 0;
+	margin-left: auto;
+	cursor: pointer;
+}
+
+.newpost-p { 
+	text-align: right;
+	padding: 6px 0 0 0;
+	margin: 0;
 }
 
 .link-alt { color: black; }
