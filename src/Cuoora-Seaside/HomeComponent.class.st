@@ -20,7 +20,7 @@ HomeComponent >> renderContentOn: anHtmlCanvas [
 	self renderRelevantQuestionsOn: anHtmlCanvas
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-topbar' }
 HomeComponent >> renderHeaderNavBar: html [
 	html
 		unorderedList: [ html listItem with: [ self renderSeparator: html ].
@@ -46,7 +46,7 @@ HomeComponent >> renderHeaderOn: aCanvas [
 	aCanvas horizontalRule
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-topbar' }
 HomeComponent >> renderHeaderTitle: html [
 	html heading
 		id: 'title';
@@ -54,14 +54,14 @@ HomeComponent >> renderHeaderTitle: html [
 		with: [ html span with: 'CuOOra' ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-topbar' }
 HomeComponent >> renderLogoutAnchor: html [
 	html anchor
 		callback: [ self logout ];
 		with: 'Log out'
 ]
 
-{ #category : #rendering }
+{ #category : #'rendering-questions' }
 HomeComponent >> renderNewQuestionButtonOn: html [
 	html paragraph
 		class: 'newpost-p';
@@ -73,7 +73,7 @@ HomeComponent >> renderNewQuestionButtonOn: html [
 			html span: 'Hacer una nueva pregunta' ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-posts' }
 HomeComponent >> renderPostReactionAnchors: aPost on: html [
 	html paragraph
 		with: [ html anchor
@@ -85,7 +85,7 @@ HomeComponent >> renderPostReactionAnchors: aPost on: html [
 				with: 'dislike' ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-posts' }
 HomeComponent >> renderPostVotes: aPost on: html [
 	html paragraph
 		with: [ html span
@@ -99,7 +99,7 @@ HomeComponent >> renderPostVotes: aPost on: html [
 			html span with: ' dislikes' ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-questions' }
 HomeComponent >> renderQuestion: aQuestion on: html [
 	html div
 		class: 'question-div';
@@ -112,7 +112,7 @@ HomeComponent >> renderQuestion: aQuestion on: html [
 			html horizontalRule ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-questions' }
 HomeComponent >> renderQuestionInfo: aQuestion on: html [
 	html paragraph
 		with: [ html span: 'Realizada por '.
@@ -125,7 +125,7 @@ HomeComponent >> renderQuestionInfo: aQuestion on: html [
 			html span: ' respuestas' ]
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-questions' }
 HomeComponent >> renderQuestions: questions on: html [
 	html
 		orderedList: [ questions
@@ -148,7 +148,7 @@ HomeComponent >> renderRelevantQuestionsOn: aCanvas [
 			self renderQuestions: rQuestions on: aCanvas ]
 ]
 
-{ #category : #'rendering-utilities' }
+{ #category : #'rendering-topbar' }
 HomeComponent >> renderSeparator: html [
 	html span
 		id: 'title-separator';

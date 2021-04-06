@@ -11,6 +11,13 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
+{ #category : #utilities }
+AccessGrantingComponent >> clearInstance [
+	"metodo para borrar datos nuevos creados desde seaside"
+
+	CuooraPlatform clearSoleInstance
+]
+
 { #category : #accesing }
 AccessGrantingComponent >> fieldsEmpty [
 	^ username isEmpty | password isEmpty
@@ -49,17 +56,26 @@ AccessGrantingComponent >> renderContentOn: aCanvas [
 		level1;
 		with: [ aCanvas span with: 'CuOOra' ].
 	aCanvas horizontalRule.
-	aCanvas
-		form: [ self renderInputElementsOn: aCanvas.
-			self renderButtonsOn: aCanvas ]
+	aCanvas form
+		class: 'login-form';
+		with: [ self renderInputElementsOn: aCanvas.
+			self renderButtonsOn: aCanvas ].
+	aCanvas horizontalRule
+	"aCanvas anchor
+		callback: [ self clearInstance ];
+		with: 'Clear instance'"
 ]
 
 { #category : #rendering }
 AccessGrantingComponent >> renderInputElementsOn: aCanvas [
-	aCanvas label: 'Username'.
-	aCanvas paragraph: [ aCanvas textInput on: #username of: self ].
-	aCanvas label: 'Password'.
-	aCanvas paragraph: [ aCanvas passwordInput on: #password of: self ]
+	aCanvas
+		paragraph: [ aCanvas textInput
+				placeholder: 'Username';
+				on: #username of: self ].
+	aCanvas
+		paragraph: [ aCanvas passwordInput
+				placeholder: 'Password';
+				on: #password of: self ]
 ]
 
 { #category : #styles }
@@ -70,7 +86,7 @@ body {
 	font-family: sans-serif;
    padding: 8px;
 	max-width: 900px;
-   margin: auto; 
+   margin: auto;
 	font-size: 15px;
 }
 
@@ -83,13 +99,19 @@ body {
 .submit-button { 
 	color: white;
 	background-color: #1fa3ff;
-	border-radius: 6px;
+	border-radius: 8px;
 	border: none;
 	cursor: pointer;
 	padding: 4px 6px 4px 6px;
+	margin: 0 0 15px 0;
 }
 
 hr { opacity: 0.6; }
+
+.login-form { 
+	margin-left: 30px;
+	padding: 6px;
+}
 
 '
 ]

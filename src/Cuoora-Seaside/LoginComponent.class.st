@@ -7,13 +7,6 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
-{ #category : #utilities }
-LoginComponent >> clearInstance [
-	"metodo para borrar datos nuevos creados desde seaside"
-
-	CuooraPlatform clearSoleInstance
-]
-
 { #category : #callbacks }
 LoginComponent >> login [
 	self fieldsEmpty
@@ -27,10 +20,6 @@ LoginComponent >> login [
 { #category : #rendering }
 LoginComponent >> renderButtonsOn: aCanvas [
 	self renderSignInButtonOn: aCanvas.
-	aCanvas horizontalRule.
-	aCanvas anchor
-		callback: [ self clearInstance ];
-		with: 'Clear instance'
 ]
 
 { #category : #rendering }
