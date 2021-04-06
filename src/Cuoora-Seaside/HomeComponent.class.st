@@ -69,7 +69,6 @@ HomeComponent >> renderNewQuestionButtonOn: html [
 				class: 'newpost-button';
 				callback: [ nil ];
 				with: '+'.
-			html space.
 			html span: 'Hacer una nueva pregunta' ]
 ]
 
@@ -201,16 +200,15 @@ p {
 }
 
 .newpost-button { 
-	background-color: #2bad5d;
+	background-color: #60b327;
 	color: white;
    text-align: center;
 	font-size: 18px;
 	padding: 1px 8px 1px 8px;
-	box-shadow: 2px 4px 4px #888888;
-	border-radius: 10px;
+	box-shadow: 1px 2px 4px #888888;
+	border-radius: 12px;
 	border: none;
-	margin-right: 0;
-	margin-left: auto;
+	margin-right: 6px;
 	cursor: pointer;
 }
 
@@ -222,7 +220,7 @@ p {
 
 .link-alt { color: black; }
 
-.h2-alt { margin: 12px; }
+.h2-alt { margin: 0 12px 0 12px; }
 
 .bold { font-weight: 600; }
 
