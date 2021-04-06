@@ -36,6 +36,7 @@ LoginComponent >> renderButtonsOn: aCanvas [
 { #category : #rendering }
 LoginComponent >> renderSignInButtonOn: aCanvas [
 	aCanvas submitButton
+		class: 'submit-button';
 		callback: [ self login ];
 		with: 'Sign In'
 ]

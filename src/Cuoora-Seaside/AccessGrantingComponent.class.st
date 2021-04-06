@@ -69,14 +69,24 @@ AccessGrantingComponent >> style [
 body { 
 	font-family: sans-serif;
    padding: 8px;
-	max-width: 920px;
+	max-width: 900px;
    margin: auto; 
+	font-size: 15px;
 }
 
 #title { 
 	display: inline;
-	color: #1fa3ff;
+	color: #2ea1ff;
 	font-weight: 400;
+}
+
+.submit-button { 
+	color: white;
+	background-color: #1fa3ff;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	padding: 4px 6px 4px 6px;
 }
 
 hr { opacity: 0.6; }

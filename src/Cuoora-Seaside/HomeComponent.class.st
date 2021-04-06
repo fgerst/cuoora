@@ -158,11 +158,13 @@ HomeComponent >> renderSeparator: html [
 { #category : #styles }
 HomeComponent >> style [
 	^ '
+	
 body { 
 	font-family: sans-serif;
    padding: 8px;
 	max-width: 900px;
    margin: auto; 
+	font-size: 15px;
 }
 
 #title { 
@@ -203,6 +205,8 @@ p {
 	color: white;
    text-align: center;
 	font-size: 18px;
+	padding: 1px 8px 1px 8px;
+	box-shadow: 2px 4px 4px #888888;
 	border-radius: 10px;
 	border: none;
 	margin-right: 0;
