@@ -137,3 +137,14 @@ CuooraPlatform >> usernameExists: anUsername [
 CuooraPlatform >> users [
 	^ users
 ]
+
+{ #category : #accesing }
+CuooraPlatform >> validatingStringTopics: stringOfTopicNamesSeparatedBySpaces [
+
+| validTopics topicNames|
+
+topicNames := topics collect: [ :each | ( each name ) asLowercase ].
+validTopics := ( stringOfTopicNamesSeparatedBySpaces splitOn: ' ' ).
+validTopics := validTopics select: [ :each | topicNames includes: (each asLowercase) ].
+^validTopics 
+]
