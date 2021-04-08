@@ -6,7 +6,8 @@ Class {
 	#superclass : #Post,
 	#instVars : [
 		'title',
-		'answers'
+		'answers',
+		'topics'
 	],
 	#category : #'Cuoora-Model'
 }
@@ -35,6 +36,12 @@ Question >> delete [
 	answers do: [ :each | each delete ].
 ]
 
+{ #category : #accesing }
+Question >> includesTopic: aTopic [ 
+
+^( topics includes: aTopic )
+]
+
 { #category : #initialization }
 Question >> initialize [
 	super initialize.
@@ -61,4 +68,10 @@ Question >> title [
 { #category : #accesing }
 Question >> title: aString [
 	title := aString
+]
+
+{ #category : #accesing }
+Question >> topics [ 
+
+^topics
 ]

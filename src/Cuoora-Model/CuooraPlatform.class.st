@@ -84,8 +84,13 @@ CuooraPlatform class >> soleInstance [
 
 { #category : #'adding/removing' }
 CuooraPlatform >> deleteQuestion: aQuestion [
-	topics do: [ :each | each deleteTopicQuestion: aQuestion ].
-	aQuestion author deleteMyQuestion: aQuestion.
+"Este metodo es inutil creo"
+	users do: [ :each | each deleteMyQuestion: aQuestion ]
+]
+
+{ #category : #'adding/removing' }
+CuooraPlatform >> deleteTopicQuestions: aTopic [
+	users do: [ :each | each deleteTopicQuestion: aTopic ]
 ]
 
 { #category : #initialization }
