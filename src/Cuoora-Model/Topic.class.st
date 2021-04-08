@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'description'
+		'description',
+		'topicQuestions'
 	],
 	#category : #'Cuoora-Model'
 }
@@ -17,6 +18,28 @@ Topic class >> withName: aName description: aDesc [
 		name: aName;
 		description: aDesc;
 		yourself
+]
+
+{ #category : #adding }
+Topic >> addTopicQuestion: aQuestion [ 
+
+topicQuestions add: aQuestion 
+
+
+]
+
+{ #category : #adding }
+Topic >> addTopicQuestions: aQuestion [ 
+
+topicQuestions add: aQuestion 
+
+
+]
+
+{ #category : #adding }
+Topic >> deleteTopicQuestion: aQuestion [ 
+
+topicQuestions remove: aQuestion ifAbsent: [ ^nil ]
 ]
 
 { #category : #accesing }
@@ -32,6 +55,7 @@ Topic >> description: aString [
 { #category : #initialization }
 Topic >> initialize [
 	
+topicQuestions := Set new.
 ]
 
 { #category : #accesing }
@@ -42,4 +66,10 @@ Topic >> name [
 { #category : #accesing }
 Topic >> name: aString [
 	name := aString
+]
+
+{ #category : #accesing }
+Topic >> topicQuestions [
+
+^topicQuestions 
 ]
