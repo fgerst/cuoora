@@ -99,6 +99,13 @@ CuooraPlatform >> initialize [
 	topics := OrderedCollection new
 ]
 
+{ #category : #accesing }
+CuooraPlatform >> listTopicQuestions: aTopic [ 
+
+	^users collect: [ :each | each listQuestionsFromTopic: aTopic ].
+
+]
+
 { #category : #'adding/removing' }
 CuooraPlatform >> newQuestion: aQuestion withTopics: topicList [
 	aQuestion author addQuestion: aQuestion.
