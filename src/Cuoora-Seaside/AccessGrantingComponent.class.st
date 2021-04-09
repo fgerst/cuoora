@@ -60,10 +60,10 @@ AccessGrantingComponent >> renderContentOn: aCanvas [
 		class: 'login-form';
 		with: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ].
-	aCanvas horizontalRule
-	"aCanvas anchor
+	aCanvas horizontalRule.
+	aCanvas anchor
 		callback: [ self clearInstance ];
-		with: 'Clear instance'"
+		with: 'Clear instance'
 ]
 
 { #category : #rendering }

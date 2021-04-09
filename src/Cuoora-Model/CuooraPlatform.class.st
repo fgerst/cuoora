@@ -34,29 +34,27 @@ CuooraPlatform class >> instanceWithData [
 	u2 := cuoora newUser: (User withUsername: 'Tomas' password: '123').
 	u3 := cuoora newUser: (User withUsername: 'Juan' password: '123').
 	"creacion de preguntas"
-	q1 := cuoora
+	q1 := u1
 		newQuestion:
 			(Question
 				withAuthor: u1
 				title: '¿Para que sirve el método setUp en un Test Case?'
-				content: 'Lorem ipsum lorem ipsum')
-		withTopics:
-			{t1.
-			t2}.
-	q2 := cuoora
+				content: 'Lorem ipsum lorem ipsum'
+				topics: {t1. t2}).
+	q2 := u2
 		newQuestion:
 			(Question
 				withAuthor: u2
 				title: '¿Qué significa #MessageNotUnderstood?'
-				content: 'Lorem ipsum lorem ipsum')
-		withTopics: {t3}.
-	q3 := cuoora
+				content: 'Lorem ipsum lorem ipsum'
+				topics: {t3} ).
+	q3 := u3
 		newQuestion:
 			(Question
 				withAuthor: u3
 				title: '¿Como imprimo en consola en Java?'
-				content: 'Lorem ipsum lorem ipsum')
-		withTopics: {t2}.
+				content: 'Lorem ipsum lorem ipsum'
+				topics: {t2}).
 	"creacion de respuestas"
 	a1 := q1 newAnswer: (Answer withAuthor: u2 content: 'Sos un boludo').
 	a2 := q1
@@ -67,6 +65,8 @@ CuooraPlatform class >> instanceWithData [
 		addInterest: t2;
 		addInterest: t3.
 	u1 addInterest: t2.
+	"follows"
+	u3 addFollowing: u1.
 	"likes y dislikes"
 	q1 likeFrom: u2.
 	q1 dislikeFrom: u3.
@@ -82,35 +82,10 @@ CuooraPlatform class >> soleInstance [
 	^ soleInstance ifNil: [ soleInstance := self instanceWithData ]
 ]
 
-{ #category : #'adding/removing' }
-CuooraPlatform >> deleteQuestion: aQuestion [
-"Este metodo es inutil creo"
-	users do: [ :each | each deleteMyQuestion: aQuestion ]
-]
-
-{ #category : #'adding/removing' }
-CuooraPlatform >> deleteTopicQuestions: aTopic [
-	users do: [ :each | each deleteTopicQuestion: aTopic ]
-]
-
 { #category : #initialization }
 CuooraPlatform >> initialize [
 	users := OrderedCollection new.
 	topics := OrderedCollection new
-]
-
-{ #category : #accesing }
-CuooraPlatform >> listTopicQuestions: aTopic [ 
-
-	^users collect: [ :each | each listQuestionsFromTopic: aTopic ].
-
-]
-
-{ #category : #'adding/removing' }
-CuooraPlatform >> newQuestion: aQuestion withTopics: topicList [
-	aQuestion author addQuestion: aQuestion.
-	topicList do: [ :each | each addTopicQuestion: aQuestion ].
-	^ aQuestion
 ]
 
 { #category : #'adding/removing' }
@@ -130,19 +105,13 @@ CuooraPlatform >> topics [
 	^ topics
 ]
 
-{ #category : #users }
+{ #category : #'validating-users' }
 CuooraPlatform >> username: anUsername protectedBy: aPassword [
 	| user |
 	user := users
 		detect: [ :each | each username = anUsername & (each password = aPassword) ]
 		ifNone: [ nil ].
-	user.
 	^ user
-]
-
-{ #category : #users }
-CuooraPlatform >> usernameExists: anUsername [
-	^ users anySatisfy: [ :each | each username = anUsername ]
 ]
 
 { #category : #accesing }
@@ -150,13 +119,12 @@ CuooraPlatform >> users [
 	^ users
 ]
 
-{ #category : #accesing }
-CuooraPlatform >> validatingStringTopics: stringOfTopicNamesSeparatedBySpaces [
-
-| validTopics topicNames|
-
-topicNames := topics collect: [ :each | ( each name ) asLowercase ].
-validTopics := ( stringOfTopicNamesSeparatedBySpaces splitOn: ' ' ).
-validTopics := validTopics select: [ :each | topicNames includes: (each asLowercase) ].
-^validTopics 
+{ #category : #'validating-topics' }
+CuooraPlatform >> validateStringTopics: aStringOfSpaceSeparatedTopicNames [
+	| validTopics topicNames |
+	topicNames := topics collect: [ :each | each name asLowercase ].
+	validTopics := aStringOfSpaceSeparatedTopicNames splitOn: ' '.
+	validTopics := validTopics
+		select: [ :each | topicNames includes: each asLowercase ].
+	^ validTopics
 ]

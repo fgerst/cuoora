@@ -15,6 +15,11 @@ Answer class >> withAuthor: anUser content: aContent [
 		yourself
 ]
 
+{ #category : #'initialization-actions' }
+Answer >> addToAuthor [
+	author addAnswer: self
+]
+
 { #category : #removing }
 Answer >> delete [
 	author deleteMyAnswer: self

@@ -32,7 +32,7 @@ CommonPageComponent >> renderHeaderNavBar: html [
 						with: self session loggedUsername ].
 			html listItem
 				with: [ html anchor
-						callback: [ nil ];
+						callback: [ self call: HomeComponent new ];
 						with: 'Home' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]

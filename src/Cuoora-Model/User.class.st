@@ -39,11 +39,6 @@ User >> addInterest: aTopic [
 	interests add: aTopic
 ]
 
-{ #category : #'adding/removing' }
-User >> addQuestion: aQuestion [
-	questions add: aQuestion
-]
-
 { #category : #accesing }
 User >> answers [
 	^ answers
@@ -56,14 +51,8 @@ User >> deleteMyAnswer: anAnswer [
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
-	aQuestion delete.
-	questions remove: aQuestion ifAbsent: [ ^ nil ]
-]
-
-{ #category : #'adding/removing' }
-User >> deleteTopicQuestions: aTopic [ 
-
-( self listQuestionsFromTopic: aTopic ) do: [ :each | self deleteMyQuestion: each ]
+	questions remove: aQuestion ifAbsent: [ ^ nil ].
+	aQuestion delete
 ]
 
 { #category : #accesing }
@@ -85,10 +74,11 @@ User >> interests [
 	^ interests
 ]
 
-{ #category : #listing }
-User >> listQuestionsFromTopic: aTopic [ 
-
-^ ( questions select: [ :each | each includesTopic: aTopic ] )
+{ #category : #'adding/removing' }
+User >> newQuestion: aQuestion [
+	questions add: aQuestion.
+	aQuestion	 addToRelatedTopics.
+	^ aQuestion
 ]
 
 { #category : #accesing }
@@ -117,7 +107,7 @@ User >> relevantQuestions [
 
 { #category : #listing }
 User >> sortedAnswers [
-	^ ( answers asOrderedCollection sort: [ :a :b | ( a postScore ) > ( b postScore ) ] )
+	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
 ]
 
 { #category : #accesing }

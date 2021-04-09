@@ -23,12 +23,12 @@ UserTest >> setUp [
 	anUser1 := User withUsername: 'name1' password: 'word1'.
 	anUser2 := User withUsername: 'name2' password: 'word2'.
 	anUser3 := User withUsername: 'name3' password: 'word3'.
-	q1 := Question withAuthor: anUser1 title: 'Question 1' content: 'content 1'.
-	q2 := Question withAuthor: anUser2 title: 'Question 2' content: 'content 2'.
+	q1 := Question withAuthor: anUser1 title: 'Question 1' content: 'content 1' topics: { }.
+	q2 := Question withAuthor: anUser2 title: 'Question 2' content: 'content 2' topics: { }.
 	a1 := Answer withAuthor: anUser1 content: 'content 1'.
 	a2 := Answer withAuthor: anUser3 content: 'content 3'.
 	q1 newAnswer: a1. q2 newAnswer: a2.
-	anUser1 addQuestion: q1. anUser2 addQuestion: q2.
+	anUser1 newQuestion: q1. anUser2 newQuestion: q2.
 	anUser2 addAnswer: a1. anUser2 addAnswer: a2.
 	i1 := Topic withName: 'Python' description: 'contenido Python'.
 	i2 := Topic withName: 'C' description: 'contenido C'
@@ -95,7 +95,7 @@ UserTest >> testRelevantQuestions [
 	"scope: class-variables  &  instance-variables"	
 		
 	| q3 |
-	q3 := Question withAuthor: anUser3 title: 'Question 3' content: 'content 3'.
+	q3 := Question withAuthor: anUser3 title: 'Question 3' content: 'content 3' topics: { }.
 			
 	i1 addTopicQuestion: q1.
 	i2 addTopicQuestion: q2.
@@ -109,28 +109,6 @@ UserTest >> testRelevantQuestions [
 	self assert: ( anUser1 relevantQuestions includes: q1).
 	self assert: ( (anUser1 relevantQuestions includes: q3 ) not ).
 	self assert: ( anUser1 relevantQuestions size) equals: 2.
-]
-
-{ #category : #tests }
-UserTest >> testSortedAnswers [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	self assert: ( anUser2 sortedAnswers size ) equals: 2.
-	self assert: ( anUser2 sortedAnswers includes: a1 ).
-	self assert: ( anUser2 sortedAnswers includes: a2 ).
-	
-	a1 likeFrom: anUser1. a1 likeFrom: anUser3.
-	a2 likeFrom: anUser1.
-	
-	self assert: ( anUser2 sortedAnswers at: 1 ) equals: a1.
-	self assert: ( anUser2 sortedAnswers at: 2 ) equals: a2.
-	
-	a1 dislikeFrom: anUser1. a1 dislikeFrom: anUser3.
-	a2 likeFrom: anUser1.
-	
-	self assert: ( anUser2 sortedAnswers at: 1 ) equals: a2.
-	self assert: ( anUser2 sortedAnswers at: 2 ) equals: a1.
 ]
 
 { #category : #tests }

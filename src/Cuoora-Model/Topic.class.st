@@ -20,26 +20,14 @@ Topic class >> withName: aName description: aDesc [
 		yourself
 ]
 
-{ #category : #adding }
-Topic >> addTopicQuestion: aQuestion [ 
-
-topicQuestions add: aQuestion 
-
-
+{ #category : #'adding/removing' }
+Topic >> addTopicQuestion: aQuestion [
+	topicQuestions add: aQuestion
 ]
 
-{ #category : #adding }
-Topic >> addTopicQuestions: aQuestion [ 
-
-topicQuestions add: aQuestion 
-
-
-]
-
-{ #category : #adding }
-Topic >> deleteTopicQuestion: aQuestion [ 
-
-topicQuestions remove: aQuestion ifAbsent: [ ^nil ]
+{ #category : #'adding/removing' }
+Topic >> deleteTopicQuestion: aQuestion [
+	topicQuestions remove: aQuestion ifAbsent: [ ^ nil ]
 ]
 
 { #category : #accesing }
@@ -54,8 +42,7 @@ Topic >> description: aString [
 
 { #category : #initialization }
 Topic >> initialize [
-	
-topicQuestions := Set new.
+	topicQuestions := OrderedCollection new
 ]
 
 { #category : #accesing }
@@ -70,6 +57,5 @@ Topic >> name: aString [
 
 { #category : #accesing }
 Topic >> topicQuestions [
-
-^topicQuestions 
+	^ topicQuestions
 ]

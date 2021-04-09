@@ -21,13 +21,6 @@ cuoora newUser: ( User withUsername: 'Juan' password: '123' )
 ]
 
 { #category : #tests }
-CuooraPlatformTest >> testUsernameExists [
-
-self assert: ( cuoora usernameExists: 'Juan' ).
-self deny: ( cuoora usernameExists: 'Anita' ).
-]
-
-{ #category : #tests }
 CuooraPlatformTest >> testUsernameProtectedBy [
 	"comment stating purpose of instance-side message"
 	"scope: class-variables  &  instance-variables"	
@@ -38,12 +31,29 @@ CuooraPlatformTest >> testUsernameProtectedBy [
 ]
 
 { #category : #tests }
-CuooraPlatformTest >> testvalidatingStringTopics [
-
-self assert: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'AdA' ).
-self assert: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'c++' ).
-self assert: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'ada' ).
-self assert: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'python' ).
-self deny: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'LLL' ).
-self deny: ( ( cuoora validatingStringTopics: 'python LLL ada ADA AdA c++ kkk' ) includes: 'kkk' ).
+CuooraPlatformTest >> testvalidateStringTopics [
+	self
+		assert:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'AdA').
+	self
+		assert:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'c++').
+	self
+		assert:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'ada').
+	self
+		assert:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'python').
+	self
+		deny:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'LLL').
+	self
+		deny:
+			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
+				includes: 'kkk')
 ]

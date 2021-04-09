@@ -16,9 +16,9 @@ TopicTest >> setUp [
 	
 	super setUp.
 	aTopic1 := Topic withName: 'topic 1' description: 'description 1'.
-	q1 := Question withAuthor: (User new) title: 'q1' content: 'c1'.
-	q2 := Question withAuthor: (User new) title: 'q2' content: 'c2'.
-	q3 := Question withAuthor: (User new) title: 'q3' content: 'c3'.
+	q1 := Question withAuthor: (User new) title: 'q1' content: 'c1' topics: { }.
+	q2 := Question withAuthor: (User new) title: 'q2' content: 'c2' topics: { }.
+	q3 := Question withAuthor: (User new) title: 'q3' content: 'c3' topics: { }.
 ]
 
 { #category : #tests }

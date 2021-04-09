@@ -7,18 +7,24 @@ Class {
 	#instVars : [
 		'title',
 		'answers',
-		'topics'
+		'relatedTopics'
 	],
 	#category : #'Cuoora-Model'
 }
 
 { #category : #creation }
-Question class >> withAuthor: anUser title: aTitle content: aContent [
+Question class >> withAuthor: anUser title: aTitle content: aContent topics: aTopicList [
 	^ self new
 		author: anUser;
 		title: aTitle;
 		content: aContent;
+		relatedTopics: aTopicList;
 		yourself
+]
+
+{ #category : #'initialization - actions' }
+Question >> addToRelatedTopics [
+	relatedTopics do: [ :each | each addTopicQuestion: self ]
 ]
 
 { #category : #accesing }
@@ -33,13 +39,8 @@ Question >> answersCount [
 
 { #category : #'adding/removing' }
 Question >> delete [
-	answers do: [ :each | each delete ].
-]
-
-{ #category : #accesing }
-Question >> includesTopic: aTopic [ 
-
-^( topics includes: aTopic )
+	relatedTopics do: [ :topic | topic deleteTopicQuestion: self ].
+	answers do: [ :each | each delete ]
 ]
 
 { #category : #initialization }
@@ -51,11 +52,21 @@ Question >> initialize [
 { #category : #'adding/removing' }
 Question >> newAnswer: anAnswer [
 	answers add: anAnswer.
-	anAnswer author addAnswer: anAnswer.
+	anAnswer addToAuthor.
 	^ anAnswer
 ]
 
 { #category : #accesing }
+Question >> relatedTopics [
+	^ relatedTopics
+]
+
+{ #category : #accesing }
+Question >> relatedTopics: aTopicList [
+	relatedTopics := aTopicList
+]
+
+{ #category : #listing }
 Question >> sortedAnswers [
 	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
 ]
@@ -68,10 +79,4 @@ Question >> title [
 { #category : #accesing }
 Question >> title: aString [
 	title := aString
-]
-
-{ #category : #accesing }
-Question >> topics [ 
-
-^topics
 ]
