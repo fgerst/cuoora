@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #rendering }
-QuestionViewComponent >> renderPageContentOn: anHtmlCanvas [
+QuestionViewComponent >> renderPageContentOn: aCanvas [
 	nil
 	"En que forma puede mandar la pregunta que quiere ver? la secion?"
 	"self renderQuestionOn: anHtmlCanvas (Este metodo esta en HeaderComponent"

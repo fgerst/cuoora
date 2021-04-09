@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #rendering }
-UserProfileComponent >> renderPageContentOn: anHtmlCanvas [
+UserProfileComponent >> renderPageContentOn: aCanvas [
 	nil
 	"Como sabemos a que usuario le pertenece este perfil?"
 	"self renderTituloDePerfilOn: anHtmlCanvas"

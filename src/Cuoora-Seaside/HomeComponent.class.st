@@ -19,9 +19,9 @@ HomeComponent >> renderNewQuestionButtonOn: html [
 ]
 
 { #category : #rendering }
-HomeComponent >> renderPageContentOn: anHtmlCanvas [
-	self renderNewQuestionButtonOn: anHtmlCanvas.
-	self renderRelevantQuestionsOn: anHtmlCanvas
+HomeComponent >> renderPageContentOn: aCanvas [
+	self renderNewQuestionButtonOn: aCanvas.
+	self renderRelevantQuestionsOn: aCanvas
 ]
 
 { #category : #rendering }

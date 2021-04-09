@@ -14,6 +14,6 @@ Class {
 }
 
 { #category : #rendering }
-NewAnswerComponent >> renderPageContentOn: anHtmlCanvas [
+NewAnswerComponent >> renderPageContentOn: aCanvas [
 	nil
 ]

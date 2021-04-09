@@ -16,9 +16,9 @@ CommonPageComponent >> logout [
 ]
 
 { #category : #rendering }
-CommonPageComponent >> renderContentOn: anHtmlCanvas [
-	self renderHeaderOn: anHtmlCanvas.
-	self renderPageContentOn: anHtmlCanvas
+CommonPageComponent >> renderContentOn: aCanvas [
+	self renderHeaderOn: aCanvas.
+	self renderPageContentOn: aCanvas
 ]
 
 { #category : #'rendering-header' }
@@ -38,13 +38,13 @@ CommonPageComponent >> renderHeaderNavBar: html [
 ]
 
 { #category : #rendering }
-CommonPageComponent >> renderHeaderOn: html [
-	html div
+CommonPageComponent >> renderHeaderOn: aCanvas [
+	aCanvas div
 		id: 'header';
-		with: [ self renderHeaderTitle: html.
-			self renderHeaderNavBar: html.
-			self renderLogoutAnchor: html ].
-	html horizontalRule
+		with: [ self renderHeaderTitle: aCanvas.
+			self renderHeaderNavBar: aCanvas.
+			self renderLogoutAnchor: aCanvas ].
+	aCanvas horizontalRule
 ]
 
 { #category : #'rendering-header' }
@@ -63,7 +63,7 @@ CommonPageComponent >> renderLogoutAnchor: html [
 ]
 
 { #category : #rendering }
-CommonPageComponent >> renderPageContentOn: anHtmlCanvas [
+CommonPageComponent >> renderPageContentOn: aCanvas [
 	self subclassResponsibility
 ]
 
@@ -206,6 +206,14 @@ p {
 	cursor: pointer;
 	padding: 4px 6px 4px 6px;
 	margin: 0 0 15px 0;
+}
+
+.text-input { width: 75%; }
+
+.text-area { 
+	height: 250px;
+	width: 75%;
+	font-family: sans-serif;
 }
 
 .link-alt { color: black; }
