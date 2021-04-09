@@ -67,3 +67,32 @@ QuestionTest >> testNewAnswer [
 	self assert: ( aQuestion1 answers size ) equals: 1.
 	self assert: ( aQuestion2 answers size ) equals: 2.
 ]
+
+{ #category : #tests }
+QuestionTest >> testSortedAnswers [
+	self assert: ( aQuestion1 sortedAnswers size ) equals: 0.
+	self assert: ( aQuestion2 sortedAnswers size ) equals: 0.
+
+	a1 likeFrom: u1.
+	a1 likeFrom: u2.
+	a2 likeFrom: u1.
+
+	aQuestion1 newAnswer: a1.
+	aQuestion1 newAnswer: a2.
+	aQuestion2 newAnswer: a2.
+	self assert: ( aQuestion1 sortedAnswers size ) equals: 2.
+	self assert: ( aQuestion2 sortedAnswers size ) equals: 1.
+	aQuestion2 newAnswer: a1.
+	self assert: ( aQuestion2 sortedAnswers at: 1 ) equals: ( aQuestion1 sortedAnswers at: 1 ).
+	self assert: ( aQuestion2 sortedAnswers at: 2 ) equals: ( aQuestion1 sortedAnswers at: 2 ).
+
+	self assert: ( aQuestion1 sortedAnswers at: 1 ) equals: (a1).
+	self assert: ( aQuestion1 sortedAnswers at: 2 ) equals: (a2).
+
+	a1 likeFrom: u1.
+	a1 likeFrom: u2.
+	a2 likeFrom: u2.
+
+	self assert: ( aQuestion1 sortedAnswers at: 1 ) equals: (a2).
+	self assert: ( aQuestion1 sortedAnswers at: 2 ) equals: (a1).
+]
