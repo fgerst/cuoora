@@ -27,8 +27,7 @@ HomeComponent >> renderPageContentOn: aCanvas [
 { #category : #rendering }
 HomeComponent >> renderRelevantQuestionsOn: html [
 	| rQuestions |
-	(rQuestions := self session user relevantQuestions
-		asSortedCollection: [ :a :b | a timestamp < b timestamp ])
+	(rQuestions := self userRelevantQuestions)
 		ifEmpty: [ html paragraph
 				class: 'italic';
 				with:
@@ -38,4 +37,10 @@ HomeComponent >> renderRelevantQuestionsOn: html [
 				class: 'h2-alt';
 				with: 'Preguntas relevantes'.
 			self renderQuestions: rQuestions on: html ]
+]
+
+{ #category : #'accesing-session' }
+HomeComponent >> userRelevantQuestions [
+	^ self session user relevantQuestions
+		asSortedCollection: [ :a :b | a timestamp < b timestamp ]
 ]

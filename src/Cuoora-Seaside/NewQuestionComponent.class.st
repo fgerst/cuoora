@@ -68,29 +68,27 @@ NewQuestionComponent >> renderInputElementsOn: html [
 		with: 'Titulo:'.
 	html textInput
 		class: 'text-input';
-		placeholder: 'Escriba aqui el titulo de su pregunta';
+		placeholder: 'Escriba aquí el titulo de su pregunta';
 		on: #title of: self.
 	html paragraph
 		class: 'italic';
 		with: 'Desarrollo:'.
 	html textArea
 		class: 'text-area';
-		placeholder: 'Escriba aqui el desarrollo de su pregunta';
+		placeholder: 'Escriba aquí el desarrollo de su pregunta';
 		on: #content of: self.
 	html paragraph
 		class: 'italic';
 		with: 'Topicos:'.
 	html textInput
 		class: 'text-input';
-		placeholder: 'Escriba aqui los topicos separados por coma';
+		placeholder: 'Escriba aquí los tópicos separados por coma';
 		on: #topics of: self
 ]
 
 { #category : #rendering }
 NewQuestionComponent >> renderPageContentOn: aCanvas [
-	aCanvas paragraph
-		class: 'italic medium';
-		with: [ aCanvas span with: 'Nueva Pregunta' ].
+	self renderPageTitleOn: aCanvas.
 	aCanvas form
 		with: [ aCanvas horizontalRule.
 			self renderInputElementsOn: aCanvas.

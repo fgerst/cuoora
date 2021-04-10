@@ -32,8 +32,8 @@ CommonPageComponent >> renderHeaderNavBar: html [
 						with: self session loggedUsername ].
 			html listItem
 				with: [ html anchor
-						callback: [ self call: HomeComponent new ];
-						with: 'Home' ].
+						callback: [ self answer ];
+						with: 'Back' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]
 
@@ -85,41 +85,65 @@ CommonPageComponent >> renderPostVotes: aPost on: html [
 		with: [ html span
 				class: 'green-text';
 				with: aPost likeCount.
-			html span with: ' likes'.
-			html span with: ' | '.
+			html span with: ' likes | '.
 			html span
 				class: 'red-text';
 				with: aPost dislikeCount.
 			html span with: ' dislikes' ]
 ]
 
-{ #category : #'rendering-posts' }
+{ #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestion: aQuestion on: html [
 	html div
-		class: 'question-div';
-		with: [ html paragraph
-				class: 'italic bold';
-				with: aQuestion title.
+		class: 'post-div';
+		with: [ 
+			self renderQuestionTitleAnchor: aQuestion on: html. 
 			self renderQuestionInfo: aQuestion on: html.
 			self renderPostVotes: aQuestion on: html.
 			self renderPostReactionAnchors: aQuestion on: html.
 			html horizontalRule ]
 ]
 
-{ #category : #'rendering-posts' }
-CommonPageComponent >> renderQuestionInfo: aQuestion on: html [
-	html paragraph
-		with: [ html span: 'Realizada por '.
-			html anchor
-				class: 'bold link-alt';
-				callback: [ nil ];
-				with: aQuestion author username.
+{ #category : #'rendering-questions' }
+CommonPageComponent >> renderQuestionAnswerCount: answerCount on: html [
 			html span: ' | '.
-			html span: aQuestion answersCount.
-			html span: ' respuestas' ]
+			html span: answerCount.
+			html span: ' respuestas'
 ]
 
-{ #category : #'rendering-posts' }
+{ #category : #'rendering-questions' }
+CommonPageComponent >> renderQuestionAuthor: anUsername on: html [
+	html span: 'Realizada por '.
+	html anchor
+		class: 'bold link-alt';
+		callback: [ nil ];
+		with: anUsername
+]
+
+{ #category : #'rendering-questions' }
+CommonPageComponent >> renderQuestionInfo: aQuestion on: html [
+	self renderQuestionTopics: aQuestion relatedTopics on: html.
+	html paragraph
+		with: [ self renderQuestionAuthor: aQuestion author username on: html.
+			self renderQuestionAnswerCount: aQuestion answersCount on: html ]
+]
+
+{ #category : #'rendering-questions' }
+CommonPageComponent >> renderQuestionTitleAnchor: aQuestion on: html [
+	html anchor
+		class: 'link-alt italic bold';
+		callback: [ self call: (QuestionViewComponent newWith: aQuestion) ];
+		with: aQuestion title
+]
+
+{ #category : #'rendering-questions' }
+CommonPageComponent >> renderQuestionTopics: topics on: html [
+	html paragraph
+		class: 'italic grey';
+		with: 'Tópicos: ', (self topicNames: topics).
+]
+
+{ #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestions: questions on: html [
 	html
 		orderedList: [ questions
@@ -218,15 +242,19 @@ p {
 
 .link-alt { color: black; }
 
-.h2-alt { margin: 0 12px 0 12px; }
+.h2-alt { margin: 0 12px 6px 12px; }
 
 .bold { font-weight: 600; }
+
+.grey { color: gray; }
 
 .italic { font-style: italic; }
 
 .medium { font-size: 20px; } 
 
-.question-div { 
+.width-800 { max-width: 800px; margin: auto; }
+
+.post-div { 
 	padding: 6px;
 	max-width: 800px;
 	margin: auto;
@@ -246,4 +274,18 @@ a:hover { text-decoration: underline; }
 hr { opacity: 0.6; }
 
 '
+]
+
+{ #category : #utilities }
+CommonPageComponent >> topicNames: topics [
+	| names |
+	names := String
+		streamContents: [ :str | 
+			topics
+				do: [ :topic | 
+					str
+						nextPutAll: topic name asString;
+						nextPutAll: ', ' ] ].
+	"elimina ultimo separador (coma y espacio)"
+	^ names truncateTo: names size - 2
 ]
