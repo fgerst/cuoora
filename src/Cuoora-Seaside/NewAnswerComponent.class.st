@@ -6,14 +6,94 @@ Class {
 	#name : #NewAnswerComponent,
 	#superclass : #CommonPageComponent,
 	#instVars : [
-		'titulo',
-		'desarrollo',
-		'topicos'
+		'question',
+		'content'
 	],
 	#category : #'Cuoora-Seaside'
 }
 
+{ #category : #creation }
+NewAnswerComponent class >> newWith: aQuestion [
+	^ self new question: aQuestion yourself
+]
+
+{ #category : #callbacks }
+NewAnswerComponent >> accept [
+	"#TODO guardar respuesta"
+
+	self fieldsEmpty
+		ifTrue: [ ^ nil ].
+	self answer
+]
+
+{ #category : #callbacks }
+NewAnswerComponent >> cancel [
+	content := nil.
+	self answer
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> content [
+	^ content
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> content: anObject [
+	content := anObject
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> fieldsEmpty [
+	^ content isEmptyOrNil
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> question [
+	^ question
+]
+
+{ #category : #accessing }
+NewAnswerComponent >> question: anObject [
+	question := anObject
+]
+
+{ #category : #rendering }
+NewAnswerComponent >> renderAnswerFormOn: html [
+	html form
+		class: 'width-800';
+		with: [ self renderInputElementsOn: html.
+			html break.
+			self renderButtonsOn: html ]
+]
+
+{ #category : #rendering }
+NewAnswerComponent >> renderButtonsOn: html [
+	html submitButton
+		class: 'submit-button';
+		callback: [ self accept ];
+		with: 'Crear respuesta'.
+	html space.
+	html submitButton
+		class: 'submit-button';
+		callback: [ self cancel ];
+		with: 'Cancelar'
+]
+
+{ #category : #rendering }
+NewAnswerComponent >> renderInputElementsOn: html [
+	html paragraph
+		class: 'italic';
+		with: 'Responder'.
+	html textArea
+		class: 'text-area';
+		placeholder: 'Escriba aquí el desarrollo de su respuesta';
+		on: #content of: self.
+
+]
+
 { #category : #rendering }
 NewAnswerComponent >> renderPageContentOn: aCanvas [
-	nil
+	self renderQuestion: question on: aCanvas.
+	self renderAnswerFormOn: aCanvas.
+
 ]

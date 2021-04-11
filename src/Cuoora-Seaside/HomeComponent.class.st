@@ -7,13 +7,18 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
-{ #category : #'rendering-questions' }
+{ #category : #callbacks }
+HomeComponent >> newQuestion [
+	self call: NewQuestionComponent new
+]
+
+{ #category : #rendering }
 HomeComponent >> renderNewQuestionButtonOn: html [
 	html form
-		class: 'newpost-p';
+		class: 'newpost';
 		with: [ html button
 				class: 'newpost-button';
-				callback: [ self call: NewQuestionComponent new ];
+				callback: [ self newQuestion ];
 				with: '+'.
 			html span: 'Hacer una nueva pregunta' ]
 ]

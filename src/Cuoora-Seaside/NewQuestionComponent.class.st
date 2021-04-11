@@ -15,8 +15,8 @@ Class {
 
 { #category : #callbacks }
 NewQuestionComponent >> accept [
-	"Aca comprobar que los topicos sean correctos
-	Guardar pregunta en donde deberia de guardarse"
+	"#TODO *comprobar que los topicos sean correctos
+	*guardar pregunta"
 
 	self fieldsEmpty
 		ifTrue: [ ^ nil ].
@@ -25,7 +25,15 @@ NewQuestionComponent >> accept [
 
 { #category : #callbacks }
 NewQuestionComponent >> cancel [
+	self clearFields.
 	self answer
+]
+
+{ #category : #accessing }
+NewQuestionComponent >> clearFields [
+	title := nil.
+	content := nil.
+	topics := nil
 ]
 
 { #category : #accessing }
@@ -45,18 +53,15 @@ NewQuestionComponent >> fieldsEmpty [
 
 { #category : #rendering }
 NewQuestionComponent >> renderButtonsOn: html [
-	"El guardado todavia no guarda"
-
-	html
-		form: [ html submitButton
-				class: 'submit-button';
-				callback: [ self accept ];
-				with: 'Crear pregunta'.
-			html space.
-			html submitButton
-				class: 'submit-button';
-				callback: [ self cancel ];
-				with: 'Cancelar' ]
+	html submitButton
+		class: 'submit-button';
+		callback: [ self accept ];
+		with: 'Crear pregunta'.
+	html space.
+	html submitButton
+		class: 'submit-button';
+		callback: [ self cancel ];
+		with: 'Cancelar'
 ]
 
 { #category : #rendering }
@@ -89,11 +94,8 @@ NewQuestionComponent >> renderInputElementsOn: html [
 { #category : #rendering }
 NewQuestionComponent >> renderPageContentOn: aCanvas [
 	self renderPageTitleOn: aCanvas.
-	aCanvas form
-		with: [ aCanvas horizontalRule.
-			self renderInputElementsOn: aCanvas.
-			aCanvas horizontalRule.
-			self renderButtonsOn: aCanvas ]
+	self renderQuestionFormOn: aCanvas.
+
 ]
 
 { #category : #rendering }
@@ -101,6 +103,15 @@ NewQuestionComponent >> renderPageTitleOn: html [
 	html paragraph
 		class: 'italic medium';
 		with: [ html span with: 'Nueva Pregunta' ]
+]
+
+{ #category : #rendering }
+NewQuestionComponent >> renderQuestionFormOn: html [
+	html form
+		with: [ html horizontalRule.
+			self renderInputElementsOn: html.
+			html horizontalRule.
+			self renderButtonsOn: html ]
 ]
 
 { #category : #accessing }

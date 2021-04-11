@@ -33,7 +33,7 @@ CommonPageComponent >> renderHeaderNavBar: html [
 			html listItem
 				with: [ html anchor
 						callback: [ self answer ];
-						with: 'Back' ].
+						with: '🡠 Back' ].
 			html listItem with: [ self renderSeparator: html ] ]
 ]
 
@@ -112,27 +112,27 @@ CommonPageComponent >> renderQuestionAnswerCount: answerCount on: html [
 ]
 
 { #category : #'rendering-questions' }
-CommonPageComponent >> renderQuestionAuthor: anUsername on: html [
+CommonPageComponent >> renderQuestionAuthor: anUser on: html [
 	html span: 'Realizada por '.
 	html anchor
 		class: 'bold link-alt';
 		callback: [ nil ];
-		with: anUsername
+		with: anUser username
 ]
 
 { #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestionInfo: aQuestion on: html [
-	self renderQuestionTopics: aQuestion relatedTopics on: html.
+	self renderQuestionTopics: (aQuestion relatedTopics) on: html.
 	html paragraph
-		with: [ self renderQuestionAuthor: aQuestion author username on: html.
-			self renderQuestionAnswerCount: aQuestion answersCount on: html ]
+		with: [ self renderQuestionAuthor: (aQuestion author) on: html.
+			self renderQuestionAnswerCount: (aQuestion answersCount) on: html ]
 ]
 
 { #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestionTitleAnchor: aQuestion on: html [
 	html anchor
 		class: 'link-alt italic bold';
-		callback: [ self call: (QuestionViewComponent newWith: aQuestion) ];
+		callback: [ self viewQuestion: aQuestion ];
 		with: aQuestion title
 ]
 
@@ -216,7 +216,7 @@ p {
 	cursor: pointer;
 }
 
-.newpost-p { 
+.newpost { 
 	text-align: right;
 	padding: 6px 0 0 0;
 	margin: 0;
@@ -229,7 +229,7 @@ p {
 	border: none;
 	cursor: pointer;
 	padding: 4px 6px 4px 6px;
-	margin: 0 0 15px 0;
+	margin: 4px 0 15px 0;
 }
 
 .text-input { width: 75%; }
@@ -253,6 +253,8 @@ p {
 .medium { font-size: 20px; } 
 
 .width-800 { max-width: 800px; margin: auto; }
+
+.center { text-align: center; }
 
 .post-div { 
 	padding: 6px;
@@ -288,4 +290,9 @@ CommonPageComponent >> topicNames: topics [
 						nextPutAll: ', ' ] ].
 	"elimina ultimo separador (coma y espacio)"
 	^ names truncateTo: names size - 2
+]
+
+{ #category : #callbacks }
+CommonPageComponent >> viewQuestion: aQuestion [
+	self call: (QuestionViewComponent newWith: aQuestion)
 ]

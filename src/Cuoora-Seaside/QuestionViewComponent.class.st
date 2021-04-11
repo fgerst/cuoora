@@ -15,6 +15,11 @@ QuestionViewComponent class >> newWith: anObject [
 	^ self new question: anObject yourself
 ]
 
+{ #category : #callbacks }
+QuestionViewComponent >> newAnswer [
+	self call: (NewAnswerComponent newWith: question)
+]
+
 { #category : #accesing }
 QuestionViewComponent >> question [
 	^ question
@@ -51,21 +56,36 @@ QuestionViewComponent >> renderAnswerAuthor: anAnswer on: html [
 
 { #category : #'rendering-answers' }
 QuestionViewComponent >> renderAnswers: answers on: html [
-	| text |
-	text := answers isEmpty
-		ifTrue: [ '...aún no hay respuestas' ]
-		ifFalse: [ 'Respuestas:' ].
-	html paragraph
-		class: 'italic bold width-800';
-		with: text.
-	html
-		orderedList: [ answers do: [ :answer | self renderAnswer: answer on: html ] ]
+	answers isEmpty
+		ifTrue: [ html paragraph
+				class: 'italic bold width-800';
+				with: '...aún no hay respuestas' ]
+		ifFalse: [ html paragraph
+				class: 'italic bold width-800';
+				with: 'Respuestas:'.
+			html
+				orderedList: [ answers do: [ :answer | self renderAnswer: answer on: html ] ].
+			html paragraph
+				class: 'italic width-800';
+				with: '...no hay mas respuestas' ]
+]
+
+{ #category : #'rendering-answers' }
+QuestionViewComponent >> renderNewAnswerButtonOn: html [
+	html form
+		class: 'newpost post-div center';
+		with: [ html button
+				class: 'newpost-button';
+				callback: [ self newAnswer ];
+				with: '+'.
+			html span: 'Agregar respuesta' ]
 ]
 
 { #category : #rendering }
 QuestionViewComponent >> renderPageContentOn: aCanvas [
 	self renderQuestion: question on: aCanvas.
 	self renderQuestionAnswersOn: aCanvas.
+	self renderNewAnswerButtonOn: aCanvas
 ]
 
 { #category : #'rendering-answers' }
@@ -75,7 +95,7 @@ QuestionViewComponent >> renderQuestionAnswersOn: html [
 
 { #category : #rendering }
 QuestionViewComponent >> renderQuestionContentOn: html [
-	"preguntar si es opcional"
+	"preguntar si es opcional mostrar content"
 
 	html div
 		with: [ html paragraph
