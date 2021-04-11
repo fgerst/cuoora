@@ -51,7 +51,7 @@ QuestionViewComponent >> renderAnswerAuthor: anAnswer on: html [
 			html anchor
 				class: 'link-alt italic';
 				callback: [ self viewProfile: anAnswer author ];
-				with: anAnswer author username ]
+				with: anAnswer author profileName ]
 ]
 
 { #category : #'rendering-answers' }

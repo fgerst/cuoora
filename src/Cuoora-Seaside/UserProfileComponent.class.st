@@ -73,7 +73,7 @@ UserProfileComponent >> renderUserQuestionsOn: html [
 { #category : #'rendering-elements' }
 UserProfileComponent >> renderUsernameOn: html [
 	html span: 'Preguntas de '.
-	html span: userProfile username
+	html span: userProfile profileName
 ]
 
 { #category : #accessing }

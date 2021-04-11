@@ -11,7 +11,8 @@ Class {
 		'following',
 		'questions',
 		'answers',
-		'interests'
+		'interests',
+		'profileName'
 	],
 	#category : #'Cuoora-Model'
 }
@@ -20,6 +21,7 @@ Class {
 User class >> withUsername: anUsername password: aPassword [
 	^ self new
 		username: anUsername;
+		profileName: anUsername;
 		password: aPassword;
 		yourself
 ]
@@ -39,7 +41,7 @@ User >> addInterest: aTopic [
 	interests add: aTopic
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> answers [
 	^ answers
 ]
@@ -55,7 +57,7 @@ User >> deleteMyQuestion: aQuestion [
 	aQuestion delete
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> following [
 	^ following
 ]
@@ -66,10 +68,10 @@ User >> initialize [
 	questions := Set new.
 	answers := Set new.
 	following := Set new.
-	interests := Set new
+	interests := Set new.
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> interests [
 	^ interests
 ]
@@ -86,17 +88,27 @@ User >> newQuestion: aQuestion [
 	^ aQuestion
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> password [
 	^ password
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> password: aString [
 	password := aString
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
+User >> profileName [
+	^ profileName
+]
+
+{ #category : #accessing }
+User >> profileName: anObject [
+	profileName := anObject
+]
+
+{ #category : #accessing }
 User >> questions [
 	^ questions
 ]
@@ -115,7 +127,7 @@ User >> sortedAnswers [
 	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> timestamp [
 	^ timestamp
 ]
@@ -135,12 +147,13 @@ User >> userScore [
 	^ qScore + aScore + vScore
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> username [
 	^ username
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 User >> username: aString [
-	username := aString
+	username := aString.
+	profileName := username.
 ]

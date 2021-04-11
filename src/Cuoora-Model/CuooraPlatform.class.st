@@ -92,6 +92,9 @@ CuooraPlatform class >> instanceWithDataFinal [
 	u1 := cuoora newUser: (User withUsername: 'pedro@cuoora.com' password: 'pedro@cuoora.com').
 	u2 := cuoora newUser: (User withUsername: 'diego@cuoora.com' password: 'diego@cuoora.com').
 	u3 := cuoora newUser: (User withUsername: 'juan@cuoora.com' password: 'juan@cuoora.com').
+	u1 profileName: 'Pedro'.
+	u2 profileName: 'Diego'.
+	u3 profileName: 'Juan'.
 	"creacion de preguntas"
 	q1 := u1
 		newQuestion:
@@ -125,7 +128,8 @@ CuooraPlatform class >> instanceWithDataFinal [
 
 { #category : #'instance creation' }
 CuooraPlatform class >> soleInstance [
-	^ soleInstance ifNil: [ soleInstance := self instanceWithData ]
+	"^ soleInstance ifNil: [ soleInstance := self instanceWithData ]"
+	^ soleInstance ifNil: [ soleInstance := self instanceWithDataFinal ]
 ]
 
 { #category : #initialization }

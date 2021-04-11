@@ -184,7 +184,7 @@ CommonPageComponent >> renderUserAnchor: anUser on: html [
 	html anchor
 		class: 'bold link-alt';
 		callback: [ self viewProfile: anUser ];
-		with: anUser username
+		with: anUser profileName
 ]
 
 { #category : #styles }
