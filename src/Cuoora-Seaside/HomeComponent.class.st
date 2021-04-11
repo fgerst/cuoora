@@ -1,5 +1,12 @@
 "
 Componente que implementa el Home de la aplicacion, donde se pueden ver las Preguntas Relevantes para el Usuario, y crear nuevas preguntas.
+
+Expresión a evaluar para registrar aplicación:
+
+| app |
+
+app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+app sessionClass: UserSession.
 "
 Class {
 	#name : #HomeComponent,

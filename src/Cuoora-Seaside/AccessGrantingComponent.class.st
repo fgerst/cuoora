@@ -1,5 +1,12 @@
 "
 Clase abstracta que implementa comportamiento para el login de usuarios y eventualmente implementar registro de nuevos usuarios.
+
+Expresión a evaluar para registrar aplicación:
+
+| app |
+
+app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+app sessionClass: UserSession.
 "
 Class {
 	#name : #AccessGrantingComponent,

@@ -1,5 +1,12 @@
 "
 Componente para realizar el Login de User
+
+Expresión a evaluar para registrar aplicación:
+
+| app |
+
+app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
+app sessionClass: UserSession.
 "
 Class {
 	#name : #LoginComponent,
