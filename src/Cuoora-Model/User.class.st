@@ -74,6 +74,11 @@ User >> interests [
 	^ interests
 ]
 
+{ #category : #testing }
+User >> isFollowing: anUser [
+	^ following includes: anUser
+]
+
 { #category : #'adding/removing' }
 User >> newQuestion: aQuestion [
 	questions add: aQuestion.

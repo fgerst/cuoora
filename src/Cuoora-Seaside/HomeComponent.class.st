@@ -12,6 +12,14 @@ HomeComponent >> newQuestion [
 	self call: NewQuestionComponent new
 ]
 
+{ #category : #'rendering-elements' }
+HomeComponent >> renderEmptyPageTitle: html [
+	html paragraph
+		class: 'italic';
+		with:
+			'...no hay preguntas relevantes. Añada tópicos de interés, o siga a otros usuarios.'
+]
+
 { #category : #rendering }
 HomeComponent >> renderNewQuestionButtonOn: html [
 	html form
@@ -29,18 +37,21 @@ HomeComponent >> renderPageContentOn: aCanvas [
 	self renderRelevantQuestionsOn: aCanvas
 ]
 
+{ #category : #'rendering-elements' }
+HomeComponent >> renderPageTitle: html [
+	html heading
+		level: 2;
+		class: 'h2-alt';
+		with: 'Preguntas relevantes'
+]
+
 { #category : #rendering }
 HomeComponent >> renderRelevantQuestionsOn: html [
 	| rQuestions |
 	(rQuestions := self userRelevantQuestions)
-		ifEmpty: [ html paragraph
-				class: 'italic';
-				with:
-					'...no hay preguntas relevantes. Añada tópicos de interés, o siga a otros usuarios.' ]
-		ifNotEmpty: [ html heading
-				level: 2;
-				class: 'h2-alt';
-				with: 'Preguntas relevantes'.
+		ifEmpty: [ self renderEmptyPageTitle: html ]
+		ifNotEmpty: [ 
+			self renderPageTitle: html.
 			self renderQuestions: rQuestions on: html ]
 ]
 

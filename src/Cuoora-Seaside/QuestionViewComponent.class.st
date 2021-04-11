@@ -50,31 +50,27 @@ QuestionViewComponent >> renderAnswerAuthor: anAnswer on: html [
 				with: 'Respuesta de '.
 			html anchor
 				class: 'link-alt italic';
-				callback: [ nil ];
+				callback: [ self viewProfile: anAnswer author ];
 				with: anAnswer author username ]
 ]
 
 { #category : #'rendering-answers' }
 QuestionViewComponent >> renderAnswers: answers on: html [
-	answers isEmpty
-		ifTrue: [ html paragraph
-				class: 'italic bold width-800';
-				with: '...aún no hay respuestas' ]
-		ifFalse: [ html paragraph
-				class: 'italic bold width-800';
-				with: 'Respuestas:'.
-			html
-				orderedList: [ answers do: [ :answer | self renderAnswer: answer on: html ] ].
-			html paragraph
-				class: 'italic width-800';
-				with: '...no hay mas respuestas' ]
+	html paragraph
+		class: 'italic bold width-800';
+		with: 'Respuestas:'.
+	html
+		orderedList: [ answers do: [ :answer | self renderAnswer: answer on: html ] ].
+	html paragraph
+		class: 'italic width-800';
+		with: '...no hay mas respuestas'
 ]
 
-{ #category : #'rendering-answers' }
+{ #category : #rendering }
 QuestionViewComponent >> renderNewAnswerButtonOn: html [
 	html form
-		class: 'newpost post-div center';
-		with: [ html button
+		class: 'newpost width-800 center';
+		with: [ html submitButton
 				class: 'newpost-button';
 				callback: [ self newAnswer ];
 				with: '+'.
@@ -88,9 +84,13 @@ QuestionViewComponent >> renderPageContentOn: aCanvas [
 	self renderNewAnswerButtonOn: aCanvas
 ]
 
-{ #category : #'rendering-answers' }
+{ #category : #rendering }
 QuestionViewComponent >> renderQuestionAnswersOn: html [
-	self renderAnswers: question answers on: html
+	question answers isEmpty
+		ifTrue: [ html paragraph
+				class: 'italic bold width-800';
+				with: '...aún no hay respuestas' ]
+		ifFalse: [ self renderAnswers: question answers on: html ]
 ]
 
 { #category : #rendering }

@@ -15,26 +15,46 @@ CommonPageComponent >> logout [
 	self requestContext redirectTo: self application url
 ]
 
+{ #category : #'rendering-elements' }
+CommonPageComponent >> renderBackAnchor: html [
+	html anchor
+		callback: [ self answer ];
+		with: '🡠 Back'
+]
+
 { #category : #rendering }
 CommonPageComponent >> renderContentOn: aCanvas [
 	self renderHeaderOn: aCanvas.
 	self renderPageContentOn: aCanvas
 ]
 
+{ #category : #'rendering-posts' }
+CommonPageComponent >> renderDislikeAnchor: aPost on: html [
+	html anchor
+		callback: [ aPost dislikeFrom: self session user ];
+		with: 'dislike'
+]
+
+{ #category : #'rendering-posts' }
+CommonPageComponent >> renderDislikeCount: count on: html [
+	html span
+		class: 'red-text';
+		with: count.
+	html span with: ' dislikes'
+]
+
 { #category : #'rendering-header' }
 CommonPageComponent >> renderHeaderNavBar: html [
 	html
-		unorderedList: [ html listItem with: [ self renderSeparator: html ].
+		unorderedList: [ 
+			html listItem 
+				with: [ self renderSeparator: html ].
 			html listItem
-				with: [ html anchor
-						class: 'link-alt bold';
-						callback: [ nil ];
-						with: self session loggedUsername ].
+				with: [ self renderUserAnchor: self session user on: html ].
 			html listItem
-				with: [ html anchor
-						callback: [ self answer ];
-						with: '🡠 Back' ].
-			html listItem with: [ self renderSeparator: html ] ]
+				with: [ self renderBackAnchor: html ].
+			html listItem 
+				with: [ self renderSeparator: html ] ]
 ]
 
 { #category : #rendering }
@@ -55,6 +75,21 @@ CommonPageComponent >> renderHeaderTitle: html [
 		with: [ html span with: 'CuOOra' ]
 ]
 
+{ #category : #'rendering-posts' }
+CommonPageComponent >> renderLikeAnchor: aPost on: html [
+	html anchor
+		callback: [ aPost likeFrom: self session user ];
+		with: 'like'
+]
+
+{ #category : #'rendering-posts' }
+CommonPageComponent >> renderLikeCount: count on: html [
+	html span
+		class: 'green-text';
+		with: count.
+	html span with: ' likes | '
+]
+
 { #category : #'rendering-header' }
 CommonPageComponent >> renderLogoutAnchor: html [
 	html anchor
@@ -70,26 +105,16 @@ CommonPageComponent >> renderPageContentOn: aCanvas [
 { #category : #'rendering-posts' }
 CommonPageComponent >> renderPostReactionAnchors: aPost on: html [
 	html paragraph
-		with: [ html anchor
-				callback: [ aPost likeFrom: self session user ];
-				with: 'like'.
+		with: [ self renderLikeAnchor: aPost on: html.
 			html span with: ' | '.
-			html anchor
-				callback: [ aPost dislikeFrom: self session user ];
-				with: 'dislike' ]
+			self renderDislikeAnchor: aPost on: html ]
 ]
 
 { #category : #'rendering-posts' }
 CommonPageComponent >> renderPostVotes: aPost on: html [
 	html paragraph
-		with: [ html span
-				class: 'green-text';
-				with: aPost likeCount.
-			html span with: ' likes | '.
-			html span
-				class: 'red-text';
-				with: aPost dislikeCount.
-			html span with: ' dislikes' ]
+		with: [ self renderLikeCount: aPost likeCount on: html.
+			self renderDislikeCount: aPost dislikeCount on: html ]
 ]
 
 { #category : #'rendering-questions' }
@@ -114,10 +139,7 @@ CommonPageComponent >> renderQuestionAnswerCount: answerCount on: html [
 { #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestionAuthor: anUser on: html [
 	html span: 'Realizada por '.
-	html anchor
-		class: 'bold link-alt';
-		callback: [ nil ];
-		with: anUser username
+	self renderUserAnchor: anUser on: html
 ]
 
 { #category : #'rendering-questions' }
@@ -157,9 +179,16 @@ CommonPageComponent >> renderSeparator: html [
 		with: '|'
 ]
 
-{ #category : #styles }
-CommonPageComponent >> style [ 
+{ #category : #'rendering-elements' }
+CommonPageComponent >> renderUserAnchor: anUser on: html [
+	html anchor
+		class: 'bold link-alt';
+		callback: [ self viewProfile: anUser ];
+		with: anUser username
+]
 
+{ #category : #styles }
+CommonPageComponent >> style [
 	^ '
 	
 body { 
@@ -232,13 +261,19 @@ p {
 	margin: 4px 0 15px 0;
 }
 
-.text-input { width: 75%; }
-
 .text-area { 
 	height: 250px;
 	width: 75%;
 	font-family: sans-serif;
 }
+
+.post-div { 
+	padding: 6px;
+	max-width: 800px;
+	margin: auto;
+}
+
+.text-input { width: 75%; }
 
 .link-alt { color: black; }
 
@@ -252,24 +287,17 @@ p {
 
 .medium { font-size: 20px; } 
 
+.small { font-size: 16px; }
+
 .width-800 { max-width: 800px; margin: auto; }
 
 .center { text-align: center; }
-
-.post-div { 
-	padding: 6px;
-	max-width: 800px;
-	margin: auto;
-}
 
 .green-text { color: green;}
 
 .red-text { color: #9e0000; }
 
-a {  
-	text-decoration: none;
-	color: #0f61bf;
-} 
+a { text-decoration: none; color: #0f61bf; } 
 
 a:hover { text-decoration: underline; }
 
@@ -290,6 +318,11 @@ CommonPageComponent >> topicNames: topics [
 						nextPutAll: ', ' ] ].
 	"elimina ultimo separador (coma y espacio)"
 	^ names truncateTo: names size - 2
+]
+
+{ #category : #callbacks }
+CommonPageComponent >> viewProfile: anUser [
+	self call: (UserProfileComponent withUserProfile: anUser)
 ]
 
 { #category : #callbacks }

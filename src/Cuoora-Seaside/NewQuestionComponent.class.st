@@ -51,7 +51,7 @@ NewQuestionComponent >> fieldsEmpty [
 	^ title isEmptyOrNil | content isEmptyOrNil | topics isEmptyOrNil
 ]
 
-{ #category : #rendering }
+{ #category : #'rendering-elements' }
 NewQuestionComponent >> renderButtonsOn: html [
 	html submitButton
 		class: 'submit-button';
@@ -64,31 +64,22 @@ NewQuestionComponent >> renderButtonsOn: html [
 		with: 'Cancelar'
 ]
 
-{ #category : #rendering }
-NewQuestionComponent >> renderInputElementsOn: html [
-	"#TODO refactorizar en distintos metodos"
-
-	html paragraph
-		class: 'italic';
-		with: 'Titulo:'.
-	html textInput
-		class: 'text-input';
-		placeholder: 'Escriba aquí el titulo de su pregunta';
-		on: #title of: self.
+{ #category : #'rendering-elements' }
+NewQuestionComponent >> renderContentInput: html [
 	html paragraph
 		class: 'italic';
 		with: 'Desarrollo:'.
 	html textArea
 		class: 'text-area';
 		placeholder: 'Escriba aquí el desarrollo de su pregunta';
-		on: #content of: self.
-	html paragraph
-		class: 'italic';
-		with: 'Topicos:'.
-	html textInput
-		class: 'text-input';
-		placeholder: 'Escriba aquí los tópicos separados por coma';
-		on: #topics of: self
+		on: #content of: self
+]
+
+{ #category : #rendering }
+NewQuestionComponent >> renderInputElementsOn: html [
+	self renderTitleInput: html.
+	self renderContentInput: html.
+	self renderTopicInput: html
 ]
 
 { #category : #rendering }
@@ -112,6 +103,28 @@ NewQuestionComponent >> renderQuestionFormOn: html [
 			self renderInputElementsOn: html.
 			html horizontalRule.
 			self renderButtonsOn: html ]
+]
+
+{ #category : #'rendering-elements' }
+NewQuestionComponent >> renderTitleInput: html [
+	html paragraph
+		class: 'italic';
+		with: 'Titulo:'.
+	html textInput
+		class: 'text-input';
+		placeholder: 'Escriba aquí el titulo de su pregunta';
+		on: #title of: self
+]
+
+{ #category : #'rendering-elements' }
+NewQuestionComponent >> renderTopicInput: html [
+	html paragraph
+		class: 'italic';
+		with: 'Topicos:'.
+	html textInput
+		class: 'text-input';
+		placeholder: 'Escriba aquí los tópicos separados por coma';
+		on: #topics of: self
 ]
 
 { #category : #accessing }
