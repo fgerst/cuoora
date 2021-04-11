@@ -28,9 +28,9 @@ TopicTest >> testAddTopicQuestions [
 		
 	self assert: ( aTopic1 topicQuestions size ) equals: 0.
 			
-	aTopic1 addTopicQuestion: q1.
-	aTopic1 addTopicQuestion: q2.
-	aTopic1 addTopicQuestion: q3.
+	self assert: ( aTopic1 addTopicQuestion: q1 ) equals: ( q1 ).
+	self assert: ( aTopic1 addTopicQuestion: q2 ) equals: ( q2 ).
+	self assert: ( aTopic1 addTopicQuestion: q3 ) equals: ( q3 ).
 	self assert: ( aTopic1 topicQuestions size ) equals: 3.
 	self assert: ( aTopic1 topicQuestions includes: q1 ).
 	self assert: ( aTopic1 topicQuestions includes: q2 ).

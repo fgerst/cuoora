@@ -40,7 +40,8 @@ Question >> answersCount [
 { #category : #'adding/removing' }
 Question >> delete [
 	relatedTopics do: [ :topic | topic deleteTopicQuestion: self ].
-	answers do: [ :each | each delete ]
+	answers do: [ :each | each delete ].
+	answers := Set new.
 ]
 
 { #category : #initialization }

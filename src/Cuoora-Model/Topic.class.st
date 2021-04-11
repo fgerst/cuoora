@@ -22,7 +22,8 @@ Topic class >> withName: aName description: aDesc [
 
 { #category : #'adding/removing' }
 Topic >> addTopicQuestion: aQuestion [
-	topicQuestions add: aQuestion
+	topicQuestions add: aQuestion.
+	^aQuestion.
 ]
 
 { #category : #'adding/removing' }

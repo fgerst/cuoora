@@ -7,7 +7,9 @@ Class {
 		'a1',
 		'a2',
 		'u1',
-		'u2'
+		'u2',
+		't1',
+		't2'
 	],
 	#category : #'Cuoora-Tests'
 }
@@ -17,10 +19,12 @@ QuestionTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	
 	super setUp.
+	t1 := Topic withName: 'smalltalk' description: 'desc'.
+	t2 := Topic withName: 'python' description: 'desc2'.
 	u1 := User withUsername: 'name1' password: 'word1'.
 	u2 := User withUsername: 'name2' password: 'word2'.
-	aQuestion1 := Question withAuthor: u1 title: 'titulo1' content: 'contenido1' topics: { }.
-	aQuestion2 := Question withAuthor: u2 title: 'titulo2' content: 'contenido2' topics: { }.
+	aQuestion1 := Question withAuthor: u1 title: 'titulo1' content: 'contenido1' topics: { t1. t2 }.
+	aQuestion2 := Question withAuthor: u2 title: 'titulo2' content: 'contenido2' topics: { t2 }.
 	a1 := Answer withAuthor: u1 content: 'contenido1'.
 	a2 := Answer withAuthor: u2 content: 'contenido2'.
 	u1 newQuestion: aQuestion1.
@@ -32,9 +36,19 @@ QuestionTest >> setUp [
 ]
 
 { #category : #tests }
+QuestionTest >> testAddRelatedTopics [
+
+self assert: ( t1 topicQuestions includes: aQuestion1 ).
+self assert: ( t2 topicQuestions includes: aQuestion1 ).
+self assert: ( t2 topicQuestions includes: aQuestion2 ).
+]
+
+{ #category : #tests }
 QuestionTest >> testDelete [
 	"Este Delete solo elimina las preguntas correspondientes, el que elimina las preguntas es el metodo del usuario que luego llama a este"
 			
+	self assert: ( aQuestion1 answersCount ) equals: 0 .
+	
 	aQuestion1 newAnswer: a1.
 	aQuestion2 newAnswer: a2.
 	
@@ -42,6 +56,8 @@ QuestionTest >> testDelete [
 	self assert: ( u2 questions size ) equals: 1.
 	self assert: ( u1 answers size ) equals: 1.
 	self assert: ( u2 answers size ) equals: 1.
+	self assert: ( aQuestion1 answers includes: a1 ). self deny: ( aQuestion1 answers includes: a2 ).
+	self assert: ( aQuestion1 answersCount ) equals: 1 .
 	
 	aQuestion1 delete.
 	aQuestion2 delete.
@@ -50,6 +66,8 @@ QuestionTest >> testDelete [
 	self assert: ( u2 questions size ) equals: 1.
 	self assert: ( u1 answers size ) equals: 0.
 	self assert: ( u2 answers size ) equals: 0.
+	self deny: ( aQuestion1 answers includes: a1 ). self deny: ( aQuestion2 answers includes: a2 ).
+	self assert: ( aQuestion1 answersCount ) equals: 0 .
 	
 ]
 
