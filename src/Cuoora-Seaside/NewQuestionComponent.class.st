@@ -15,11 +15,19 @@ Class {
 
 { #category : #callbacks }
 NewQuestionComponent >> accept [
-	"#TODO *comprobar que los topicos sean correctos
-	*guardar pregunta"
-
 	self fieldsEmpty
 		ifTrue: [ ^ nil ].
+	(topics := self model parseTopics: topics)
+		ifEmpty: [ 
+			topics := nil.
+			^ nil ].
+	self session user
+		newQuestion:
+			(Question
+				withAuthor: self session user
+				title: title
+				content: content
+				topics: topics).
 	self answer
 ]
 
@@ -49,6 +57,11 @@ NewQuestionComponent >> content: aString [
 { #category : #accessing }
 NewQuestionComponent >> fieldsEmpty [
 	^ title isEmptyOrNil | content isEmptyOrNil | topics isEmptyOrNil
+]
+
+{ #category : #accessing }
+NewQuestionComponent >> model [
+^CuooraPlatform soleInstance
 ]
 
 { #category : #'rendering-elements' }
@@ -123,7 +136,7 @@ NewQuestionComponent >> renderTopicInput: html [
 		with: 'Topicos:'.
 	html textInput
 		class: 'text-input';
-		placeholder: 'Escriba aquí los tópicos separados por coma';
+		placeholder: 'Tópicos separados por coma, ejemplo: "java,Test de unidad,Python"';
 		on: #topics of: self
 ]
 

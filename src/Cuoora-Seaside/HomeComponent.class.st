@@ -55,14 +55,13 @@ HomeComponent >> renderPageTitle: html [
 { #category : #rendering }
 HomeComponent >> renderRelevantQuestionsOn: html [
 	| rQuestions |
-	(rQuestions := self userRelevantQuestions)
+	(rQuestions := self userRelevantQuestions takeFirst: 5)
 		ifEmpty: [ self renderEmptyPageTitle: html ]
-		ifNotEmpty: [ 
-			self renderPageTitle: html.
+		ifNotEmpty: [ self renderPageTitle: html.
 			self renderQuestions: rQuestions on: html ]
 ]
 
-{ #category : #'accesing-session' }
+{ #category : #'accessing-session' }
 HomeComponent >> userRelevantQuestions [
 	^ self session user relevantQuestions
 		asSortedCollection: [ :a :b | a timestamp < b timestamp ]

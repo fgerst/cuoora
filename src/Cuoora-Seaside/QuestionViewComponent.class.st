@@ -20,12 +20,12 @@ QuestionViewComponent >> newAnswer [
 	self call: (NewAnswerComponent newWith: question)
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 QuestionViewComponent >> question [
 	^ question
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 QuestionViewComponent >> question: aQuestion [
 	question := aQuestion
 ]
@@ -90,7 +90,7 @@ QuestionViewComponent >> renderQuestionAnswersOn: html [
 		ifTrue: [ html paragraph
 				class: 'italic bold width-800';
 				with: '...aún no hay respuestas' ]
-		ifFalse: [ self renderAnswers: question answers on: html ]
+		ifFalse: [ self renderAnswers: self sortedAnswers on: html ]
 ]
 
 { #category : #rendering }
@@ -103,4 +103,10 @@ QuestionViewComponent >> renderQuestionContentOn: html [
 				with: 'Contenido:'.
 			html paragraph with: question content.
 			html horizontalRule ]
+]
+
+{ #category : #listing }
+QuestionViewComponent >> sortedAnswers [
+	^ question answers
+		asSortedCollection: [ :a :b | a postScore < b postScore ]
 ]

@@ -129,13 +129,13 @@ CuooraPlatform class >> instanceWithDataFinal [
 { #category : #'instance creation' }
 CuooraPlatform class >> soleInstance [
 	"^ soleInstance ifNil: [ soleInstance := self instanceWithData ]"
-	^ soleInstance ifNil: [ soleInstance := self instanceWithDataFinal ]
+	^ soleInstance ifNil: [ soleInstance := self instanceWithData ]
 ]
 
 { #category : #initialization }
 CuooraPlatform >> initialize [
-	users := OrderedCollection new.
-	topics := OrderedCollection new
+	users := Set new.
+	topics := Set new
 ]
 
 { #category : #'adding/removing' }
@@ -148,6 +148,15 @@ CuooraPlatform >> newTopic: aTopic [
 CuooraPlatform >> newUser: anUser [
 	users add: anUser.
 	^ anUser
+]
+
+{ #category : #'validating-topics' }
+CuooraPlatform >> parseTopics: aTopicListString [
+	"devuelve los topicos ingresados que existan en el sistema"
+
+	| names |
+	names := aTopicListString splitOn: ','.
+	^ topics select: [ :topic | names includes: topic name asLowercase ]
 ]
 
 { #category : #accesing }
@@ -167,14 +176,4 @@ CuooraPlatform >> username: anUsername protectedBy: aPassword [
 { #category : #accesing }
 CuooraPlatform >> users [
 	^ users
-]
-
-{ #category : #'validating-topics' }
-CuooraPlatform >> validateStringTopics: aStringOfSpaceSeparatedTopicNames [
-	| validTopics topicNames |
-	topicNames := topics collect: [ :each | each name asLowercase ].
-	validTopics := aStringOfSpaceSeparatedTopicNames splitOn: ' '.
-	validTopics := validTopics
-		select: [ :each | topicNames includes: each asLowercase ].
-	^ validTopics
 ]

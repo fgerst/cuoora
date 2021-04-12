@@ -76,7 +76,7 @@ User >> interests [
 	^ interests
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 User >> isFollowing: anUser [
 	^ following includes: anUser
 ]

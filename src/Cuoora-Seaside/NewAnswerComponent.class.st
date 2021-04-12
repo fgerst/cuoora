@@ -19,10 +19,10 @@ NewAnswerComponent class >> newWith: aQuestion [
 
 { #category : #callbacks }
 NewAnswerComponent >> accept [
-	"#TODO guardar respuesta"
-
 	self fieldsEmpty
 		ifTrue: [ ^ nil ].
+	question
+		newAnswer: (Answer withAuthor: (self session user) content: content).
 	self answer
 ]
 

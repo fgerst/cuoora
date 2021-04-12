@@ -43,31 +43,3 @@ CuooraPlatformTest >> testUsernameProtectedBy [
 	self assert: ( cuoora username: 'Pedro' protectedBy: '123' ) equals: ( nil ).
 	self assert: ( cuoora username: 'Juan' protectedBy: '124' ) equals: ( nil ).
 ]
-
-{ #category : #tests }
-CuooraPlatformTest >> testvalidateStringTopics [
-	self
-		assert:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'AdA').
-	self
-		assert:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'c++').
-	self
-		assert:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'ada').
-	self
-		assert:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'python').
-	self
-		deny:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'LLL').
-	self
-		deny:
-			((cuoora validateStringTopics: 'python LLL ada ADA AdA c++ kkk')
-				includes: 'kkk')
-]

@@ -10,22 +10,22 @@ Class {
 	#category : #'Cuoora-Seaside'
 }
 
-{ #category : #accesing }
+{ #category : #accessing }
 UserSession >> loggedUsername [
 	^ user username
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 UserSession >> loginUser: anUser [
 	user := anUser
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 UserSession >> logoutUser [
 	user := nil
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 UserSession >> user [
 	^ user
 ]

@@ -25,22 +25,22 @@ AccessGrantingComponent >> clearInstance [
 	CuooraPlatform clearSoleInstance
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> fieldsEmpty [
 	^ username isEmptyOrNil | password isEmptyOrNil
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> model [
 	^ CuooraPlatform soleInstance
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> password [
 	^ password
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> password: aString [
 	password := aString
 ]
@@ -124,12 +124,12 @@ hr { opacity: 0.6; }
 '
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> username [
 	^ username
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 AccessGrantingComponent >> username: aString [
 	username := aString
 ]
