@@ -128,7 +128,8 @@ CuooraPlatform class >> instanceWithDataFinal [
 
 { #category : #'instance creation' }
 CuooraPlatform class >> soleInstance [
-	"^ soleInstance ifNil: [ soleInstance := self instanceWithData ]"
+	"^ soleInstance ifNil: [ soleInstance := self instanceWithDataFinal ]"
+
 	^ soleInstance ifNil: [ soleInstance := self instanceWithData ]
 ]
 

@@ -61,7 +61,7 @@ NewQuestionComponent >> fieldsEmpty [
 
 { #category : #accessing }
 NewQuestionComponent >> model [
-^CuooraPlatform soleInstance
+	^ CuooraPlatform soleInstance
 ]
 
 { #category : #'rendering-elements' }
