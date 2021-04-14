@@ -135,8 +135,8 @@ CuooraPlatform class >> soleInstance [
 
 { #category : #initialization }
 CuooraPlatform >> initialize [
-	users := Set new.
-	topics := Set new
+	users := OrderedCollection new.
+	topics := OrderedCollection new
 ]
 
 { #category : #'adding/removing' }

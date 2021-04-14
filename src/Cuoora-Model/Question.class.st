@@ -51,7 +51,7 @@ Question >> delete [
 { #category : #initialization }
 Question >> initialize [
 	super initialize.
-	answers := Set new
+	answers := OrderedCollection new
 ]
 
 { #category : #initialization }

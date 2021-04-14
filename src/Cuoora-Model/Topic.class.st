@@ -35,7 +35,7 @@ Topic >> description [
 
 { #category : #initialization }
 Topic >> initialize [
-	topicQuestions := Set new
+	topicQuestions := OrderedCollection new
 ]
 
 { #category : #initialization }
