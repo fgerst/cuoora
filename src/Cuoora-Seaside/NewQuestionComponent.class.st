@@ -136,7 +136,7 @@ NewQuestionComponent >> renderTopicInput: html [
 		with: 'Topicos:'.
 	html textInput
 		class: 'text-input';
-		placeholder: 'Tópicos separados por coma, ejemplo: "java,Test de unidad,Python"';
+		placeholder: 'Tópicos separados por coma sin espacios, ejemplo: "java,Test de unidad,Python"';
 		on: #topics of: self
 ]
 

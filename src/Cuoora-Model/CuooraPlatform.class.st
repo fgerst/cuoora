@@ -112,9 +112,9 @@ CuooraPlatform class >> instanceWithDataFinal [
 				topics: {t1. t3} ).
 	"creacion de respuestas"
 	a1 := q1 
-		newAnswer: (Answer withAuthor: u2 content: 'Respuesta de Diego: Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.').
+		newAnswer: (Answer withAuthor: u2 content: 'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.').
 	a2 := q2
-		newAnswer: (Answer withAuthor: u1 content: 'Respuesta de Pedro: Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.').
+		newAnswer: (Answer withAuthor: u1 content: 'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.').
 	"intereses" "No hay intereses en la instancia original de la entrega final"
 	
 	"follows"
@@ -130,7 +130,7 @@ CuooraPlatform class >> instanceWithDataFinal [
 CuooraPlatform class >> soleInstance [
 	"^ soleInstance ifNil: [ soleInstance := self instanceWithDataFinal ]"
 
-	^ soleInstance ifNil: [ soleInstance := self instanceWithData ]
+	^ soleInstance ifNil: [ soleInstance := self instanceWithDataFinal ]
 ]
 
 { #category : #initialization }
@@ -156,7 +156,7 @@ CuooraPlatform >> parseTopics: aTopicListString [
 	"devuelve los topicos ingresados que existan en el sistema"
 
 	| names |
-	names := aTopicListString splitOn: ','.
+	names := aTopicListString asLowercase splitOn: ','.
 	^ topics select: [ :topic | names includes: topic name asLowercase ]
 ]
 
