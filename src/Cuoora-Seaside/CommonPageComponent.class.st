@@ -11,6 +11,7 @@ Class {
 
 { #category : #callbacks }
 CommonPageComponent >> logout [
+	self session logoutUser.
 	self session unregister.
 	self requestContext redirectTo: self application url
 ]

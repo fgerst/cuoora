@@ -11,11 +11,6 @@ Class {
 }
 
 { #category : #accessing }
-UserSession >> loggedUsername [
-	^ user username
-]
-
-{ #category : #accessing }
 UserSession >> loginUser: anUser [
 	user := anUser
 ]

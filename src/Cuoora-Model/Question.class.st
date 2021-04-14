@@ -67,11 +67,6 @@ Question >> relatedTopics: aTopicList [
 	relatedTopics := aTopicList
 ]
 
-{ #category : #listing }
-Question >> sortedAnswers [
-	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
-]
-
 { #category : #accesing }
 Question >> title [
 	^ title

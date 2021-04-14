@@ -122,11 +122,6 @@ User >> relevantQuestions [
 	^ relevantQuestions
 ]
 
-{ #category : #listing }
-User >> sortedAnswers [
-	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
-]
-
 { #category : #accessing }
 User >> timestamp [
 	^ timestamp

@@ -93,18 +93,6 @@ QuestionViewComponent >> renderQuestionAnswersOn: html [
 		ifFalse: [ self renderAnswers: self sortedAnswers on: html ]
 ]
 
-{ #category : #rendering }
-QuestionViewComponent >> renderQuestionContentOn: html [
-	"preguntar si es opcional mostrar content"
-
-	html div
-		with: [ html paragraph
-				class: 'italic';
-				with: 'Contenido:'.
-			html paragraph with: question content.
-			html horizontalRule ]
-]
-
 { #category : #listing }
 QuestionViewComponent >> sortedAnswers [
 	^ question answers
