@@ -13,9 +13,7 @@ Class {
 
 { #category : #creation }
 Vote class >> withAuthor: anUser [
-	^ self new
-		author: anUser;
-		yourself
+	^ self new initializeWithAuthor: anUser yourself
 ]
 
 { #category : #accesing }
@@ -23,14 +21,14 @@ Vote >> author [
 	^ author
 ]
 
-{ #category : #accesing }
-Vote >> author: anUser [
-	author := anUser
-]
-
 { #category : #initialization }
 Vote >> initialize [		
 	timestamp := DateAndTime now.
+]
+
+{ #category : #initialization }
+Vote >> initializeWithAuthor: anUser [
+	author := anUser
 ]
 
 { #category : #accesing }

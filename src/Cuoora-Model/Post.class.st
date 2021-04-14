@@ -20,18 +20,8 @@ Post >> author [
 ]
 
 { #category : #accesing }
-Post >> author: anUser [
-	author := anUser
-]
-
-{ #category : #accesing }
 Post >> content [
 	^ content
-]
-
-{ #category : #accesing }
-Post >> content: aString [
-	content := aString
 ]
 
 { #category : #removing }

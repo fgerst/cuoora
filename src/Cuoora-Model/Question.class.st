@@ -15,11 +15,10 @@ Class {
 { #category : #creation }
 Question class >> withAuthor: anUser title: aTitle content: aContent topics: aTopicList [
 	^ self new
-		author: anUser;
-		title: aTitle;
-		content: aContent;
-		relatedTopics: aTopicList;
-		yourself
+		initializeWithAuthor: anUser
+		title: aTitle
+		content: aContent
+		topics: aTopicList yourself
 ]
 
 { #category : #'initialization - actions' }
@@ -55,6 +54,14 @@ Question >> initialize [
 	answers := Set new
 ]
 
+{ #category : #initialization }
+Question >> initializeWithAuthor: anUser title: aTitle content: aContent topics: aTopicList [
+	author := anUser.
+	title := aTitle.
+	content := aContent.
+	relatedTopics := aTopicList
+]
+
 { #category : #'adding/removing' }
 Question >> newAnswer: anAnswer [
 	answers add: anAnswer.
@@ -68,16 +75,6 @@ Question >> relatedTopics [
 ]
 
 { #category : #accesing }
-Question >> relatedTopics: aTopicList [
-	relatedTopics := aTopicList
-]
-
-{ #category : #accesing }
 Question >> title [
 	^ title
-]
-
-{ #category : #accesing }
-Question >> title: aString [
-	title := aString
 ]

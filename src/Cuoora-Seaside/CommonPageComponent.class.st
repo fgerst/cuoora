@@ -16,7 +16,7 @@ CommonPageComponent >> logout [
 	self requestContext redirectTo: self application url
 ]
 
-{ #category : #'rendering-elements' }
+{ #category : #'rendering-header' }
 CommonPageComponent >> renderBackAnchor: html [
 	html anchor
 		callback: [ self answer ];

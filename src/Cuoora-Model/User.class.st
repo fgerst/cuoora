@@ -20,10 +20,9 @@ Class {
 { #category : #creation }
 User class >> withUsername: anUsername password: aPassword [
 	^ self new
-		username: anUsername;
-		profileName: anUsername;
-		password: aPassword;
-		yourself
+		initializeWithUsername: anUsername
+		profileName: anUsername
+		password: aPassword yourself
 ]
 
 { #category : #'adding/removing' }
@@ -71,6 +70,13 @@ User >> initialize [
 	interests := Set new.
 ]
 
+{ #category : #initialization }
+User >> initializeWithUsername: anUsername profileName: aProfileName password: aPassword [
+	username := anUsername.
+	profileName := aProfileName.
+	password := aPassword
+]
+
 { #category : #accessing }
 User >> interests [
 	^ interests
@@ -94,18 +100,13 @@ User >> password [
 ]
 
 { #category : #accessing }
-User >> password: aString [
-	password := aString
-]
-
-{ #category : #accessing }
 User >> profileName [
 	^ profileName
 ]
 
 { #category : #accessing }
-User >> profileName: anObject [
-	profileName := anObject
+User >> profileName: aProfileName [
+	profileName := aProfileName
 ]
 
 { #category : #accessing }
@@ -145,10 +146,4 @@ User >> userScore [
 { #category : #accessing }
 User >> username [
 	^ username
-]
-
-{ #category : #accessing }
-User >> username: aString [
-	username := aString.
-	profileName := username.
 ]

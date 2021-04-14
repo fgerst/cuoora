@@ -14,10 +14,7 @@ Class {
 
 { #category : #creation }
 Topic class >> withName: aName description: aDesc [
-	^ self new
-		name: aName;
-		description: aDesc;
-		yourself
+	^ self new initializeWithName: aName description: aDesc yourself
 ]
 
 { #category : #'adding/removing' }
@@ -36,24 +33,20 @@ Topic >> description [
 	^ description
 ]
 
-{ #category : #accesing }
-Topic >> description: aString [
-	description := aString
-]
-
 { #category : #initialization }
 Topic >> initialize [
 	topicQuestions := Set new
 ]
 
-{ #category : #accesing }
-Topic >> name [
-	^ name
+{ #category : #initialization }
+Topic >> initializeWithName: aName description: aDesc [
+	name := aName.
+	description := aDesc
 ]
 
 { #category : #accesing }
-Topic >> name: aString [
-	name := aString
+Topic >> name [
+	^ name
 ]
 
 { #category : #accesing }

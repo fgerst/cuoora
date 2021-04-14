@@ -1,5 +1,5 @@
 "
-Clase que representa a una respuesta
+Clase que representa una respuesta a una pregunta. Los usuarios pueden responder sus propias preguntas.
 "
 Class {
 	#name : #Answer,
@@ -9,10 +9,7 @@ Class {
 
 { #category : #creation }
 Answer class >> withAuthor: anUser content: aContent [
-	^ self new
-		author: anUser;
-		content: aContent;
-		yourself
+	^ self new initializeWithAuthor: anUser content: aContent yourself
 ]
 
 { #category : #'initialization-actions' }
@@ -28,4 +25,10 @@ Answer >> delete [
 { #category : #initialization }
 Answer >> initialize [
 	super initialize
+]
+
+{ #category : #initialization }
+Answer >> initializeWithAuthor: anUser content: aContent [
+	author := anUser.
+	content := aContent
 ]
