@@ -37,6 +37,11 @@ Question >> answersCount [
 	^ answers size
 ]
 
+{ #category : #listing }
+Question >> answersSortedByScore [
+	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
+]
+
 { #category : #'adding/removing' }
 Question >> delete [
 	relatedTopics do: [ :topic | topic deleteTopicQuestion: self ].

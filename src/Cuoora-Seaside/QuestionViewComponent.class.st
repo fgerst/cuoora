@@ -95,6 +95,5 @@ QuestionViewComponent >> renderQuestionAnswersOn: html [
 
 { #category : #listing }
 QuestionViewComponent >> sortedAnswers [
-	^ question answers
-		asSortedCollection: [ :a :b | a postScore < b postScore ]
+	^ question answersSortedByScore
 ]
