@@ -323,10 +323,10 @@ CommonPageComponent >> topicNames: topics [
 
 { #category : #callbacks }
 CommonPageComponent >> viewProfile: anUser [
-	self call: (UserProfileComponent withUserProfile: anUser)
+	self call: (UserProfileComponent newWithUserProfile: anUser)
 ]
 
 { #category : #callbacks }
 CommonPageComponent >> viewQuestion: aQuestion [
-	self call: (QuestionViewComponent newWith: aQuestion)
+	self call: (QuestionViewComponent newWithQuestion: aQuestion)
 ]

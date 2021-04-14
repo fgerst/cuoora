@@ -1,5 +1,5 @@
 "
-Clase que representa un voto a una publicacion (like o dislike)
+Clase que representa un voto a una publicacion (like o dislike). Los usuarios pueden darle dislike/like a sus propias preguntas/respuestas.
 "
 Class {
 	#name : #Vote,

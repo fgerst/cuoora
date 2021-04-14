@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #creation }
-UserProfileComponent class >> withUserProfile: anUser [
+UserProfileComponent class >> newWithUserProfile: anUser [
 	^ self new userProfile: anUser yourself
 ]
 

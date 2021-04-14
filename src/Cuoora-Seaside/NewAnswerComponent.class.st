@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #creation }
-NewAnswerComponent class >> newWith: aQuestion [
+NewAnswerComponent class >> newWithQuestion: aQuestion [
 	^ self new question: aQuestion yourself
 ]
 

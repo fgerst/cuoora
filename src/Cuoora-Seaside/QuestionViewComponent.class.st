@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #creation }
-QuestionViewComponent class >> newWith: anObject [
-	^ self new question: anObject yourself
+QuestionViewComponent class >> newWithQuestion: aQuestion [
+	^ self new question: aQuestion yourself
 ]
 
 { #category : #callbacks }
 QuestionViewComponent >> newAnswer [
-	self call: (NewAnswerComponent newWith: question)
+	self call: (NewAnswerComponent newWithQuestion: question)
 ]
 
 { #category : #accessing }
