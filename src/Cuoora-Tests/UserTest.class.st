@@ -40,31 +40,25 @@ UserTest >> setUp [
 
 { #category : #tests }
 UserTest >> testAdd [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"
-	anUser1 addInterest: i1. anUser1 addInterest: i2. anUser1 addInterest: i2.  
+	anUser1 addInterest: i1.
+	anUser1 addInterest: i2.
+	anUser1 addInterest: i2.
 	anUser2 addInterest: i1.
-			
-	self assert: ( anUser1 interests size ) equals: 2.
-	self assert: ( anUser2 interests size ) equals: 1.
-	self assert: ( anUser3 interests size ) equals: 0.
-	
-	self assert: ( anUser1 questions size ) equals: 1.
-	self assert: ( anUser2 questions size ) equals: 1.
-	self assert: ( anUser3 questions size ) equals: 0.
-	
-	self assert: ( anUser1 answers size ) equals: 1.
-	self assert: ( anUser2 answers size ) equals: 2.
-	self assert: ( anUser3 answers size ) equals: 1.
-	
+	self assert: anUser1 interests size equals: 2.
+	self assert: anUser2 interests size equals: 1.
+	self assert: anUser3 interests size equals: 0.
+	self assert: anUser1 questions size equals: 1.
+	self assert: anUser2 questions size equals: 1.
+	self assert: anUser3 questions size equals: 0.
+	self assert: anUser1 answers size equals: 1.
+	self assert: anUser2 answers size equals: 2.
+	self assert: anUser3 answers size equals: 1.
 	anUser1 addFollowing: anUser2.
 	anUser1 addFollowing: anUser3.
 	anUser2 addFollowing: anUser3.
-	
-	self assert: ( anUser1 following size ) equals: 2.
-	self assert: ( anUser2 following size ) equals: 1.
-	self assert: ( anUser3 following size ) equals: 0.
-	
+	self assert: anUser1 following size equals: 2.
+	self assert: anUser2 following size equals: 1.
+	self assert: anUser3 following size equals: 0
 ]
 
 { #category : #tests }

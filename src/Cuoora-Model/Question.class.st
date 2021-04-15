@@ -47,10 +47,11 @@ Question >> answersSortedByScore [
 
 { #category : #'adding/removing' }
 Question >> delete [
-	"elimina una pregunta y todas sus respuestas, y limpia las referencias en los topicos relacionados, es llamado desde User"
+	"elimina todas sus respuestas, y limpia las referencias en los topicos relacionados, es llamado desde User>>deleteMyQuestion()"
 
 	relatedTopics do: [ :topic | topic deleteTopicQuestion: self ].
-	answers do: [ :each | each delete ]
+	answers do: [ :each | each delete ].
+	answers := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -69,7 +70,7 @@ Question >> initializeWithAuthor: anUser title: aTitle content: aContent topics:
 
 { #category : #'adding/removing' }
 Question >> newAnswer: anAnswer [
-	"crea una nueva respuesta a la pregunta"
+	"crea una nueva respuesta a la pregunta, agrega la referencia en la pregunta y ene el autor"
 
 	answers add: anAnswer.
 	anAnswer addToAuthor.

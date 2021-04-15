@@ -2,89 +2,64 @@ Class {
 	#name : #AnswerTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'anAnswer1',
-		'anAnswer2',
+		'a1',
+		'a2',
 		'u1',
-		'u2'
+		'u2',
+		'q1'
 	],
 	#category : #'Cuoora-Tests'
 }
 
 { #category : #running }
 AnswerTest >> setUp [
-	"Hooks that subclasses may override to define the fixture of test."
-	
 	super setUp.
-	u1 := User withUsername: 'name1' password: 'word1'.
-	u2 := User withUsername: 'name2' password: 'word2'.
-	anAnswer1 := Answer withAuthor: u1 content: 'contenido1'.
-	anAnswer2 := Answer withAuthor: u2 content: 'contenido2'.
-	u1 addAnswer: anAnswer1.
-	u2 addAnswer: anAnswer2 
 	
+	"usuarios"
+	u1 := User withUsername: 'Franco' password: '123'.
+	u2 := User withUsername: 'Tomas' password: '123'.
 	
+	"pregunta"
+	q1 := Question withAuthor: u1 title: 'Titulo1' content: 'Lorem ipsum' topics: { }.
+	
+	"respuestas"
+	a1 := Answer withAuthor: u1 content: 'contenido1'.
+	a2 := Answer withAuthor: u2 content: 'contenido2'.
+	
+	"newAnswer() va a agregar referencias a la respuesta en el User autor"
+	q1 newAnswer: a1.
+	q1 newAnswer: a2.
+	
+
+
+]
+
+{ #category : #tests }
+AnswerTest >> testAddToAuthor [
+	"Answer>>addToAuthor() es llamado por Question>>newAnswer(), puede corroborarse que la referencia a la respuesta fue agregada al User autor"
+
+	self assert: (u1 answers includes: a1).
+	self assert: (u2 answers includes: a2)
 ]
 
 { #category : #tests }
 AnswerTest >> testDelete [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	self assert: ( u1 answers includes: anAnswer1 ).
-	
-	anAnswer1 delete.
-	
-	self assert: ( u1 answers size ) equals: 0.
-]
+	"Answer>>delete() solo elimina la referencia en User, ya que la relacion Question->Answer es unidireccional"
 
-{ #category : #tests }
-AnswerTest >> testLikes [
+	self assert: u1 answers size equals: 1.
+	self assert: u2 answers size equals: 1.
 
-	anAnswer1 likeFrom: u1.
-	anAnswer1 likeFrom: u2.
-	self assert: ( anAnswer1 likes size ) equals: 2.
-	self assert: ( anAnswer2 likes size ) equals: 0.
-	self assert: ( anAnswer1 dislikes size ) equals: 0.
-	self assert: ( anAnswer2 dislikes size ) equals: 0.
-	
-	anAnswer1 likeFrom: u1.
-	self assert: ( anAnswer1 likes size ) equals: 1.
-	self assert: ( anAnswer1 dislikes size ) equals: 0.
-	
-	anAnswer1 dislikeFrom: u2.
-	self assert: ( anAnswer1 likes size ) equals: 0.
-	self assert: ( anAnswer1 dislikes size ) equals: 1.
-	
-	anAnswer1 dislikeFrom: u2.
-	self assert: ( anAnswer1 likes size ) equals: 0.
-	self assert: ( anAnswer1 dislikes size ) equals: 0.
-	
-]
+	"si llamamos a delete() de Answer, se elimina la referencia en User"
+	a1 delete.
+	self assert: u1 answers size equals: 0.
+	self assert: u2 answers size equals: 1.
 
-{ #category : #tests }
-AnswerTest >> testPostScore [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-		
-	self assert: ( anAnswer1 postScore ) equals: 0.
-	self assert: ( anAnswer2 postScore ) equals: 0.
-			
-	anAnswer1 likeFrom: u1.
-	anAnswer1 likeFrom: u2.
-	anAnswer2 likeFrom: u1.
-	anAnswer2 dislikeFrom: u2.
-	self assert: ( anAnswer1 postScore ) equals: 2.
-	self assert: ( anAnswer2 postScore ) equals: 0.
-	
-	anAnswer1 likeFrom: u1.
-	anAnswer1 likeFrom: u2.
-	anAnswer2 dislikeFrom: u2.
-	self assert: ( anAnswer1 postScore ) equals: 0.
-	self assert: ( anAnswer2 postScore ) equals: 1.
-	
-	anAnswer1 dislikeFrom: u1.
-	anAnswer2 dislikeFrom: u1.
-	anAnswer2 dislikeFrom: u2.
-	self assert: ( anAnswer1 postScore ) equals: ( -1 ).
-	self assert: ( anAnswer2 postScore ) equals: ( -2 ).
+	"las referencias en Question sigen estando"
+	self assert: q1 answersCount equals: 2.
+
+	"si eliminamos la pregunta, se eliminan referencias a la respuesta tanto desde User como desde Question"
+	q1 delete.
+	self assert: u1 answers size equals: 0.
+	self assert: u2 answers size equals: 0.
+	self assert: q1 answersCount equals: 0
 ]
