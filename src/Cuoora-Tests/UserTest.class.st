@@ -27,8 +27,8 @@ UserTest >> setUp [
 	i2 := Topic withName: 'C' description: 'contenido C'.
 	q1 := Question withAuthor: anUser1 title: 'Question 1' content: 'content 1' topics: { i1 }.
 	q2 := Question withAuthor: anUser2 title: 'Question 2' content: 'content 2' topics: { i2 }.
-	a1 := Answer withAuthor: anUser1 content: 'content 1'.
-	a2 := Answer withAuthor: anUser3 content: 'content 3'.
+	a1 := Answer withAuthor: anUser1 content: 'content 3'.
+	a2 := Answer withAuthor: anUser3 content: 'content 4'.
 	q1 newAnswer: a1. q2 newAnswer: a2.
 	anUser1 newQuestion: q1. 
 	anUser2 newQuestion: q2. anUser2 addAnswer: a1. anUser2 addAnswer: a2.
@@ -41,28 +41,44 @@ UserTest >> setUp [
 
 { #category : #tests }
 UserTest >> testAddAnswer [
+	"El metodo User>>addAnswer agrega una respuesta hecha por el usuario a us coleccion de respuestas propias"
+	
+	"Nos aseguramos de que las preguntas agregadas en el setUp esten dentro de las colecciones apropiadas"
 	self assert: anUser1 answers size equals: 1.
 	self assert: anUser2 answers size equals: 2.
 	self assert: anUser3 answers size equals: 1.
+	self assert: ( anUser2 answers includes: a1 ).
+	self assert: ( anUser2 answers includes: a2 ).
+	self assert: ( anUser1 answers includes: a1 ).
+	self assert: ( anUser3 answers includes: a2 ).
 ]
 
 { #category : #tests }
 UserTest >> testAddFollowing [
 	"El metodo User>>addFollowing recibe otro usuario como parametro y lo agrega a la coleccion de otros usuarios a los que el usuario sigue"
+	
+	"Nos aseguramos de que la coleccion de seguidos (flollowing) este vacia"
+	self deny: ( anUser1 following includes: anUser2 ).
+	self assert: ( anUser1 following size ) equals: 0.
 
 	"Primero agregamos los usuarios como seguidos"
 	self assert: ( anUser1 addFollowing: anUser2 ) equals: ( anUser1 ).
 	self assert: ( anUser1 addFollowing: anUser3 ) equals: ( anUser1 ).
 	self assert: ( anUser2 addFollowing: anUser3 ) equals: ( anUser2 ).
 	
-	"Luego constatamos los cambios que pasaron en la coleccion de seguidos usando el metodo isFollowing"
-	self assert: ( anUser1 isFollowing: anUser2 ).
-	self assert: ( anUser1 isFollowing: anUser3 ).
-	self assert: ( anUser2 isFollowing: anUser3 ).
+	"Luego constatamos los cambios que pasaron en la coleccion de seguidos"
+	self assert: ( anUser1 following includes: anUser2 ).
+	self assert: ( anUser1 following includes: anUser3 ).
+	self assert: ( anUser2 following includes: anUser3 ).
+	self assert: ( anUser1 following size ) equals: 2.
+	self assert: ( anUser2 following size ) equals: 1.
+	self assert: ( anUser3 following size ) equals: 0.
 ]
 
 { #category : #tests }
 UserTest >> testAddinterest [
+	"El metodo User>>addInterests agrega topicos a los intereses del usuario"
+	
 	anUser1 addInterest: i1.
 	anUser1 addInterest: i2.
 	anUser1 addInterest: i2.
