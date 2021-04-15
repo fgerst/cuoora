@@ -79,6 +79,8 @@ QuestionViewComponent >> renderNewAnswerButtonOn: html [
 
 { #category : #rendering }
 QuestionViewComponent >> renderPageContentOn: aCanvas [
+	"renderiza la pregunta que esta siendo vista, la lista de respuestas y un botón para agregar una respuesta"
+
 	self renderQuestion: question on: aCanvas.
 	self renderQuestionAnswersOn: aCanvas.
 	self renderNewAnswerButtonOn: aCanvas

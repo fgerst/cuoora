@@ -25,6 +25,7 @@ CommonPageComponent >> renderBackAnchor: html [
 
 { #category : #rendering }
 CommonPageComponent >> renderContentOn: aCanvas [
+	"renderContentOn de CommonPageComponent renderiza el header y luego delega el contenido de la página a la subclase que fue instanciada"
 	self renderHeaderOn: aCanvas.
 	self renderPageContentOn: aCanvas
 ]
@@ -57,6 +58,8 @@ CommonPageComponent >> renderHeaderNavBar: html [
 
 { #category : #rendering }
 CommonPageComponent >> renderHeaderOn: aCanvas [
+	"renderiza el header, se divide en 3 metodos para legibilidad"
+
 	aCanvas div
 		id: 'header';
 		with: [ self renderHeaderTitle: aCanvas.
@@ -124,10 +127,11 @@ CommonPageComponent >> renderPostVotes: aPost on: html [
 
 { #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestion: aQuestion on: html [
+	"renderiza una pregunta, se divide en metodos para legibildiad"
+
 	html div
 		class: 'post-div';
-		with: [ 
-			self renderQuestionTitleAnchor: aQuestion on: html. 
+		with: [ self renderQuestionTitleAnchor: aQuestion on: html.
 			self renderQuestionInfo: aQuestion on: html.
 			self renderPostVotes: aQuestion on: html.
 			self renderPostReactionAnchors: aQuestion on: html.
@@ -172,9 +176,11 @@ CommonPageComponent >> renderQuestionTopics: topics on: html [
 
 { #category : #'rendering-questions' }
 CommonPageComponent >> renderQuestions: questions on: html [
+	"renderiza una lista de preguntas"
+
 	html
-		orderedList: [ questions
-				do: [ :question | self renderQuestion: question on: html ] ]
+		orderedList:
+			[ questions do: [ :question | self renderQuestion: question on: html ] ]
 ]
 
 { #category : #'rendering-header' }
@@ -313,6 +319,8 @@ hr { opacity: 0.6; }
 
 { #category : #utilities }
 CommonPageComponent >> topicNames: topics [
+	"recibe una coleccion de topicos y los formatea en un String separados por coma"
+
 	| names |
 	names := String
 		streamContents: [ :str | 

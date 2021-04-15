@@ -17,8 +17,10 @@ Class {
 
 { #category : #callbacks }
 LoginComponent >> login [
+	"chequea que no haya campos vacios"
 	self fieldsEmpty
 		ifTrue: [ ^ nil ].
+	"chequea las credenciales contra el modelo"
 	(self model username: username protectedBy: password)
 		ifNotNil: [ :it | self proceedWith: it ].
 	username := nil.

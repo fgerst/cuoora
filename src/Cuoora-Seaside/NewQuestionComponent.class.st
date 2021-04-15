@@ -97,9 +97,10 @@ NewQuestionComponent >> renderInputElementsOn: html [
 
 { #category : #rendering }
 NewQuestionComponent >> renderPageContentOn: aCanvas [
-	self renderPageTitleOn: aCanvas.
-	self renderQuestionFormOn: aCanvas.
+	"renderiza el titulo de la página y el formulario de creacion de pregunta"
 
+	self renderPageTitleOn: aCanvas.
+	self renderQuestionFormOn: aCanvas
 ]
 
 { #category : #rendering }

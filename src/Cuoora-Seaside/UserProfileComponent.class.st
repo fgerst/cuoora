@@ -52,6 +52,8 @@ UserProfileComponent >> renderFollowingTextOn: html [
 
 { #category : #rendering }
 UserProfileComponent >> renderPageContentOn: aCanvas [
+	"renderiza el titulo de la página (username y follow anchor) y la lista de preguntas del usuario"
+
 	self renderPageTitleOn: aCanvas.
 	self renderUserQuestionsOn: aCanvas
 ]

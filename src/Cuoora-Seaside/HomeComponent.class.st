@@ -41,6 +41,8 @@ HomeComponent >> renderNewQuestionButtonOn: html [
 
 { #category : #rendering }
 HomeComponent >> renderPageContentOn: aCanvas [
+	"renderiza el botón para crear una pregunta, y la lista de preguntas relevantes para el usuario logeado"
+
 	self renderNewQuestionButtonOn: aCanvas.
 	self renderRelevantQuestionsOn: aCanvas
 ]

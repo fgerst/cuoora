@@ -93,7 +93,8 @@ NewAnswerComponent >> renderInputElementsOn: html [
 
 { #category : #rendering }
 NewAnswerComponent >> renderPageContentOn: aCanvas [
-	self renderQuestion: question on: aCanvas.
-	self renderAnswerFormOn: aCanvas.
+	"renderiza la pregunta a la que se responde y el formulario de la nueva respuesta"
 
+	self renderQuestion: question on: aCanvas.
+	self renderAnswerFormOn: aCanvas
 ]
