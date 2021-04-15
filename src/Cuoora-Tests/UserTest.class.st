@@ -30,8 +30,8 @@ UserTest >> setUp [
 	a1 := Answer withAuthor: anUser1 content: 'content 1'.
 	a2 := Answer withAuthor: anUser3 content: 'content 3'.
 	q1 newAnswer: a1. q2 newAnswer: a2.
-	anUser1 newQuestion: q1. anUser2 newQuestion: q2.
-	anUser2 addAnswer: a1. anUser2 addAnswer: a2.
+	anUser1 newQuestion: q1. 
+	anUser2 newQuestion: q2. anUser2 addAnswer: a1. anUser2 addAnswer: a2.
 	
 	
 	
@@ -40,7 +40,29 @@ UserTest >> setUp [
 ]
 
 { #category : #tests }
-UserTest >> testAdd [
+UserTest >> testAddAnswer [
+	self assert: anUser1 answers size equals: 1.
+	self assert: anUser2 answers size equals: 2.
+	self assert: anUser3 answers size equals: 1.
+]
+
+{ #category : #tests }
+UserTest >> testAddFollowing [
+	"El metodo User>>addFollowing recibe otro usuario como parametro y lo agrega a la coleccion de otros usuarios a los que el usuario sigue"
+
+	"Primero agregamos los usuarios como seguidos"
+	self assert: ( anUser1 addFollowing: anUser2 ) equals: ( anUser1 ).
+	self assert: ( anUser1 addFollowing: anUser3 ) equals: ( anUser1 ).
+	self assert: ( anUser2 addFollowing: anUser3 ) equals: ( anUser2 ).
+	
+	"Luego constatamos los cambios que pasaron en la coleccion de seguidos usando el metodo isFollowing"
+	self assert: ( anUser1 isFollowing: anUser2 ).
+	self assert: ( anUser1 isFollowing: anUser3 ).
+	self assert: ( anUser2 isFollowing: anUser3 ).
+]
+
+{ #category : #tests }
+UserTest >> testAddinterest [
 	anUser1 addInterest: i1.
 	anUser1 addInterest: i2.
 	anUser1 addInterest: i2.
@@ -48,18 +70,6 @@ UserTest >> testAdd [
 	self assert: anUser1 interests size equals: 3.
 	self assert: anUser2 interests size equals: 1.
 	self assert: anUser3 interests size equals: 0.
-	self assert: anUser1 questions size equals: 1.
-	self assert: anUser2 questions size equals: 1.
-	self assert: anUser3 questions size equals: 0.
-	self assert: anUser1 answers size equals: 1.
-	self assert: anUser2 answers size equals: 2.
-	self assert: anUser3 answers size equals: 1.
-	anUser1 addFollowing: anUser2.
-	anUser1 addFollowing: anUser3.
-	anUser2 addFollowing: anUser3.
-	self assert: anUser1 following size equals: 2.
-	self assert: anUser2 following size equals: 1.
-	self assert: anUser3 following size equals: 0
 ]
 
 { #category : #tests }
@@ -94,6 +104,35 @@ UserTest >> testDeleteMyQuestion [
 	self deny:  ( anUser1 questions includes: q1 ).
 	self deny: ( anUser1 answers includes: a1 ).
 	self deny: ( i1 topicQuestions includes: q1 ).
+]
+
+{ #category : #tests }
+UserTest >> testIsFollowing [
+	"El metodo User>>isFollowing() recibe un usario como parametro y se asegura si el usuario enviado como parametro es seguido por el usuario al que se le mando el mensaje"
+	
+	"Primero nos aseguramos de que anUser1 no siga a anUser2"
+	self deny: ( anUser1 isFollowing: anUser2 ) .
+	
+	"Despues nos aseguramos de que si lo empieza a seguir ahora devuelva positivo"
+	anUser1 addFollowing: anUser2.
+	self assert: ( anUser1 isFollowing: anUser2 ) .
+]
+
+{ #category : #tests }
+UserTest >> testNewQuestion [
+	"User>>newQuestion() es un metodo que añade una pregunta dada a la coleccion de preguntas propias del usuario."
+	
+	"Comprobamos que en el setUp User>>newQuestion() haya agregado las preguntas correctamente"
+	self assert: ( anUser1 questions size ) equals: 1.
+	self assert: ( anUser2 questions size ) equals: 1.
+	self assert: ( anUser3 questions size ) equals: 0.
+	self assert: ( anUser1 questions includes: q1 ).
+	self assert: ( anUser2 questions includes: q2 ).
+	self deny: ( anUser3 questions includes: q1 ).
+	
+	"Comprobamos que si User>>newQuestion() agrega otra pregunta entonces se consolida el cambio y que el metodo devuelve la pregunta enviada como parametro"
+	self assert: ( anUser1 newQuestion: q2 ) equals: ( q2 ).
+	self assert: ( anUser1 questions size ) equals: 2.
 ]
 
 { #category : #tests }
