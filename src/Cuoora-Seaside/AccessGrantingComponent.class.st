@@ -68,9 +68,6 @@ AccessGrantingComponent >> renderContentOn: aCanvas [
 		with: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ].
 	aCanvas horizontalRule.
-	aCanvas anchor
-		callback: [ self clearInstance ];
-		with: 'Clear instance'
 ]
 
 { #category : #rendering }

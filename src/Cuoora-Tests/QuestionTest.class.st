@@ -55,22 +55,22 @@ QuestionTest >> testAddToRelatedTopics [
 { #category : #tests }
 QuestionTest >> testAnswersSortedByScore [
 	"sin likes/dislikes"
-	self assert: q1 answersSortedByScore first equals: a2.
+	self assert: q1 answersSortedByScore first equals: a1.
 	
-	"si le doy dislike a a2 ya no es primera"
-	a2 dislikeFrom: u1.
-	self deny: q1 answersSortedByScore first equals: a2.
+	"si le doy dislike a a1 ya no es primera"
+	a1 dislikeFrom: u2.
+	self deny: q1 answersSortedByScore first equals: a1.
 	"vuelvo a 0"
-	a2 dislikeFrom: u1.
-	self assert: q1 answersSortedByScore first equals: a2.
-
-	"luego de darle like a a1 se ordena primera"
-	a1 likeFrom: u2.
+	a1 dislikeFrom: u2.
 	self assert: q1 answersSortedByScore first equals: a1.
 
-	"al darle dislike a a1 se ordena segunda"
-	a1 dislikeFrom: u1.
-	self assert: q1 answersSortedByScore first equals: a2
+	"luego de darle like a a2 se ordena primera"
+	a2 likeFrom: u1.
+	self assert: q1 answersSortedByScore first equals: a2.
+
+	"al darle dislike a a2 se ordena segunda"
+	a2 dislikeFrom: u1.
+	self assert: q1 answersSortedByScore first equals: a1
 ]
 
 { #category : #tests }
