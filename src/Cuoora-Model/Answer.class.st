@@ -14,11 +14,15 @@ Answer class >> withAuthor: anUser content: aContent [
 
 { #category : #'initialization-actions' }
 Answer >> addToAuthor [
+	"agrega la referencia a la respuesta al autor de la misma"
+
 	author addAnswer: self
 ]
 
 { #category : #removing }
 Answer >> delete [
+	"elimina la referencia a la respuesta en el User, es llamado desde Question"
+
 	author deleteMyAnswer: self
 ]
 

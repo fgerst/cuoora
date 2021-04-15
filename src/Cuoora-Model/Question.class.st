@@ -23,6 +23,8 @@ Question class >> withAuthor: anUser title: aTitle content: aContent topics: aTo
 
 { #category : #'initialization - actions' }
 Question >> addToRelatedTopics [
+	"agrega referencias a la pregunta en todos los topicos relacionados a la misma"
+
 	relatedTopics do: [ :each | each addTopicQuestion: self ]
 ]
 
@@ -38,14 +40,17 @@ Question >> answersCount [
 
 { #category : #listing }
 Question >> answersSortedByScore [
+	"retorna las respuestas ordenadas por su puntaje"
+
 	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
 ]
 
 { #category : #'adding/removing' }
 Question >> delete [
+	"elimina una pregunta y todas sus respuestas, y limpia las referencias en los topicos relacionados, es llamado desde User"
+
 	relatedTopics do: [ :topic | topic deleteTopicQuestion: self ].
-	answers do: [ :each | each delete ].
-	answers := Set new.
+	answers do: [ :each | each delete ]
 ]
 
 { #category : #initialization }
@@ -64,6 +69,8 @@ Question >> initializeWithAuthor: anUser title: aTitle content: aContent topics:
 
 { #category : #'adding/removing' }
 Question >> newAnswer: anAnswer [
+	"crea una nueva respuesta a la pregunta"
+
 	answers add: anAnswer.
 	anAnswer addToAuthor.
 	^ anAnswer

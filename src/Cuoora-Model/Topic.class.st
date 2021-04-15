@@ -19,12 +19,16 @@ Topic class >> withName: aName description: aDesc [
 
 { #category : #'adding/removing' }
 Topic >> addTopicQuestion: aQuestion [
+	"añade una pregunta a la coleccion de preguntas relacionadas al tópico"
+
 	topicQuestions add: aQuestion.
-	^aQuestion.
+	^ aQuestion
 ]
 
 { #category : #'adding/removing' }
 Topic >> deleteTopicQuestion: aQuestion [
+	"elimina una pregunta de la coleccion de preguntas relacionadas al tópico"
+
 	topicQuestions remove: aQuestion ifAbsent: [ ^ nil ]
 ]
 

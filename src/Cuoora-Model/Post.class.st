@@ -51,7 +51,11 @@ Post >> dislikeCount [
 
 { #category : #actions }
 Post >> dislikeFrom: anUser [
+	"registra un dislike de un usuario"
+
+	"primero elimina el like que haya podido realizar el usuario en el Post"
 	self deleteVoteFrom: anUser in: likes.
+	"luego, si ya hay un dislike propio lo elimina, si no lo hay lo agrega"
 	self deleteOrAddVoteFrom: anUser in: dislikes
 ]
 
@@ -74,7 +78,11 @@ Post >> likeCount [
 
 { #category : #actions }
 Post >> likeFrom: anUser [
+	"registra un like de un usuario en un Post"
+
+	"primero elimina el dislike que haya podido realizar el usuario en el Post"
 	self deleteVoteFrom: anUser in: dislikes.
+	"luego, si ya hay un like propio lo elimina, si no lo hay lo agrega"
 	self deleteOrAddVoteFrom: anUser in: likes
 ]
 

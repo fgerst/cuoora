@@ -47,11 +47,15 @@ User >> answers [
 
 { #category : #'adding/removing' }
 User >> deleteMyAnswer: anAnswer [
+	"limpia la referencia a una respuesta propia de una pregunta que está siendo eliminada"
+
 	answers remove: anAnswer ifAbsent: [ ^ nil ]
 ]
 
 { #category : #'adding/removing' }
 User >> deleteMyQuestion: aQuestion [
+	"elimina una pregunta propia de mi coleccion, y envia el mensaje delete a la pregunta para que limpie referencias a respuestas y topicos."
+
 	questions remove: aQuestion ifAbsent: [ ^ nil ].
 	aQuestion delete
 ]
@@ -84,13 +88,17 @@ User >> interests [
 
 { #category : #accessing }
 User >> isFollowing: anUser [
+	"chequea si un usuario sigue a otro"
+
 	^ following includes: anUser
 ]
 
 { #category : #'adding/removing' }
 User >> newQuestion: aQuestion [
+	"crea una nueva pregunta"
+
 	questions add: aQuestion.
-	aQuestion	 addToRelatedTopics.
+	aQuestion addToRelatedTopics.
 	^ aQuestion
 ]
 
@@ -116,10 +124,13 @@ User >> questions [
 
 { #category : #listing }
 User >> relevantQuestions [
+	"lista las preguntas relevantes, se utiliza un Set para que no se repitan"
+
 	| relevantQuestions |
 	relevantQuestions := Set new.
 	following do: [ :user | relevantQuestions addAll: user questions ].
-	interests do: [ :topic | relevantQuestions addAll: topic topicQuestions ].
+	interests
+		do: [ :topic | relevantQuestions addAll: topic topicQuestions ].
 	^ relevantQuestions
 ]
 
@@ -130,6 +141,8 @@ User >> timestamp [
 
 { #category : #calculating }
 User >> userScore [
+	"calcula el puntaje del usuario"
+
 	| qScore aScore vScore |
 	"puntaje por cantidad de preguntas"
 	qScore := questions size * 20.
@@ -140,6 +153,7 @@ User >> userScore [
 	"balance de likes/dislikes en todas las participaciones del usuario"
 	vScore := (answers sumNumbers: [ :each | each postScore ])
 		+ (questions sumNumbers: [ :each | each postScore ]).
+	"devuelve el total"
 	^ qScore + aScore + vScore
 ]
 
