@@ -12,10 +12,10 @@ Class {
 
 { #category : #running }
 TopicTest >> setUp [
-	"Hooks that subclasses may override to define the fixture of test."
-	
 	super setUp.
-	aTopic1 := Topic withName: 'topic 1' description: 'description 1'.
+	
+	aTopic1 := Topic withName: 'Smalltalk' description: 'description 1'.
+	
 	q1 := Question withAuthor: (User new) title: 'q1' content: 'c1' topics: { }.
 	q2 := Question withAuthor: (User new) title: 'q2' content: 'c2' topics: { }.
 	q3 := Question withAuthor: (User new) title: 'q3' content: 'c3' topics: { }.
