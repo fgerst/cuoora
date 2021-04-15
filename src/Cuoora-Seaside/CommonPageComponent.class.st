@@ -48,14 +48,11 @@ CommonPageComponent >> renderDislikeCount: count on: html [
 CommonPageComponent >> renderHeaderNavBar: html [
 	html
 		unorderedList: [ 
-			html listItem 
-				with: [ self renderSeparator: html ].
-			html listItem
-				with: [ self renderUserAnchor: self session user on: html ].
-			html listItem
-				with: [ self renderBackAnchor: html ].
-			html listItem 
-				with: [ self renderSeparator: html ] ]
+			html listItem with: [ self renderSeparator: html ].
+			html listItem with: [ self renderUserAnchor: self session user on: html ].
+			html listItem with: [ self renderHomeAnchor: html ].
+			html listItem with: [ self renderBackAnchor: html ].
+			html listItem with: [ self renderSeparator: html ] ]
 ]
 
 { #category : #rendering }
@@ -74,6 +71,13 @@ CommonPageComponent >> renderHeaderTitle: html [
 		id: 'title';
 		level1;
 		with: [ html span with: 'CuOOra' ]
+]
+
+{ #category : #'rendering-header' }
+CommonPageComponent >> renderHomeAnchor: html [
+	html anchor
+		callback: [ self call: HomeComponent new ];
+		with: 'Home'
 ]
 
 { #category : #'rendering-posts' }
