@@ -72,7 +72,7 @@ Question >> initializeWithAuthor: anUser title: aTitle content: aContent topics:
 Question >> newAnswer: anAnswer [
 	"crea una nueva respuesta a la pregunta, agrega la referencia en la pregunta y ene el autor"
 
-	answers add: anAnswer.
+	answers addFirst: anAnswer.
 	anAnswer addToAuthor.
 	^ anAnswer
 ]
