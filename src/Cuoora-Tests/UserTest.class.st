@@ -107,19 +107,28 @@ UserTest >> testRelevantQuestions [
 
 { #category : #tests }
 UserTest >> testUserScore [
+	"User>>userScore() es un metodo que recibe un usuario, y se retorna un puntaje que se
+calcula en función de su actividad en la red social. Por cada pregunta realizada, suma 20
+puntos, y por cada respuesta a una pregunta que realizó otro usuario, suma 50 puntos.
+Además, se suma puntaje determinado por la diferencia entre likes y dislikes de todas
+sus participaciones, que de tener mas dislikes que likes, puede ser negativo."
 	"anUser1 tien una respuesta a su propia pregunta que no se cuenta, excepto para likes"
-	"scope: class-variables  &  instance-variables"	
 			
+	"En el setup se declara que anUser1 hizo una pregunta (+20) y tiene una respuesta a su propia pregunta por lo que no cuenta para el +50 puntos, aunque sus likes y dislikes si se cuentan. anUser2 tiene una respuesta a otro usuario (+50) e hizo una pregunta (+20). Y anUser3 hizo una pregunta y n"
 	self assert: ( anUser1 userScore ) equals: 20.
 	self assert: ( anUser2 userScore ) equals: 70.
 	self assert: ( anUser3 userScore ) equals: 50.
+	
+	"Si ahora se le dan 2 likes a la pregunta que hizo anUser1, entonces su userScore sumara 2 puntos"
 	q1 likeFrom: anUser2.
 	q1 likeFrom: anUser3.
 	self assert: ( anUser1 userScore ) equals: 22.
+	"Si ahora q1 recibe un dislike del mismo usuario que le dio like entonces se deshara el like previo y se agregara un dislike, quitando 2 puntos. Si ademas le damos dos dislikes de ususarios que antes no tenian like o dislike a la respuesta del usuario 1, esto quitara otros 2 puntos."
 	q1 dislikeFrom: anUser2.
 	a1 dislikeFrom: anUser2.
 	a1 dislikeFrom: anUser3.
 	self assert: ( anUser1 userScore ) equals: 18.
+	"Otro dislike a la respuesta del usuario 1 de un usuario que ya habia dado dislike deshara el sidlike y agregara un punto a la user score del usuario 1. Un like del usuario 3 que antes tenia un dislike en la respuesta 1, deshara el dislike y agregara un like, sumando 2 puntos a la user Score del usuario 1"
 	a1 dislikeFrom: anUser2.
 	a1 likeFrom: anUser3.
 	self assert: ( anUser1 userScore ) equals: 21.
