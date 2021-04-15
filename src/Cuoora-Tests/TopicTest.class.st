@@ -23,14 +23,17 @@ TopicTest >> setUp [
 
 { #category : #tests }
 TopicTest >> testAddTopicQuestions [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
+	"Topic>>addTopicQuestion() debe agregar las preguntas correspondientes a un topico a la OrderedCollection del topico"
 		
+	"Se asegura de que la OrderedCollection se inicialize vacia"
 	self assert: ( aTopic1 topicQuestions size ) equals: 0.
 			
+	"Si agregamos una pregunta con Topic>>addTopicQuestion() devuelve la pregunta que se le envio"
 	self assert: ( aTopic1 addTopicQuestion: q1 ) equals: ( q1 ).
 	self assert: ( aTopic1 addTopicQuestion: q2 ) equals: ( q2 ).
 	self assert: ( aTopic1 addTopicQuestion: q3 ) equals: ( q3 ).
+	
+	"Si agregamos 3 preguntas el size ahora deberia ser 3 y la OrderedCollection deberia incluir todas las preguntas enviadas"
 	self assert: ( aTopic1 topicQuestions size ) equals: 3.
 	self assert: ( aTopic1 topicQuestions includes: q1 ).
 	self assert: ( aTopic1 topicQuestions includes: q2 ).
@@ -39,21 +42,20 @@ TopicTest >> testAddTopicQuestions [
 
 { #category : #tests }
 TopicTest >> testDeleteTopicQuestion [
-	"comment stating purpose of instance-side message"
-	"scope: class-variables  &  instance-variables"	
-			
-	aTopic1 addTopicQuestion: q1.
+	"Topic>>deleteTopicQuestion() se encarga de eliminar la pregunta que le mandes de la OrderedCollection que son las preguntas del topico, si no encuentra la pregunta devuelve nil."	
+	
+	"Si se manda a eliminar una pregunta que no existe devulve nil"
+	self deny: ( aTopic1 topicQuestions includes: q1 ).
+	self assert: ( aTopic1 deleteTopicQuestion: q1 ) equals: ( nil ). 	
+	
+	"Si se elimina una pregunta deja de estar en la ordereCollection que devuelve Topic>>topicQuestions"
 	aTopic1 addTopicQuestion: q2.
 	aTopic1 addTopicQuestion: q3.
-	aTopic1 deleteTopicQuestion: q1.
-	
-	self assert: ( ( aTopic1 topicQuestions includes: q1 ) not ).
 	self assert: ( aTopic1 topicQuestions includes: q3 ).
 	self assert: ( aTopic1 topicQuestions size ) equals: 2.
 	
 	aTopic1 deleteTopicQuestion: q2.
 	aTopic1 deleteTopicQuestion: q3.
+	self deny: ( aTopic1 topicQuestions includes: q3 ).
 	self assert: ( aTopic1 topicQuestions size ) equals: 0.
-	
-	self assert: ( aTopic1 deleteTopicQuestion: q2 ) equals: ( nil).
 ]

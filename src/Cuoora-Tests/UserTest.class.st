@@ -44,7 +44,7 @@ UserTest >> testAdd [
 	anUser1 addInterest: i2.
 	anUser1 addInterest: i2.
 	anUser2 addInterest: i1.
-	self assert: anUser1 interests size equals: 2.
+	self assert: anUser1 interests size equals: 3.
 	self assert: anUser2 interests size equals: 1.
 	self assert: anUser3 interests size equals: 0.
 	self assert: anUser1 questions size equals: 1.
