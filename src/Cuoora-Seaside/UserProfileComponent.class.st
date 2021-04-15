@@ -1,5 +1,5 @@
 "
-Este componente se encarga de mostrar todas las preguntas de un usuario y permitir agregar al usuario del perfil a tus follows.
+Este componente se encarga de mostrar el perfil de un Usuario, donde se listan todas sus preguntas y se le puede dar follow.
 "
 Class {
 	#name : #UserProfileComponent,

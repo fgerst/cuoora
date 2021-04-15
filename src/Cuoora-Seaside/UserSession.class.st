@@ -1,5 +1,5 @@
 "
-Este componente agrega a la session de seaside variables que mantienen informacion importante en la sesion, en este caso el usuario.
+Este componente extiende la WASession de Seaside agregando variables que mantienen informacion importante en la sesion, en este caso la instancia User del usuario logeado.
 "
 Class {
 	#name : #UserSession,

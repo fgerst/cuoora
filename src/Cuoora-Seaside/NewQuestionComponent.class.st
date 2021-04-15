@@ -1,6 +1,6 @@
 "
 Componente que implementa la creación de nuevas preguntas.
-	Es llamado desde HomeComponent, cuando se presione el boton ""+ Hacer nueva pregunta"".
+	Es llamado desde HomeComponent, cuando se presione el boton ""(+) Hacer nueva pregunta"".
 "
 Class {
 	#name : #NewQuestionComponent,

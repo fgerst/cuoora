@@ -1,6 +1,6 @@
 "
 Componente que implementa la creación de nuevas respuestas.
-	Es llamado desde NewQuestionComponent
+	Es llamado desde NewQuestionComponent.
 "
 Class {
 	#name : #NewAnswerComponent,

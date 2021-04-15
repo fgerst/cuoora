@@ -1,12 +1,5 @@
 "
-Clase abstracta que implementa comportamiento para el login de usuarios y eventualmente implementar registro de nuevos usuarios.
-
-Expresión a evaluar para registrar aplicación:
-
-| app |
-
-app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
-app sessionClass: UserSession.
+Clase abstracta que implementa comportamiento para el login de usuarios y se mantiene como punto de extensión para eventualmente implementar registro de nuevos usuarios de manera sencilla y sin cambios.
 "
 Class {
 	#name : #AccessGrantingComponent,
@@ -20,7 +13,14 @@ Class {
 
 { #category : #utilities }
 AccessGrantingComponent >> clearInstance [
-	"metodo para borrar datos nuevos creados desde seaside"
+	"metodo de testing para borrar datos nuevos creados desde seaside"
+
+	" 
+	//se puede habilitar un anchor al metodo en la pantalla de login insertando este codigo en renderContenOn
+	aCanvas anchor
+		callback: [ self clearInstance ];
+		with: 'Clear instance' 
+	"
 
 	CuooraPlatform clearSoleInstance
 ]
@@ -68,10 +68,10 @@ AccessGrantingComponent >> renderContentOn: aCanvas [
 		with: [ self renderInputElementsOn: aCanvas.
 			self renderButtonsOn: aCanvas ].
 	aCanvas horizontalRule.
-	"testing"
+	" //testing
 	aCanvas anchor
 		callback: [ self clearInstance ];
-		with: 'Clear instance'
+		with: 'Clear instance'"
 ]
 
 { #category : #rendering }

@@ -1,12 +1,13 @@
 "
-Componente para realizar el Login de User
+Componente para realizar el Login de User. Es el punto de entrada a la aplicación Seaside.
 
 Expresión a evaluar para registrar aplicación:
 
+""
 | app |
-
 app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
 app sessionClass: UserSession.
+""
 "
 Class {
 	#name : #LoginComponent,

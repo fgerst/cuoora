@@ -3,10 +3,11 @@ Componente que implementa el Home de la aplicacion, donde se pueden ver las Preg
 
 Expresión a evaluar para registrar aplicación:
 
+""
 | app |
-
 app := WAAdmin register: LoginComponent asApplicationAt: 'cuoora'.
 app sessionClass: UserSession.
+""
 "
 Class {
 	#name : #HomeComponent,
