@@ -14,7 +14,7 @@ Class {
 TopicTest >> setUp [
 	super setUp.
 	
-	aTopic1 := Topic withName: 'Smalltalk' description: 'description 1'.
+	aTopic1 := Topic withName: 'Smalltalk' description: 'Lorem ipsum'.
 	
 	q1 := Question withAuthor: (User new) title: 'q1' content: 'c1' topics: { }.
 	q2 := Question withAuthor: (User new) title: 'q2' content: 'c2' topics: { }.
@@ -22,9 +22,9 @@ TopicTest >> setUp [
 ]
 
 { #category : #tests }
-TopicTest >> testAddTopicQuestions [
-	"Topic>>addTopicQuestion() debe agregar las preguntas correspondientes a un topico a la OrderedCollection del topico"
-		
+TopicTest >> testAddTopicQuestion [
+	"Topic>>addTopicQuestion() debe agregar la pregunta correspondiente a un topico a la OrderedCollection del topico"
+	
 	"Se asegura de que la OrderedCollection se inicialize vacia"
 	self assert: ( aTopic1 topicQuestions size ) equals: 0.
 			
@@ -42,18 +42,18 @@ TopicTest >> testAddTopicQuestions [
 
 { #category : #tests }
 TopicTest >> testDeleteTopicQuestion [
-	"Topic>>deleteTopicQuestion() se encarga de eliminar la pregunta que le mandes de la OrderedCollection que son las preguntas del topico, si no encuentra la pregunta devuelve nil."	
+	"Topic>>deleteTopicQuestion() se encarga de eliminar la pregunta que le mandes perteneciente a la OrderedCollection del topico, si no encuentra la pregunta devuelve nil."	
 	
-	"Si se manda a eliminar una pregunta que no existe devulve nil"
+	"Si se intenta eliminar una pregunta que no existe devulve nil"
 	self deny: ( aTopic1 topicQuestions includes: q1 ).
 	self assert: ( aTopic1 deleteTopicQuestion: q1 ) equals: ( nil ). 	
 	
-	"Si se elimina una pregunta deja de estar en la ordereCollection que devuelve Topic>>topicQuestions"
 	aTopic1 addTopicQuestion: q2.
 	aTopic1 addTopicQuestion: q3.
 	self assert: ( aTopic1 topicQuestions includes: q3 ).
 	self assert: ( aTopic1 topicQuestions size ) equals: 2.
 	
+	"Si se elimina una pregunta deja de estar en la orderedCollection que devuelve Topic>>topicQuestions"
 	aTopic1 deleteTopicQuestion: q2.
 	aTopic1 deleteTopicQuestion: q3.
 	self deny: ( aTopic1 topicQuestions includes: q3 ).
