@@ -67,5 +67,5 @@ HomeComponent >> renderRelevantQuestionsOn: html [
 { #category : #'accessing-session' }
 HomeComponent >> userRelevantQuestions [
 	^ self session user relevantQuestions
-		asSortedCollection: [ :a :b | a timestamp < b timestamp ]
+		asSortedCollection: [ :a :b | a timestamp > b timestamp ]
 ]
