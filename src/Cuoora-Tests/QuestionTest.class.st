@@ -32,6 +32,7 @@ QuestionTest >> setUp [
 
 	"respuestas"
 	a1 := Answer withAuthor: u1 content: 'contenido1'.
+	0.1 seconds asDelay wait.
 	a2 := Answer withAuthor: u2 content: 'contenido2'.
 
 	"hizo una pregunta cada usuario, q1 tiene dos respuestas"
@@ -55,7 +56,7 @@ QuestionTest >> testAddToRelatedTopics [
 { #category : #tests }
 QuestionTest >> testAnswersSortedByScore [
 	"sin likes/dislikes"
-	self assert: q1 answersSortedByScore first equals: a1.
+	self assert: (q1 answersSortedByScore first) equals: a1.
 	
 	"si le doy dislike a a1 ya no es primera"
 	a1 dislikeFrom: u2.

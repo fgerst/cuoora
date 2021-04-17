@@ -40,9 +40,16 @@ Question >> answersCount [
 
 { #category : #listing }
 Question >> answersSortedByScore [
-	"retorna las respuestas ordenadas por su puntaje"
+	"retorna las respuestas ordenadas por su puntaje, si el puntaje es igual se ordena por el timestamp"
 
-	^ answers asSortedCollection: [ :a :b | a postScore > b postScore ]
+	| ans |
+	ans := OrderedCollection new.
+	ans := answers copy.
+	ans
+		sort: [ :a :b | 
+			a postScore > b postScore
+				or: [ a postScore = b postScore and: [ a timestamp < b timestamp ] ] ].
+	^ ans
 ]
 
 { #category : #'adding/removing' }
@@ -72,7 +79,7 @@ Question >> initializeWithAuthor: anUser title: aTitle content: aContent topics:
 Question >> newAnswer: anAnswer [
 	"crea una nueva respuesta a la pregunta, agrega la referencia en la pregunta y ene el autor"
 
-	answers addFirst: anAnswer.
+	answers add: anAnswer.
 	anAnswer addToAuthor.
 	^ anAnswer
 ]
