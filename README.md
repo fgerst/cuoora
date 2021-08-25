@@ -1,6 +1,9 @@
 # cuoora
 Plataforma web de preguntas y respuestas desarrollada en Smalltalk con el framework Seaside, para la materia Orientación a Objetos 2 2021 de la UNLP.
 
+![q](https://user-images.githubusercontent.com/45186471/130707643-cf5b6753-918d-4647-9624-02032a55b710.PNG)
+[Mas fotos](https://github.com/fgerst/cuoora/blob/main/pics.md)
+
 ## Stack
 - [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk) (lenguaje de programación)
 - [Pharo](https://pharo.org) (entorno de desarrollo)
